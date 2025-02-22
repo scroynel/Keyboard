@@ -20,13 +20,14 @@ class Category(models.Model):
 
 
 class Order(models.Model):
-    product = models.ForeignKey('Product', on_delete=models.CASCADE)
+    cart = models.ForeignKey('Cart', on_delete=models.CASCADE)
     create_time = models.DateTimeField(auto_now_add=True)
+    is_paid = models.BooleanField(default=False)
 
 
 class Cart(models.Model):
-    products = models.ManyToManyField('Cart_product')
-
+    owner = models.ForeignKey('User', on_delete=models.CASCADE)
 
 class Cart_product(models.Model):
     product = models.ForeignKey('Product', on_delete=models.CASCADE)
+    cart = models.ForeignKey('Cart', on_delete=models.CASCADE)
