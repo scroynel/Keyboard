@@ -5,10 +5,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="keyboard/css/style.css">
     {% tailwind_css %}
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
+    <header class="bg-gray-300 flex justify-between items-center px-32">
+        <div>
+            <a href="">
+                <img class="w-[100px]" src="{% static '/keyboard/images/keyboard_logo.png' %}" alt="">
+            </a>
+            <!-- MGKey -->
+        </div>
+        <nav>
+            <ul class="flex space-x-20 text-gray-500">
+                <li class="hover:text-white hover:underline hover:underline-offset-4 hover:decoration-2">
+                    <a class="" href="">Keyboards</a>
+                </li>
+                <li class="hover:text-white hover:underline hover:underline-offset-4 hover:decoration-2">
+                    <a href="">Keycaps</a>
+                </li>
+                <li class="hover:text-white hover:underline hover:underline-offset-4 hover:decoration-2">
+                    <a href="">Switches</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="flex space-x-5">
+            <a href="">
+                <img class="w-[25px]" src="{% static '/keyboard/images/search_logo.png' %}" alt="">
+            </a>
+            <a href="">
+                <img class="w-[25px]" src="{% static '/keyboard/images/profile_logo.png' %}" alt="">
+            </a>
+            <a href="">
+                <img class="w-[25px]" src="{% static '/keyboard/images/cart_logo.png' %}" alt="">
+            </a>
+        </div>
+    </header>
     {% block content %}
     {% endblock %}
 </body>
