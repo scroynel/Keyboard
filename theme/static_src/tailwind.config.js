@@ -42,7 +42,11 @@ module.exports = {
         // '../../**/*.py'
     ],
     theme: {
-        extend: {},
+        extend: {
+            backgroundImage: theme => {
+                main_keyboard: "url('/static/keyboard/images/main_bg_keyboard.jpg')"
+            } 
+        },
     },
     plugins: [
         /**

@@ -787,41 +787,133 @@ select {
   position: static;
 }
 
+.relative {
+  position: relative;
+}
+
+.z-10 {
+  z-index: 10;
+}
+
+.z-0 {
+  z-index: 0;
+}
+
+.-z-10 {
+  z-index: -10;
+}
+
+.m-auto {
+  margin: auto;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
+}
+
+.mt-\[\] {
+  margin-top: ;
+}
+
+.mt-\[100px\] {
+  margin-top: 100px;
+}
+
+.mt-\[-100px\] {
+  margin-top: -100px;
+}
+
+.mt-10 {
+  margin-top: 2.5rem;
+}
+
+.mt-24 {
+  margin-top: 6rem;
+}
+
+.mt-5 {
+  margin-top: 1.25rem;
+}
+
+.mt-12 {
+  margin-top: 3rem;
+}
+
+.mt-1 {
+  margin-top: 0.25rem;
+}
+
+.mt-16 {
+  margin-top: 4rem;
 }
 
 .block {
   display: block;
 }
 
+.inline-block {
+  display: inline-block;
+}
+
 .flex {
   display: flex;
+}
+
+.h-\[100px\] {
+  height: 100px;
 }
 
 .h-screen {
   height: 100vh;
 }
 
+.h-full {
+  height: 100%;
+}
+
+.h-\[200px\] {
+  height: 200px;
+}
+
+.h-\[\] {
+  height: ;
+}
+
+.h-\[100\] {
+  height: 100;
+}
+
+.h-\[150px\] {
+  height: 150px;
+}
+
+.h-\[full\] {
+  height: full;
+}
+
 .w-\[100px\] {
   width: 100px;
-}
-
-.w-\[30px\] {
-  width: 30px;
-}
-
-.w-\[20px\] {
-  width: 20px;
 }
 
 .w-\[25px\] {
   width: 25px;
 }
 
-.w-\[1000px\] {
-  width: 1000px;
+.w-full {
+  width: 100%;
+}
+
+.w-\[200px\] {
+  width: 200px;
+}
+
+.w-\[50\%\] {
+  width: 50%;
+}
+
+.w-\[\] {
+  width: ;
 }
 
 .items-center {
@@ -842,16 +934,29 @@ select {
   margin-left: calc(5rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
-.space-x-0 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-x-reverse: 0;
-  margin-right: calc(0px * var(--tw-space-x-reverse));
-  margin-left: calc(0px * calc(1 - var(--tw-space-x-reverse)));
-}
-
 .space-x-5 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
   margin-right: calc(1.25rem * var(--tw-space-x-reverse));
   margin-left: calc(1.25rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.space-y-5 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1.25rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1.25rem * var(--tw-space-y-reverse));
+}
+
+.border {
+  border-width: 1px;
+}
+
+.border-dashed {
+  border-style: dashed;
+}
+
+.border-white {
+  --tw-border-opacity: 1;
+  border-color: rgb(255 255 255 / var(--tw-border-opacity, 1));
 }
 
 .bg-gray-300 {
@@ -868,167 +973,97 @@ select {
   background-color: ;
 }
 
-.bg-\[\'\/\'\] {
-  background-color: '/';
+.bg-\[main\] {
+  background-color: main;
 }
 
-.bg-\[\'\'\] {
-  background-color: '';
+.bg-\[main_keyboard\] {
+  background-color: main keyboard;
 }
 
-.bg-\[\'\/keyboard\'\] {
-  background-color: '/keyboard';
+.bg-gray-700 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(55 65 81 / var(--tw-bg-opacity, 1));
 }
 
-.bg-\[\'\/keyboard\/images\/\'\] {
-  background-color: '/keyboard/images/';
+.bg-gray-900 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(17 24 39 / var(--tw-bg-opacity, 1));
 }
 
-.bg-\[\'\/keyboard\/images\/main_bg_keyboard\.jpg\'\] {
-  background-color: '/keyboard/images/main bg keyboard.jpg';
+.bg-stone-800 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(41 37 36 / var(--tw-bg-opacity, 1));
 }
 
-.bg-\[url\'\/keyboard\/images\/main_bg_keyboard\.jpg\'\] {
-  background-color: url'/keyboard/images/main bg keyboard.jpg';
+.bg-\[\#181818\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(24 24 24 / var(--tw-bg-opacity, 1));
 }
 
-.bg-\[url\'keyboard\/images\/main_bg_keyboard\.jpg\'\] {
-  background-color: url'keyboard/images/main bg keyboard.jpg';
-}
-
-.bg-\[url\(keyboard\/images\/main_bg_keyboard\.jpg\)\] {
-  background-image: url(keyboard/images/main_bg_keyboard.jpg);
-}
-
-.bg-\[url\(\/keyboard\/images\/main_bg_keyboard\.jpg\)\] {
-  background-image: url(/keyboard/images/main_bg_keyboard.jpg);
-}
-
-.bg-\[url\(\'\/keyboard\/images\/main_bg_keyboard\.jpg\'\)\] {
-  background-image: url('/keyboard/images/main_bg_keyboard.jpg');
-}
-
-.bg-\[url\(\'keyboard\/images\/main_bg_keyboard\.jpg\'\)\] {
-  background-image: url('keyboard/images/main_bg_keyboard.jpg');
-}
-
-.bg-\[url\(\/images\/main_bg_keyboard\.jpg\)\] {
-  background-image: url(/images/main_bg_keyboard.jpg);
-}
-
-.bg-\[url\(\'\/images\/main_bg_keyboard\.jpg\'\)\] {
-  background-image: url('/images/main_bg_keyboard.jpg');
-}
-
-.bg-\[url\(\'\.\.\/images\/main_bg_keyboard\.jpg\'\)\] {
-  background-image: url('../images/main_bg_keyboard.jpg');
-}
-
-.bg-\[url\(\'static\/images\/main_bg_keyboard\.jpg\'\)\] {
-  background-image: url('static/images/main_bg_keyboard.jpg');
-}
-
-.bg-\[url\(\'static\/\/images\/main_bg_keyboard\.jpg\'\)\] {
-  background-image: url('static//images/main_bg_keyboard.jpg');
-}
-
-.bg-\[url\(\'static\/key\/images\/main_bg_keyboard\.jpg\'\)\] {
-  background-image: url('static/key/images/main_bg_keyboard.jpg');
+.bg-opacity-30 {
+  --tw-bg-opacity: 0.3;
 }
 
 .bg-\[url\(\'static\/keyboard\/images\/main_bg_keyboard\.jpg\'\)\] {
   background-image: url('static/keyboard/images/main_bg_keyboard.jpg');
 }
 
-.bg-\[url\(\'\.\.\/public\/images\/tailwind\.png\'\)\] {
-  background-image: url('../public/images/tailwind.png');
-}
-
-.bg-\[url\(\'\/\'\)\] {
-  background-image: url('/');
-}
-
-.bg-\[url\(\'\.\.\/\'\)\] {
-  background-image: url('../');
-}
-
-.bg-\[url\(\'\'\)\] {
-  background-image: url('');
-}
-
-.bg-\[url\(\'\.\.\/\.\.\/static\/\'\)\] {
-  background-image: url('../../static/');
-}
-
-.bg-\[url\(\'\.\.\/\.\.\/static\/keyboard\/images\'\)\] {
-  background-image: url('../../static/keyboard/images');
-}
-
-.bg-\[url\(\'\.\.\/\.\.\/static\/keyboard\/images\/\'\)\] {
-  background-image: url('../../static/keyboard/images/');
-}
-
-.bg-\[url\(\'\.\.\/\.\.\/static\/keyboard\/images\/bg-\[url\(\'\.\.\/public\/images\/tailwind\.png\'\)\]\'\)\] {
-  background-image: url('../../static/keyboard/images/bg-[url('../public/images/tailwind.png')]');
-}
-
-.bg-\[url\(\'\.\.\/\.\.\/static\/keyboard\/images\/\'main_bg_keyboard\.jpg\)\] {
-  background-image: url('../../static/keyboard/images/'main_bg_keyboard.jpg);
-}
-
 .bg-\[url\(\'\.\.\/\.\.\/static\/keyboard\/images\/main_bg_keyboard\.jpg\'\)\] {
   background-image: url('../../static/keyboard/images/main_bg_keyboard.jpg');
 }
 
-.bg-\[url\(\{\%\}\'\/keyboard\/images\/main_bg_keyboard\.jpg\'\)\] {
-  background-image: url({%}'/keyboard/images/main_bg_keyboard.jpg');
+.bg-contain {
+  background-size: contain;
 }
 
-.bg-\[url\(\'\/static\/imgs\/background\.png\'\)\] {
-  background-image: url('/static/imgs/background.png');
+.bg-cover {
+  background-size: cover;
 }
 
-.bg-\[url\(\'\/static\/keyboard\/background\.png\'\)\] {
-  background-image: url('/static/keyboard/background.png');
+.p-4 {
+  padding: 1rem;
 }
 
-.bg-\[url\(\'\/static\/keyboard\/images\/background\.png\'\)\] {
-  background-image: url('/static/keyboard/images/background.png');
+.p-\[\] {
+  padding: ;
 }
 
-.bg-\[url\(\'\/static\/keyboard\/images\/\.png\'\)\] {
-  background-image: url('/static/keyboard/images/.png');
+.p-\[30\%\] {
+  padding: 30%;
 }
 
-.bg-\[url\(\'\/static\/keyboard\/images\/bg-\[url\(\'\/static\/imgs\/background\.png\'\)\]\.png\'\)\] {
-  background-image: url('/static/keyboard/images/bg-[url('/static/imgs/background.png')].png');
+.p-\[10\%\] {
+  padding: 10%;
 }
 
-.bg-\[url\(\'\/static\/keyboard\/images\/main_\.png\'\)\] {
-  background-image: url('/static/keyboard/images/main_.png');
-}
-
-.bg-\[url\(\'\/static\/keyboard\/images\/main_bg_keyboard\.png\'\)\] {
-  background-image: url('/static/keyboard/images/main_bg_keyboard.png');
-}
-
-.bg-\[url\(\'\/static\/keyboard\/images\/main_bg_keyboard\.jpg\'\)\] {
-  background-image: url('/static/keyboard/images/main_bg_keyboard.jpg');
-}
-
-.px-10 {
-  padding-left: 2.5rem;
-  padding-right: 2.5rem;
-}
-
-.px-20 {
-  padding-left: 5rem;
-  padding-right: 5rem;
+.p-\[15\%\] {
+  padding: 15%;
 }
 
 .px-32 {
   padding-left: 8rem;
   padding-right: 8rem;
+}
+
+.pt-\[100px\] {
+  padding-top: 100px;
+}
+
+.pt-\[50\] {
+  padding-top: 50;
+}
+
+.pt-\[100\] {
+  padding-top: 100;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.align-middle {
+  vertical-align: middle;
 }
 
 .font-serif {
@@ -1053,8 +1088,13 @@ select {
   color: rgb(107 114 128 / var(--tw-text-opacity, 1));
 }
 
-.underline-offset-2 {
-  text-underline-offset: 2px;
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}
+
+.opacity-30 {
+  opacity: 0.3;
 }
 
 .hover\:text-white:hover {
@@ -1066,22 +1106,10 @@ select {
   text-decoration-line: underline;
 }
 
-.hover\:decoration-4:hover {
-  text-decoration-thickness: 4px;
-}
-
 .hover\:decoration-2:hover {
   text-decoration-thickness: 2px;
 }
 
 .hover\:underline-offset-4:hover {
   text-underline-offset: 4px;
-}
-
-.hover\:underline-offset-2:hover {
-  text-underline-offset: 2px;
-}
-
-.hover\:underline-offset-8:hover {
-  text-underline-offset: 8px;
 }
