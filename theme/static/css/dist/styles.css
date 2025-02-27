@@ -795,14 +795,6 @@ select {
   z-index: 10;
 }
 
-.z-0 {
-  z-index: 0;
-}
-
-.-z-10 {
-  z-index: -10;
-}
-
 .m-auto {
   margin: auto;
 }
@@ -812,40 +804,21 @@ select {
   margin-right: auto;
 }
 
-.mt-\[\] {
-  margin-top: ;
-}
-
-.mt-\[100px\] {
-  margin-top: 100px;
-}
-
-.mt-\[-100px\] {
-  margin-top: -100px;
+.my-auto {
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .mt-10 {
   margin-top: 2.5rem;
 }
 
-.mt-24 {
-  margin-top: 6rem;
-}
-
 .mt-5 {
   margin-top: 1.25rem;
 }
 
-.mt-12 {
-  margin-top: 3rem;
-}
-
-.mt-1 {
-  margin-top: 0.25rem;
-}
-
-.mt-16 {
-  margin-top: 4rem;
+.mt-\[-100px\] {
+  margin-top: -100px;
 }
 
 .block {
@@ -860,36 +833,24 @@ select {
   display: flex;
 }
 
-.h-\[100px\] {
-  height: 100px;
+.grid {
+  display: grid;
 }
 
-.h-screen {
-  height: 100vh;
+.h-\[100px\] {
+  height: 100px;
 }
 
 .h-full {
   height: 100%;
 }
 
-.h-\[200px\] {
-  height: 200px;
+.h-screen {
+  height: 100vh;
 }
 
-.h-\[\] {
-  height: ;
-}
-
-.h-\[100\] {
-  height: 100;
-}
-
-.h-\[150px\] {
-  height: 150px;
-}
-
-.h-\[full\] {
-  height: full;
+.h-auto {
+  height: auto;
 }
 
 .w-\[100px\] {
@@ -900,20 +861,16 @@ select {
   width: 25px;
 }
 
-.w-full {
-  width: 100%;
-}
-
-.w-\[200px\] {
-  width: 200px;
-}
-
 .w-\[50\%\] {
   width: 50%;
 }
 
-.w-\[\] {
-  width: ;
+.w-full {
+  width: 100%;
+}
+
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .items-center {
@@ -940,23 +897,18 @@ select {
   margin-left: calc(1.25rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
-.space-y-5 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-y-reverse: 0;
-  margin-top: calc(1.25rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(1.25rem * var(--tw-space-y-reverse));
-}
-
 .border {
   border-width: 1px;
-}
-
-.border-dashed {
-  border-style: dashed;
 }
 
 .border-white {
   --tw-border-opacity: 1;
   border-color: rgb(255 255 255 / var(--tw-border-opacity, 1));
+}
+
+.bg-\[\#181818\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(24 24 24 / var(--tw-bg-opacity, 1));
 }
 
 .bg-gray-300 {
@@ -969,76 +921,32 @@ select {
   background-color: rgb(249 250 251 / var(--tw-bg-opacity, 1));
 }
 
-.bg-\[\] {
-  background-color: ;
-}
-
-.bg-\[main\] {
-  background-color: main;
-}
-
-.bg-\[main_keyboard\] {
-  background-color: main keyboard;
-}
-
-.bg-gray-700 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(55 65 81 / var(--tw-bg-opacity, 1));
-}
-
-.bg-gray-900 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(17 24 39 / var(--tw-bg-opacity, 1));
-}
-
-.bg-stone-800 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(41 37 36 / var(--tw-bg-opacity, 1));
-}
-
-.bg-\[\#181818\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(24 24 24 / var(--tw-bg-opacity, 1));
-}
-
 .bg-opacity-30 {
   --tw-bg-opacity: 0.3;
-}
-
-.bg-\[url\(\'static\/keyboard\/images\/main_bg_keyboard\.jpg\'\)\] {
-  background-image: url('static/keyboard/images/main_bg_keyboard.jpg');
-}
-
-.bg-\[url\(\'\.\.\/\.\.\/static\/keyboard\/images\/main_bg_keyboard\.jpg\'\)\] {
-  background-image: url('../../static/keyboard/images/main_bg_keyboard.jpg');
-}
-
-.bg-contain {
-  background-size: contain;
 }
 
 .bg-cover {
   background-size: cover;
 }
 
+.bg-contain {
+  background-size: contain;
+}
+
+.bg-center {
+  background-position: center;
+}
+
 .p-4 {
   padding: 1rem;
-}
-
-.p-\[\] {
-  padding: ;
-}
-
-.p-\[30\%\] {
-  padding: 30%;
 }
 
 .p-\[10\%\] {
   padding: 10%;
 }
 
-.p-\[15\%\] {
-  padding: 15%;
+.p-10 {
+  padding: 2.5rem;
 }
 
 .px-32 {
@@ -1046,24 +954,72 @@ select {
   padding-right: 8rem;
 }
 
+.px-\[10\%\] {
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.py-\[\] {
+  padding-top: ;
+  padding-bottom: ;
+}
+
+.py-\[15\] {
+  padding-top: 15;
+  padding-bottom: 15;
+}
+
+.py-\[15\%\] {
+  padding-top: 15%;
+  padding-bottom: 15%;
+}
+
+.py-\[13\%\] {
+  padding-top: 13%;
+  padding-bottom: 13%;
+}
+
+.py-\[10\%\] {
+  padding-top: 10%;
+  padding-bottom: 10%;
+}
+
+.py-\[11\%\] {
+  padding-top: 11%;
+  padding-bottom: 11%;
+}
+
+.py-\[1\%\] {
+  padding-top: 1%;
+  padding-bottom: 1%;
+}
+
+.px-\[15\%\] {
+  padding-left: 15%;
+  padding-right: 15%;
+}
+
+.py-20 {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+.px-20 {
+  padding-left: 5rem;
+  padding-right: 5rem;
+}
+
+.px-10 {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+
 .pt-\[100px\] {
   padding-top: 100px;
 }
 
-.pt-\[50\] {
-  padding-top: 50;
-}
-
-.pt-\[100\] {
-  padding-top: 100;
-}
-
 .text-center {
   text-align: center;
-}
-
-.align-middle {
-  vertical-align: middle;
 }
 
 .font-serif {
@@ -1091,10 +1047,6 @@ select {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
-}
-
-.opacity-30 {
-  opacity: 0.3;
 }
 
 .hover\:text-white:hover {
