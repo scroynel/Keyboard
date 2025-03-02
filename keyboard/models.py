@@ -24,6 +24,16 @@ class Product(models.Model):
         verbose_name_plural = 'Products'
 
 
+class ProductAdditionalImages(models.Model):
+    product = models.ForeignKey('Product', on_delete=models.CASCADE, related_name='additional_images')
+    image = models.ImageField(upload_to='additional_images')
+
+
+    class Meta:
+        verbose_name = 'Product Additional Image'
+        verbose_name_plural = 'Product Additional Images'
+
+
 class Category(models.Model):
     name = models.CharField(max_length=50)
     slug = models.SlugField()

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, Category, Cart_product, Cart, Order
+from .models import Product, Category, Cart_product, Cart, Order, ProductAdditionalImages
 
 
 admin.site.register(Cart)
@@ -7,8 +7,13 @@ admin.site.register(Cart)
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name', 'category', 'number', 'image', 'price', 'add_time']
+    list_display = ['id', 'name', 'category', 'number', 'price', 'add_time', 'image']
     prepopulated_fields = {'slug': ('name',)}
+
+
+@admin.register(ProductAdditionalImages)
+class ProductAdditionalImagesAdmin(admin.ModelAdmin):
+    list_display = ['id', 'product', 'image']
 
 
 @admin.register(Category)
