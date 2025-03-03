@@ -6,7 +6,7 @@ class Product(models.Model):
     name = models.CharField(max_length=100)
     slug = models.SlugField()
     description = models.TextField()
-    image = models.ImageField(upload_to='keyboard_products')
+    image = models.ImageField(upload_to='keyboard_products', null=True, blank=True)
     price = models.DecimalField(decimal_places=2, max_digits=9)
     in_stock = models.BooleanField(default=True)
     number = models.PositiveIntegerField()
