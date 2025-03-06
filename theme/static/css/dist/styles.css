@@ -795,32 +795,44 @@ select {
   position: relative;
 }
 
-.left-\[10px\] {
-  left: 10px;
-}
-
 .right-\[10px\] {
   right: 10px;
 }
 
-.top-\[\] {
-  top: ;
+.right-\[\] {
+  right: ;
 }
 
-.top-\[10px\] {
-  top: 10px;
+.right-\[20px\] {
+  right: 20px;
 }
 
 .top-\[20px\] {
   top: 20px;
 }
 
-.top-\[30px\] {
-  top: 30px;
+.top-\[25px\] {
+  top: 25px;
 }
 
-.top-\[0px\] {
-  top: 0px;
+.left-\[20px\] {
+  left: 20px;
+}
+
+.left-\[50px\] {
+  left: 50px;
+}
+
+.left-\[10px\] {
+  left: 10px;
+}
+
+.top-\[\] {
+  top: ;
+}
+
+.top-\[30px\] {
+  top: 30px;
 }
 
 .z-10 {
@@ -889,16 +901,24 @@ select {
   height: 100vh;
 }
 
-.h-\[150px\] {
-  height: 150px;
+.h-\[50px\] {
+  height: 50px;
+}
+
+.h-2 {
+  height: 0.5rem;
+}
+
+.h-\[1000px\] {
+  height: 1000px;
+}
+
+.h-\[100vh\] {
+  height: 100vh;
 }
 
 .w-\[100px\] {
   width: 100px;
-}
-
-.w-\[25px\] {
-  width: 25px;
 }
 
 .w-\[30px\] {
@@ -913,12 +933,44 @@ select {
   width: ;
 }
 
-.w-\[30xp\] {
-  width: 30xp;
+.w-\[200px\] {
+  width: 200px;
 }
 
-.w-\[150px\] {
-  width: 150px;
+.w-\[100\] {
+  width: 100;
+}
+
+.w-\[2\] {
+  width: 2;
+}
+
+.w-\[1000px\] {
+  width: 1000px;
+}
+
+.w-\[30\] {
+  width: 30;
+}
+
+.w-\[30\%\] {
+  width: 30%;
+}
+
+.w-\[40\%\] {
+  width: 40%;
+}
+
+.w-\[50\%\] {
+  width: 50%;
+}
+
+.w-\[50px\] {
+  width: 50px;
+}
+
+.w-\[100ox\] {
+  width: 100ox;
 }
 
 .grid-cols-2 {
@@ -982,8 +1034,61 @@ select {
   background-color: rgb(249 250 251 / var(--tw-bg-opacity, 1));
 }
 
+.bg-\[url\] {
+  background-color: url;
+}
+
+.bg-black {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity, 1));
+}
+
 .bg-opacity-30 {
   --tw-bg-opacity: 0.3;
+}
+
+.bg-\[url\(\/img\/mountains\.jpg\)\] {
+  background-image: url(/img/mountains.jpg);
+}
+
+.bg-\[url\(static\/img\/mountains\.jpg\)\] {
+  background-image: url(static/img/mountains.jpg);
+}
+
+.bg-\[url\(static\/keyboard\/img\/mountains\.jpg\)\] {
+  background-image: url(static/keyboard/img/mountains.jpg);
+}
+
+.bg-\[url\(static\/keyboard\/images\/mountains\.jpg\)\] {
+  background-image: url(static/keyboard/images/mountains.jpg);
+}
+
+.bg-\[url\(static\/keyboard\/images\/\.jpg\)\] {
+  background-image: url(static/keyboard/images/.jpg);
+}
+
+.bg-\[url\(static\/keyboard\/images\/price\.jpg\)\] {
+  background-image: url(static/keyboard/images/price.jpg);
+}
+
+.bg-\[url\(static\/keyboard\/images\/price_\.jpg\)\] {
+  background-image: url(static/keyboard/images/price_.jpg);
+}
+
+.bg-\[url\(static\/keyboard\/images\/price_cloud\.jpg\)\] {
+  background-image: url(static/keyboard/images/price_cloud.jpg);
+}
+
+.bg-\[url\(static\/keyboard\/images\/price_cloud\.wep\)\] {
+  background-image: url(static/keyboard/images/price_cloud.wep);
+}
+
+.bg-\[url\(static\/keyboard\/images\/price_cloud\.webp\)\] {
+  background-image: url(static/keyboard/images/price_cloud.webp);
+}
+
+.bg-\[url\(\'static\/keyboard\/images\/price_cloud\.webp\'\)\] {
+  background-image: url('static/keyboard/images/price_cloud.webp');
 }
 
 .bg-cover {
@@ -994,28 +1099,12 @@ select {
   background-size: contain;
 }
 
-.fill-green-700 {
-  fill: #15803d;
-}
-
-.fill-green-600 {
-  fill: #16a34a;
-}
-
-.fill-current {
-  fill: currentColor;
-}
-
-.fill-red-600 {
-  fill: #dc2626;
+.bg-center {
+  background-position: center;
 }
 
 .p-4 {
   padding: 1rem;
-}
-
-.p-\[100px\] {
-  padding: 100px;
 }
 
 .px-32 {
@@ -1061,20 +1150,16 @@ select {
   padding-bottom: 6%;
 }
 
+.pt-5 {
+  padding-top: 1.25rem;
+}
+
 .pt-\[100px\] {
   padding-top: 100px;
 }
 
 .pt-\[6\%\] {
   padding-top: 6%;
-}
-
-.pt-3 {
-  padding-top: 0.75rem;
-}
-
-.pt-5 {
-  padding-top: 1.25rem;
 }
 
 .text-center {
@@ -1100,6 +1185,27 @@ select {
   line-height: 1.25rem;
 }
 
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.text-\[30\%\] {
+  font-size: 30%;
+}
+
+.text-\[100\%\] {
+  font-size: 100%;
+}
+
+.text-\[200\%\] {
+  font-size: 200%;
+}
+
+.text-\[1em\] {
+  font-size: 1em;
+}
+
 .leading-normal {
   line-height: 1.5;
 }
@@ -1123,14 +1229,12 @@ select {
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
 }
 
-.text-green-600 {
-  --tw-text-opacity: 1;
-  color: rgb(22 163 74 / var(--tw-text-opacity, 1));
+.text-\[30\] {
+  color: 30;
 }
 
-.text-red-600 {
-  --tw-text-opacity: 1;
-  color: rgb(220 38 38 / var(--tw-text-opacity, 1));
+.text-\[1\] {
+  color: 1;
 }
 
 .hover\:text-white:hover {

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from .models import Product
 
 class MainView(ListView):
@@ -27,3 +27,13 @@ class SwitchesView(ListView):
     template_name = 'keyboard/switches.html'
     context_object_name = 'switches'
     queryset = Product.objects.filter(category__slug="switches")
+
+
+class KeyboardsDetailView(DetailView):
+    template_name = 'keyboard/keyboards_detail.html'
+    slug_url_kwarg = 'keyboard_slug'
+    
+
+
+    def get_object(self, queryset = None):
+        return Product.objects.filter(category__slug='keyboards', slug=self.slug_url_kwarg)

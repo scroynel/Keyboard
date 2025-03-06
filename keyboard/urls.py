@@ -7,4 +7,5 @@ urlpatterns = [
     path('keyboards/', views.KeyboardsView.as_view(), name='keyboards'),
     path('keycaps/', views.KeycapsView.as_view(), name='keycaps'),
     path('switches/', views.SwitchesView.as_view(), name='switches'),
+    path('keyboards/<slug:keyboard_slug>', views.KeyboardsDetailView.as_view(), name='keyboards_detail')
 ]
