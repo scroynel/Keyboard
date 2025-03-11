@@ -5,18 +5,16 @@
 
 {% block content %}
 <div>
-    <div>
-        <h1>All keyboards</h1>
+    <div class="text-center py-[70px]">
+        <h1 class="text-7xl">All keyboards</h1>
     </div>
     <div class="grid grid-cols-3 space-x-5 px-[100px]">
         {% for keyboard in keyboards%}
-        <div class="relative text-center bg-[#f2f2f2]">
+        <div class="relative text-center bg-[#f2f2f2] shadow-none transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-400">
             <!-- class="absolute w-[100px] h-[100px] right-[10px]" -->
-             <div class="absolute left-[20px] top-[30px] text-center">
-                <img class="block w-[200px]" src="{% static 'keyboard/images/price_cloud.webp' %}" alt="">
-                <p class="text-white">${{keyboard.price}}</p>
+             <div class="absolute left-[8%] top-[8%] text-center bg-cover bg-center w-[150px] h-[47px] bg-no-repeat" style="background-image: url('/static/keyboard/images/price_cloud.webp')">
+                <p class="text-4xl">${{keyboard.price}}</p>
              </div>
-            
             <img src="{{keyboard.image.url}}" alt="">
             <h2 class="text-3xl ">{{keyboard.name}}</h2>
             <p class="pt-5">Price: ${{keyboard.price}}</p>
@@ -34,4 +32,10 @@
         {% endfor %}
     </div>
 </div>
+
+<script>
+    let header = document.getElementById('header')
+
+    header.classList.remove('bg-opacity-0')
+</script>
 {% endblock %}
