@@ -32,8 +32,8 @@ class SwitchesView(ListView):
 class KeyboardsDetailView(DetailView):
     template_name = 'keyboard/keyboards_detail.html'
     slug_url_kwarg = 'keyboard_slug'
-    
+    context_object_name = 'keyboard'
 
 
     def get_object(self, queryset = None):
-        return Product.objects.filter(category__slug='keyboards', slug=self.slug_url_kwarg)
+        return Product.objects.filter(category__slug='keyboards').get(slug=self.kwargs['keyboard_slug'])
