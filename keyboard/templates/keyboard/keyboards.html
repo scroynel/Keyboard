@@ -6,12 +6,12 @@
 {% block content %}
 <div>
     <div class="text-center py-[70px]">
-        <h1 class="text-7xl">All keyboards</h1>
+        <h1 class="text-7xl">Keyboards</h1>
     </div>
     <div class="grid grid-cols-3 space-x-5 px-[100px]">
-        {% for keyboard in keyboards%}
+        {% for keyboard in keyboards %}
         <div class="relative text-center bg-[#f2f2f2] shadow-none transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-400">
-            <a href="{% url 'keyboards_detail' keyboard.slug %}">
+            <a href="{% url 'keyboard_detail' keyboard.slug %}">
                 <div class="absolute left-[8%] top-[8%] text-center bg-cover bg-center w-[150px] h-[47px] bg-no-repeat" style="background-image: url('/static/keyboard/images/price_cloud.webp')">
                     <p class="text-4xl">${{keyboard.price}}</p>
                 </div>

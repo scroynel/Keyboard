@@ -7,5 +7,7 @@ urlpatterns = [
     path('keyboards/', views.KeyboardsView.as_view(), name='keyboards'),
     path('keycaps/', views.KeycapsView.as_view(), name='keycaps'),
     path('switches/', views.SwitchesView.as_view(), name='switches'),
-    path('keyboards/<slug:keyboard_slug>', views.KeyboardsDetailView.as_view(), name='keyboards_detail')
+    path('keyboards/<slug:keyboard_slug>/', views.KeyboardDetailView.as_view(), name='keyboard_detail'),
+    path('keycaps/<slug:keycap_slug>/', views.KeycapDetailView.as_view(), name='keycap_detail'),
+    path('switches/<slug:switch_slug>/', views.SwitchDetailView.as_view(), name='switch_detail')
 ]

@@ -29,11 +29,29 @@ class SwitchesView(ListView):
     queryset = Product.objects.filter(category__slug="switches")
 
 
-class KeyboardsDetailView(DetailView):
-    template_name = 'keyboard/keyboards_detail.html'
+class KeyboardDetailView(DetailView):
+    template_name = 'keyboard/keyboard_detail.html'
     slug_url_kwarg = 'keyboard_slug'
     context_object_name = 'keyboard'
 
 
     def get_object(self, queryset = None):
-        return Product.objects.filter(category__slug='keyboards').get(slug=self.kwargs['keyboard_slug'])
+        return Product.objects.filter(category__slug='keyboards').get(slug=self.kwargs[self.slug_url_kwarg])
+    
+
+class KeycapDetailView(DetailView):
+    template_name = 'keyboard/keycap_detail.html'
+    slug_url_kwarg = 'keycap_slug'
+    context_object_name = 'keycap'
+
+    def get_object(self, queryset = None):
+        return Product.objects.filter(category__slug='keycaps').get(slug=self.kwargs[self.slug_url_kwarg])
+    
+
+class SwitchDetailView(DetailView):
+    template_name = 'keyboard/switch_detail.html'
+    slug_url_kwarg = 'switch_slug'
+    context_object_name = 'switch'
+
+    def get_object(self, queryset = None):
+        return Product.objects.filter(category__slug='switches').get(slug=self.kwargs[self.slug_url_kwarg])
