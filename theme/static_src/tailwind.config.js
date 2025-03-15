@@ -7,6 +7,8 @@
 
 module.exports = {
     content: [
+        './templates/**/*.html',
+        './node_modules/flowbite/**/*.js',
         /**
          * HTML. Paths to Django template files that will contain Tailwind CSS classes.
          */
@@ -57,5 +59,6 @@ module.exports = {
         require('@tailwindcss/forms'),
         require('@tailwindcss/typography'),
         require('@tailwindcss/aspect-ratio'),
+        require('flowbite/plugin'),
     ],
 }

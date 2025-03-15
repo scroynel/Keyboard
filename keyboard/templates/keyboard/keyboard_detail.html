@@ -4,7 +4,7 @@
 
 {% block content %}
     <div class="flex space-x-10 mt-[50px]">
-        <div class="w-[70%] flex space-x-5">
+        <div class="w-[70%]">
             {% for image in keyboard.additional_images.all %}
                 <img class="w-[200px]" src="{{image.image.url}}" alt="">
             {% endfor %}
