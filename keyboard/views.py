@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
-from .models import Product
+from .models import Product, ProductAdditionalImages
+
 
 class MainView(ListView):
     model = Product
@@ -37,6 +38,13 @@ class KeyboardDetailView(DetailView):
 
     def get_object(self, queryset = None):
         return Product.objects.filter(category__slug='keyboards').get(slug=self.kwargs[self.slug_url_kwarg])
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['image_count'] = range(ProductAdditionalImages.objects.filter(product__slug=self.kwargs[self.slug_url_kwarg]).count())
+        return context
+
+    
     
 
 class KeycapDetailView(DetailView):
