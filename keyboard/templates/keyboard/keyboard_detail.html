@@ -5,8 +5,7 @@
 {% block content %}
     <div class="relative flex space-x-10 mt-[50px] px-[100px]">
         <div class="w-[70%]">
-
-            <div id="default-carousel" class="relative w-full h-[700px]" data-carousel="slide">
+            <div id="default-carousel" class="relative w-full h-[700%]" data-carousel="slide">
                 <!-- Carousel wrapper -->
                 <div class="relative w-full h-full overflow-hidden">
                     {% for image in keyboard.additional_images.all %}
@@ -39,7 +38,6 @@
                     </span>
                 </button>
             </div>
-
         </div>
         <div class="w-[30%]">
             <h1 class="text-4xl">{{keyboard.name}}</h1>
