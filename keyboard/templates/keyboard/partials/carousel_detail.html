@@ -1,0 +1,15 @@
+<div class="swiper carousel-detail">
+    <ul class="swiper-wrapper">
+        {% for image in keyboard.additional_images.all %}
+        <li class="swiper-slide">
+            <a href="#">
+                <img src="{{image.image.url}}" alt="">
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <div class="swiper-pagination"></div>
+    <div class="swiper-slide-button swiper-button-prev"></div>
+    <div class="swiper-slide-button swiper-button-next"></div>
+</div>

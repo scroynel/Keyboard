@@ -1,4 +1,23 @@
-body{
+* {
     font-family: "VT323", monospace;
 }
   
+.carousel-detail .swiper-pagination-bullet {
+    width: 13px;
+    height: 13px;
+    opacity: 0.5;
+    background: #303030;
+}
+
+.carousel-detail .swiper-pagination-bullet-active {
+    opacity: 1;
+}
+
+.carousel-detail .swiper-slide-button {
+    color: #303030; 
+}
+
+.carousel-detail .swiper-slide-button:hover {
+    transform: scale(150%);   
+    transition: all 0.5s;
+}
