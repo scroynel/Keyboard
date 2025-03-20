@@ -9,13 +9,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <!-- Flowbite css -->
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet"/>
     <!-- SwiperJS css -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     {% tailwind_css %}
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-    <header id="header" class="bg-[#303030] py-2 flex justify-between items-center px-32 relative z-10 bg-opacity-100">
+    <header id="header" class="bg-[#303030] py-2 flex justify-between items-center px-32 relative bg-opacity-100">
         <div class="flex items-center space-x-5 flex-1">
             <a href="{% url 'main' %}">
                 <img class="w-[100px]" src="{% static '/keyboard/images/keyboard_logo_copy.png' %}" alt="">
@@ -44,19 +46,63 @@
             <a href="">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="Search-User--Streamline-Pixel" height="24" width="24"><desc>Search User Streamline Icon: https://streamlinehq.com</desc><title>search-user</title><g><path d="M22.29 17.715h-1.1475V16.575000000000003h-1.1400000000000001v-1.1475h-1.1475v-2.2800000000000002h-1.1400000000000001v2.2800000000000002H16.575000000000003v1.1475h-1.1475v1.1400000000000001h-2.2800000000000002v1.1400000000000001h2.2800000000000002v1.1475h1.1475v1.1400000000000001h1.1400000000000001v1.1475h1.1400000000000001v1.1400000000000001h3.435v-1.1400000000000001h1.1400000000000001v-3.435h-1.1400000000000001Zm0 3.4275h-1.1475v-1.1400000000000001h-1.1400000000000001v-1.1475h-1.1475v-1.1400000000000001h1.1475v1.1400000000000001h1.1400000000000001v1.1475h1.1475Z" fill="#ffffff" stroke-width="0.75"></path><path d="M18.855 7.4325h1.1475v5.715h-1.1475Z" fill="#ffffff" stroke-width="0.75"></path><path d="M17.715 5.1450000000000005h1.1400000000000001v2.2874999999999996h-1.1400000000000001Z" fill="#ffffff" stroke-width="0.75"></path><path d="M16.575000000000003 4.005h1.1400000000000001v1.1400000000000001H16.575000000000003Z" fill="#ffffff" stroke-width="0.75"></path><path d="M15.4275 2.8575h1.1475v1.1475h-1.1475Z" fill="#ffffff" stroke-width="0.75"></path><path d="M13.1475 14.287500000000001h1.1400000000000001v1.1400000000000001h-1.1400000000000001Z" fill="#ffffff" stroke-width="0.75"></path><path d="M13.1475 1.7175h2.2800000000000002v1.1400000000000001h-2.2800000000000002Z" fill="#ffffff" stroke-width="0.75"></path><path d="M7.4325 15.4275h5.715v1.1475H7.4325Z" fill="#ffffff" stroke-width="0.75"></path><path d="M12 9.712499999999999h1.1475V12H12Z" fill="#ffffff" stroke-width="0.75"></path><path d="M7.4325 18.855h5.715v1.1475H7.4325Z" fill="#ffffff" stroke-width="0.75"></path><path d="M8.5725 13.1475H12v1.1400000000000001h-3.4275Z" fill="#ffffff" stroke-width="0.75"></path><path d="M7.4325 0.5700000000000001h5.715v1.1475H7.4325Z" fill="#ffffff" stroke-width="0.75"></path><path d="M7.4325 9.712499999999999h1.1400000000000001V12H7.4325Z" fill="#ffffff" stroke-width="0.75"></path><path d="M5.1450000000000005 17.715h2.2874999999999996v1.1400000000000001H5.1450000000000005Z" fill="#ffffff" stroke-width="0.75"></path><path d="M6.285 14.287500000000001h1.1475v1.1400000000000001H6.285Z" fill="#ffffff" stroke-width="0.75"></path><path d="M5.1450000000000005 1.7175h2.2874999999999996v1.1400000000000001H5.1450000000000005Z" fill="#ffffff" stroke-width="0.75"></path><path d="m6.285 8.5725 1.1475 0 0 -1.1400000000000001 5.715 0 0 1.1400000000000001 1.1400000000000001 0 0 5.715 1.1400000000000001 0 0 -8.0025 -1.1400000000000001 0 0 -1.1400000000000001 -1.1400000000000001 0 0 -1.1400000000000001 -5.715 0 0 1.1400000000000001 -1.1475 0 0 1.1400000000000001 -1.1400000000000001 0 0 8.0025 1.1400000000000001 0 0 -5.715z" fill="#ffffff" stroke-width="0.75"></path><path d="M3.9975 16.575000000000003h1.1475v1.1400000000000001H3.9975Z" fill="#ffffff" stroke-width="0.75"></path><path d="M3.9975 2.8575h1.1475v1.1475H3.9975Z" fill="#ffffff" stroke-width="0.75"></path><path d="M2.8575 15.4275h1.1400000000000001v1.1475H2.8575Z" fill="#ffffff" stroke-width="0.75"></path><path d="M2.8575 4.005h1.1400000000000001v1.1400000000000001H2.8575Z" fill="#ffffff" stroke-width="0.75"></path><path d="M1.7175 13.1475h1.1400000000000001v2.2800000000000002H1.7175Z" fill="#ffffff" stroke-width="0.75"></path><path d="M1.7175 5.1450000000000005h1.1400000000000001v2.2874999999999996H1.7175Z" fill="#ffffff" stroke-width="0.75"></path><path d="M0.5700000000000001 7.4325h1.1475v5.715H0.5700000000000001Z" fill="#ffffff" stroke-width="0.75"></path></g></svg>
             </a>
-            <a href="" data-modal-toggle="cart-slide" data-modal-targes="cart-slide"> 
+            <button type="button" data-modal-toggle="cart-slide" data-modal-target="cart-slide"> 
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="Shopping-Shipping-Basket--Streamline-Pixel" height="24" width="24"><desc>Shopping Shipping Basket Streamline Icon: https://streamlinehq.com</desc><title>shopping-shipping-basket</title><g><path d="M1.1400000000000001 21.142500000000002h1.1475v-1.1400000000000001h3.4275v2.2874999999999996H3.4275v1.1400000000000001h17.145v-1.1400000000000001h-2.2874999999999996v-2.2874999999999996h3.4275v1.1400000000000001h1.1475V12H24v-1.1400000000000001h-3.4275v-2.2874999999999996h-1.1400000000000001v2.2874999999999996H4.574999999999999v-2.2874999999999996H3.4275v2.2874999999999996H0V12h1.1400000000000001ZM18.285 12h3.4275v2.2874999999999996h-3.4275Zm0 3.4275h3.4275v3.435h-3.4275ZM12.57 12h4.574999999999999v2.2874999999999996h-4.574999999999999Zm0 3.4275h4.574999999999999v3.435h-4.574999999999999Zm0 4.574999999999999h4.574999999999999v2.2874999999999996h-4.574999999999999ZM6.855 12h4.574999999999999v2.2874999999999996h-4.574999999999999Zm0 3.4275h4.574999999999999v3.435h-4.574999999999999Zm0 4.574999999999999h4.574999999999999v2.2874999999999996h-4.574999999999999ZM2.2874999999999996 12h3.4275v2.2874999999999996H2.2874999999999996Zm0 3.4275h3.4275v3.435H2.2874999999999996Z" fill="#ffffff" stroke-width="0.75"></path><path d="M20.572499999999998 21.142500000000002h1.1400000000000001v1.1475h-1.1400000000000001Z" fill="#ffffff" stroke-width="0.75"></path><path d="M18.285 6.285h1.1475v2.2874999999999996h-1.1475Z" fill="#ffffff" stroke-width="0.75"></path><path d="M17.145 4.005h1.1400000000000001v2.2800000000000002h-1.1400000000000001Z" fill="#ffffff" stroke-width="0.75"></path><path d="m10.290000000000001 4.005 0 1.1400000000000001 1.1400000000000001 0 0 1.1400000000000001 1.1400000000000001 0 0 -1.1400000000000001 1.1475 0 0 -1.1400000000000001 3.4275 0 0 -1.1475 -3.4275 0 0 -1.1400000000000001 -1.1475 0 0 -1.1475 -1.1400000000000001 0 0 1.1475 -1.1400000000000001 0 0 1.1400000000000001 -3.435 0 0 1.1475 3.435 0z" fill="#ffffff" stroke-width="0.75"></path><path d="M5.715 4.005h1.1400000000000001v2.2800000000000002H5.715Z" fill="#ffffff" stroke-width="0.75"></path><path d="M4.574999999999999 6.285h1.1400000000000001v2.2874999999999996H4.574999999999999Z" fill="#ffffff" stroke-width="0.75"></path><path d="M2.2874999999999996 21.142500000000002h1.1400000000000001v1.1475H2.2874999999999996Z" fill="#ffffff" stroke-width="0.75"></path></g></svg>
-            </a>              
+            </button>    
+            <div id="cart-slide" tabindex="-1" aria-hidden="true" class="hidden fixed overflow-hidden top-0 left-[-20px] !justify-end z-50 w-full h-screen bg-black bg-opacity-20">
+                <div class=" w-[33%] h-full bg-white">
+                    <button type="button" data-modal-hide="cart-slide">sdfsfsdf</button>
+                </div>
+                </div>
+            </div>      
         </div>
-    </header>
+    </header>  
+    
+
+<!-- Modal toggle -->
+<button data-modal-target="default-modal" data-modal-toggle="default-modal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+    Toggle modal
+  </button>
+  
+  <!-- Main modal -->
+  <div id="default-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+      <div class="relative p-4 w-full max-w-2xl max-h-full">
+          <!-- Modal content -->
+          <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
+              <!-- Modal header -->
+              <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
+                  <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                      Terms of Service
+                  </h3>
+                  <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="default-modal">
+                      <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                      </svg>
+                      <span class="sr-only">Close modal</span>
+                  </button>
+              </div>
+              <!-- Modal body -->
+              <div class="p-4 md:p-5 space-y-4">
+                  <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                      With less than a month to go before the European Union enacts new consumer privacy laws for its citizens, companies around the world are updating their terms of service agreements to comply.
+                  </p>
+                  <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                      The European Union’s General Data Protection Regulation (G.D.P.R.) goes into effect on May 25 and is meant to ensure a common set of data rights in the European Union. It requires organizations to notify users as soon as possible of high-risk data breaches that could personally affect them.
+                  </p>
+              </div>
+              <!-- Modal footer -->
+              <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                  <button data-modal-hide="default-modal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">I accept</button>
+                  <button data-modal-hide="default-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Decline</button>
+              </div>
+          </div>
+      </div>
+  </div>
+  
     {% block content %}
     {% endblock %}
-    <script>
-        cart = document.getElementById('cart')
-        cart1 = document.getElementById('cart1')
-
-        cart.addEventListener('click', cart1.classList.remove('hidden'))
-    </script>
+    <!-- Flowbite script -->
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
     <!-- SwiperJS script -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <!-- Custom script -->
