@@ -1808,14 +1808,6 @@ select {
   top: 8%;
 }
 
-.-left-0\.5 {
-  left: -0.125rem;
-}
-
-.left-\[-2303030px\] {
-  left: -2303030px;
-}
-
 .z-10 {
   z-index: 10;
 }
@@ -2124,12 +2116,12 @@ select {
   justify-content: flex-start;
 }
 
-.justify-end {
-  justify-content: flex-end;
-}
-
 .\!justify-end {
   justify-content: flex-end !important;
+}
+
+.justify-end {
+  justify-content: flex-end;
 }
 
 .justify-center {
@@ -2180,6 +2172,10 @@ select {
 
 .overflow-x-hidden {
   overflow-x: hidden;
+}
+
+.overflow-y-scroll {
+  overflow-y: scroll;
 }
 
 .rounded-lg {
@@ -2637,8 +2633,18 @@ select {
   transition-duration: 150ms;
 }
 
+.transition-\[1s\] {
+  transition-property: 1s;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
 .duration-300 {
   transition-duration: 300ms;
+}
+
+.duration-700 {
+  transition-duration: 700ms;
 }
 
 .ease-out {

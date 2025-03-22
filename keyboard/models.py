@@ -64,7 +64,7 @@ class Order(models.Model):
 
 
 class Cart(models.Model):
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='cart_user')
 
 
     def __str__(self):
@@ -78,7 +78,7 @@ class Cart(models.Model):
 
 class Cart_product(models.Model):
     product = models.ForeignKey('Product', on_delete=models.CASCADE)
-    cart = models.ForeignKey('Cart', on_delete=models.CASCADE)
+    cart = models.ForeignKey('Cart', on_delete=models.CASCADE, related_name='cart_products')
 
 
     def __str__(self):
