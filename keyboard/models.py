@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+import uuid
 
 
 class Product(models.Model):
@@ -64,11 +65,16 @@ class Order(models.Model):
 
 
 class Cart(models.Model):
+    id = models.UUIDField(default=uuid.uuid4, primary_key=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='cart_user')
+    session_id = models.CharField(max_length=100, null=True, blank=True)
 
 
     def __str__(self):
-        return self.owner.username
+        if not self.session_id:
+            return f'{self.id} - {self.owner.username}'
+        else: 
+            return f'{self.id} - {self.owner.username} - session_id: {self.session_id}'
     
 
     class Meta:
@@ -79,6 +85,7 @@ class Cart(models.Model):
 class Cart_product(models.Model):
     product = models.ForeignKey('Product', on_delete=models.CASCADE)
     cart = models.ForeignKey('Cart', on_delete=models.CASCADE, related_name='cart_products')
+    quantity = models.IntegerField(default=0)
 
 
     def __str__(self):
