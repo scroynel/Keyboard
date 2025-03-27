@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 import uuid
 
 
@@ -66,7 +66,7 @@ class Order(models.Model):
 
 class Cart(models.Model):
     id = models.UUIDField(default=uuid.uuid4, primary_key=True)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='cart_user')
+    owner = models.OneToOneField(get_user_model(), on_delete=models.CASCADE, related_name='cart_user')
     session_id = models.CharField(max_length=100, null=True, blank=True)
 
 
