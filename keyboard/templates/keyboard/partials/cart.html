@@ -1,23 +1,22 @@
 {% load tags %}
 
-<div id="cart-slide" tabindex="-1" aria-hidden="true" class=" fixed overflow-x-hidden overflow-y-scroll top-0 bottom-0 left-[-20px] !justify-end z-50 w-full bg-black bg-opacity-20">
-    <div class=" w-[33%] h-full bg-white">
-        
-        dsfdsfs
-        {{ cart_prod }}
-        sdfsdfdsf
-        {% for i in request.user.cart_user.cart_products.all %}
-            {{i.product.price}}
-        {% endfor %}
-        {% if request.user.cart_user.cart_products.all %}
-            {% for product in request.user.cart_user.cart_products.all %}
-                {{product.price}}
+<div id="cart-slide" tabindex="-1" aria-hidden="true" class="hidden fixed overflow-x-hidden overflow-y-scroll top-0 bottom-0 left-[-20px] !justify-end z-50 w-full bg-black bg-opacity-20">
+    <div class="w-[33%] h-full bg-white flex justify-center items-center">
+        {% cart_products as cart_products %}
+    
+        {% if not cart_products %}
+            {% for cp in cart_products %}
+                <div>
+                    {{cp.product.name}}
+                </div>          
             {% endfor %}
         {% else %}
-            <p>Your cart is empty</p>
-            <button type="button" data-modal-hide="cart-slide">Continue shopping</button>
-            <p>Have an account?</p>
-            <p><a href="">Log in</a> to check out faster.</p>
+        <div class="text-center">
+            <p class="text-4xl">Your cart is empty</p>
+            <button type="button" class="inline-block border-4 hover:border-gray-400 hover:shadow-md shadow-black mt-10 p-4" data-modal-hide="cart-slide">Continue shopping</button>
+            <p class="text-2xl mt-10">Have an account?</p>
+            <p><a href="#" class="underline text-xl">Log in</a> to check out faster.</p>
+        </div>
         {% endif %}
     </div>
 </div>      
