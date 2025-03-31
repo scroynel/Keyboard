@@ -77,6 +77,13 @@ class Cart(models.Model):
             return f'{self.id} - {self.owner.username} - session_id: {self.session_id}'
     
 
+    @property
+    def total_price(self):
+        cart_products = self.cart_products.all()
+        total = sum([cp.product.price for cp in cart_products])
+        return total
+
+
     class Meta:
         verbose_name = 'Cart'
         verbose_name_plural = 'Carts'

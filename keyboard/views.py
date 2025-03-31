@@ -1,6 +1,7 @@
-from django.shortcuts import render
-from django.views.generic import ListView, DetailView
-from .models import Product, ProductAdditionalImages
+from django.views.generic import ListView, DetailView, DeleteView
+from django.shortcuts import get_object_or_404
+from django.urls import reverse_lazy
+from .models import Product, ProductAdditionalImages, Cart_product
 
 
 class MainView(ListView):
@@ -63,3 +64,19 @@ class SwitchDetailView(DetailView):
 
     def get_object(self, queryset = None):
         return Product.objects.filter(category__slug='switches').get(slug=self.kwargs[self.slug_url_kwarg])
+    
+
+class ProductDelete(DeleteView):
+    model = Cart_product
+
+
+    def get_object(self, queryset = None):
+        return get_object_or_404(Cart_product, product__category__slug=self.kwargs['category_slug'], product__slug=self.kwargs['product_slug'])
+    
+
+    def get(self, request, *args, **kwargs):
+        return self.delete(request, *args, **kwargs)
+    
+
+    def get_success_url(self):
+        return reverse_lazy('main')
