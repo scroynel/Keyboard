@@ -1,7 +1,8 @@
-from django.views.generic import ListView, DetailView, DeleteView
+from django.views.generic import ListView, DetailView, DeleteView, View
 from django.shortcuts import get_object_or_404
-from django.urls import reverse_lazy
-from .models import Product, ProductAdditionalImages, Cart_product
+from django.urls import reverse_lazy, reverse
+from django.http import HttpResponseRedirect
+from .models import Product, ProductAdditionalImages, Cart_product, Cart
 
 
 class MainView(ListView):
@@ -64,6 +65,18 @@ class SwitchDetailView(DetailView):
 
     def get_object(self, queryset = None):
         return Product.objects.filter(category__slug='switches').get(slug=self.kwargs[self.slug_url_kwarg])
+    
+
+def add_to_cart(request, category_slug, product_slug):
+    product = Product.objects.get(category__slug=category_slug, slug=product_slug)
+
+    if request.user.is_authenticated:
+        cart, created = Cart.objects.get_or_create(owner=request.user)
+        cart_product, created = Cart_product.objects.get_or_create(cart=cart, product=product)
+        cart_product.quantity += 1
+        cart_product.save()
+
+    return HttpResponseRedirect(reverse('main'))
     
 
 class ProductDelete(DeleteView):
