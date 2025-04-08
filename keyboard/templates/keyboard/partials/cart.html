@@ -2,8 +2,6 @@
 
 <div id="cart-slide" tabindex="-1" aria-hidden="true" class="hidden fixed overflow-x-hidden overflow-y-scroll top-0 bottom-0 left-[-20px] !justify-end z-50 w-full bg-black bg-opacity-20">
     <div class="w-[33%] h-full p-4 bg-[#f3f3f3]">
-        {% cart as cart %}
-        {% cart_products as cart_products %}
         {% if cart.cart_products.all %}
             <h2 class="text-4xl mb-10">Your cart</h2>
             {% for cp in cart.cart_products.all %}

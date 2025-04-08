@@ -3,13 +3,14 @@ from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
 from .models import Product, ProductAdditionalImages, Cart_product, Cart
+import uuid
 
 
 class MainView(ListView):
     model = Product
     template_name = 'keyboard/main.html'
     queryset = Product.objects.all()
-
+    
 
 class KeyboardsView(ListView):
     model = Product
@@ -75,6 +76,20 @@ def add_to_cart(request, category_slug, product_slug):
         cart_product, created = Cart_product.objects.get_or_create(cart=cart, product=product)
         cart_product.quantity += 1
         cart_product.save()
+    else:
+        try:
+            cart = Cart.objects.get(session_id=request.session['nonuser'])
+            cart_product, created = Cart_product.objects.get_or_create(cart=cart, product=product)
+            cart_product.quantity += 1
+            cart_product.save()
+        except: 
+            request.session['nonuser'] = str(uuid.uuid4())
+            cart = Cart.objects.create(session_id = request.session['nonuser'])
+            cart_product, created = Cart_product.objects.get_or_create(cart=cart, product=product)
+            cart_product.quantity += 1
+            cart_product.save()
+
+        print(cart_product)
 
     return HttpResponseRedirect(reverse('main'))
     

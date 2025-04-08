@@ -66,15 +66,15 @@ class Order(models.Model):
 
 class Cart(models.Model):
     id = models.UUIDField(default=uuid.uuid4, primary_key=True)
-    owner = models.OneToOneField(get_user_model(), on_delete=models.CASCADE, related_name='cart_user')
+    owner = models.OneToOneField(get_user_model(), on_delete=models.CASCADE, related_name='cart_user', blank=True, null=True)
     session_id = models.CharField(max_length=100, null=True, blank=True)
 
 
     def __str__(self):
-        if not self.session_id:
+        if not self.session_id and self.owner:
             return f'{self.id} - {self.owner.username}'
         else: 
-            return f'{self.id} - {self.owner.username} - session_id: {self.session_id}'
+            return f'{self.id} - session_id: {self.session_id}'
     
 
     @property
