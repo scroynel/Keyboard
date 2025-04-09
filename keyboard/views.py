@@ -1,4 +1,5 @@
-from django.views.generic import ListView, DetailView, DeleteView, View
+from django.views.generic import ListView, DetailView, DeleteView
+from django.contrib.auth.views import LoginView
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
