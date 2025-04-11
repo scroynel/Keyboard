@@ -1796,6 +1796,54 @@ select {
   top: 8%;
 }
 
+.bottom-20 {
+  bottom: 5rem;
+}
+
+.bottom-\[-20\] {
+  bottom: -20;
+}
+
+.top-20 {
+  top: 5rem;
+}
+
+.bottom-5 {
+  bottom: 1.25rem;
+}
+
+.top-5 {
+  top: 1.25rem;
+}
+
+.top-4 {
+  top: 1rem;
+}
+
+.bottom-2 {
+  bottom: 0.5rem;
+}
+
+.bottom-3 {
+  bottom: 0.75rem;
+}
+
+.bottom-\[-20px\] {
+  bottom: -20px;
+}
+
+.bottom-\[-40px\] {
+  bottom: -40px;
+}
+
+.bottom-\[-\] {
+  bottom: -;
+}
+
+.bottom-\[-0px\] {
+  bottom: -0px;
+}
+
 .z-10 {
   z-index: 10;
 }
@@ -2255,6 +2303,11 @@ select {
   background-color: rgb(255 255 255 / 0.5);
 }
 
+.bg-gray-600 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(75 85 99 / var(--tw-bg-opacity, 1));
+}
+
 .bg-opacity-0 {
   --tw-bg-opacity: 0;
 }
@@ -2289,6 +2342,14 @@ select {
 
 .p-4 {
   padding: 1rem;
+}
+
+.p-3 {
+  padding: 0.75rem;
+}
+
+.p-2 {
+  padding: 0.5rem;
 }
 
 .px-2 {
@@ -2359,6 +2420,16 @@ select {
 .py-\[70px\] {
   padding-top: 70px;
   padding-bottom: 70px;
+}
+
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
 }
 
 .pb-7 {
@@ -2580,12 +2651,24 @@ select {
   transition-duration: 150ms;
 }
 
+.delay-150 {
+  transition-delay: 150ms;
+}
+
 .duration-300 {
   transition-duration: 300ms;
 }
 
+.duration-500 {
+  transition-duration: 500ms;
+}
+
 .ease-out {
   transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+}
+
+.ease-in-out {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .hover\:border-gray-300:hover {
@@ -2675,6 +2758,10 @@ select {
 .focus\:ring-gray-200:focus {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(229 231 235 / var(--tw-ring-opacity, 1));
+}
+
+.group:hover .group-hover\:block {
+  display: block;
 }
 
 .group:hover .group-hover\:w-full {
