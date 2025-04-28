@@ -12,5 +12,5 @@ urlpatterns = [
     path('keycaps/<slug:keycap_slug>/', views.KeycapDetailView.as_view(), name='keycap_detail'),
     path('switches/<slug:switch_slug>/', views.SwitchDetailView.as_view(), name='switch_detail'),
     path('<slug:category_slug>/<slug:product_slug>/add/', views.add_to_cart, name='product_add'),
-    path('<slug:category_slug>/<slug:product_slug>/delete/', views.ProductDelete.as_view(), name='product_delete')
+    path('<slug:category_slug>/slug:categ/<slug:product_slug>/delete/', views.ProductDelete.as_view(), name='product_delete')
 ]

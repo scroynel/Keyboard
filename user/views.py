@@ -1,30 +1,36 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.views import LoginView
 from django.views.generic import DetailView
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, authenticate, login
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from keyboard.models import Cart
 
 
-class LoginUserView(LoginView):
-    template_name = 'user/login.html'
+def LoginUserView(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)  
+            try:
+                ses = request.session['nonuser']
+                cart = Cart.objects.get(session_id = request.session["nonuser"])
+                if not Cart.objects.filter(owner=request.user).exists():
+                    cart.owner = request.user
+                    cart.save()
+                    # if Cart.objects.filter(owner=request.user).exists()
+                    # cart.owner = None
+                    # cart.save()
+            except:
+                return redirect('main')
+        else:
+            print("Invalid credentials provided")
 
-
-    def form_valid(self, form):
-        form = super().form_valid(form)
-        try:
-            cart = Cart.objects.get(session_id=self.request.session['nonuser'])
-            if Cart.objects.filter(owner=self.request.user).exists():
-                cart.owner = None
-                cart.save()
-
-            else:
-                cart.owner = self.request.user
-                cart.save()
-        except:
-            print('omoooooooooo')
-        return form
+    context = {}
+            
+    return render(request, 'user/login.html', context)
 
 
 class ProfileView(DetailView):

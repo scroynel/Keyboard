@@ -90,8 +90,6 @@ def add_to_cart(request, category_slug, product_slug):
             cart_product.quantity += 1
             cart_product.save()
 
-        print(cart_product)
-
     return HttpResponseRedirect(reverse('main'))
     
 
