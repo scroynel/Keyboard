@@ -98,7 +98,7 @@ class ProductDelete(DeleteView):
 
 
     def get_object(self, queryset = None):
-        return get_object_or_404(Cart_product, product__category__slug=self.kwargs['category_slug'], product__slug=self.kwargs['product_slug'])
+        return get_object_or_404(Cart_product, product__category__slug=self.kwargs['category_slug'], cart=self.kwargs['cart_id'], product__slug=self.kwargs['product_slug'])
     
 
     def get(self, request, *args, **kwargs):

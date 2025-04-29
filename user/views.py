@@ -20,11 +20,13 @@ def LoginUserView(request):
                 if not Cart.objects.filter(owner=request.user).exists():
                     cart.owner = request.user
                     cart.save()
-                    # if Cart.objects.filter(owner=request.user).exists()
-                    # cart.owner = None
-                    # cart.save()
+                else:
+                    cart.delete()
+                    print('delete -> redirect main') 
             except:
-                return redirect('main')
+                print('except redirect')
+               
+            return redirect('profile', user_pk=request.user.pk)
         else:
             print("Invalid credentials provided")
 
