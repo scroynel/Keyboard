@@ -1,10 +1,14 @@
-from django.views.generic import ListView, DetailView, DeleteView
+from django.views.generic import ListView, DetailView, DeleteView, View
+from django.views.generic.detail import SingleObjectMixin
 from django.contrib.auth.views import LoginView
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy, reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from .models import Product, ProductAdditionalImages, Cart_product, Cart
 import uuid
+
+
+from django.http import HttpResponseBadRequest, JsonResponse
 
 
 class MainView(ListView):
@@ -93,17 +97,52 @@ def add_to_cart(request, category_slug, product_slug):
     return HttpResponseRedirect(reverse('main'))
     
 
-class ProductDelete(DeleteView):
-    model = Cart_product
+# class ProductDelete(DeleteView):
+#     model = Cart_product
 
+
+#     def get_object(self, queryset = None):
+#         return get_object_or_404(Cart_product, product__category__slug=self.kwargs['category_slug'], cart=self.kwargs['cart_id'], product__slug=self.kwargs['product_slug'])
+    
+
+#     def get(self, request, *args, **kwargs):
+#         return self.delete(request, *args, **kwargs)
+    
+
+#     def get_success_url(self):
+#         return reverse_lazy('main')
+
+
+class AjaxDeleteView(SingleObjectMixin, View):
+    """
+    Works like DeleteView, but without confirmation screens or a success_url.
+    """
+    model = Cart_product
 
     def get_object(self, queryset = None):
         return get_object_or_404(Cart_product, product__category__slug=self.kwargs['category_slug'], cart=self.kwargs['cart_id'], product__slug=self.kwargs['product_slug'])
-    
 
-    def get(self, request, *args, **kwargs):
-        return self.delete(request, *args, **kwargs)
-    
+    def post(self, *args, **kwargs):
+        
 
-    def get_success_url(self):
-        return reverse_lazy('main')
+        is_ajax = self.request.headers.get('X-Requested-With') == 'XMLHttpRequest'
+
+        if is_ajax:
+            if self.request.method == 'POST':
+                self.object = self.get_object()
+                self.object.delete()
+                print(self.kwargs['cart_id'])
+                cart = Cart.objects.values().filter(id=self.kwargs['cart_id']).first()
+                cart_products = list(Cart_product.objects.values().filter(cart__id = self.kwargs['cart_id']))
+                products = list(Product.objects.values().filter(cart_product__cart__id=self.kwargs['cart_id']))
+                total = Cart.objects.get(id=self.kwargs['cart_id']).total_price
+                print(cart)
+                print(cart_products)
+                print(products)
+                print(total)
+                return JsonResponse({'status': 1, 'cart_user': cart, 'cart_products_user': cart_products, 'products_user': products, 'total': total})
+            return JsonResponse({'status': 'Invalid request'}, status=400)
+        else:
+            return HttpResponseBadRequest('Invalid request')
+    
+   

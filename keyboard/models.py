@@ -80,7 +80,7 @@ class Cart(models.Model):
     @property
     def total_price(self):
         cart_products = self.cart_products.all()
-        total = sum([cp.product.price for cp in cart_products])
+        total = sum([cp.product.price * cp.quantity for cp in cart_products])
         return total
 
 
@@ -90,7 +90,7 @@ class Cart(models.Model):
 
 
 class Cart_product(models.Model):
-    product = models.ForeignKey('Product', on_delete=models.CASCADE)
+    product = models.ForeignKey('Product', on_delete=models.CASCADE, related_name='cart_product')
     cart = models.ForeignKey('Cart', on_delete=models.CASCADE, related_name='cart_products')
     quantity = models.IntegerField(default=0)
 

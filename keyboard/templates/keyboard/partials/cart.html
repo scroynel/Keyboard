@@ -1,11 +1,11 @@
 {% load tags %}
 
 <div id="cart-slide" tabindex="-1" aria-hidden="true" class="hidden fixed overflow-x-hidden overflow-y-scroll top-0 bottom-0 left-[-20px] !justify-end z-50 w-full bg-black bg-opacity-20">
-    <div class="w-[33%] h-full p-4 bg-[#f3f3f3]">
+    <div id="cart" class="w-[33%] h-full p-4 bg-[#f3f3f3]">
         {% if cart.cart_products.all %}
             <h2 class="text-4xl mb-10">Your cart</h2>
             {% for cp in cart.cart_products.all %}
-                <div class="flex items-center space-x-5 border-t-2 p-4">
+                <div class="cart-item flex items-center space-x-5 border-t-2 p-4">
                     <img src="{{cp.product.image.url}}" class="w-[100px] h-[100px]" alt="">
                     <div>
                         <p class="text-2xl">{{cp.product.name}}</p>
@@ -15,7 +15,7 @@
                     </div>
                     <div class="flex flex-1 justify-end items-center">
                         <p class="text-xl mr-10 underline underline-offset-2">${{cp.product.price}}</p>
-                        <a href="{% url 'product_delete' cp.product.category.slug cp.cart.id cp.product.slug %}" class="inline-block text-sm items-center">
+                        <a href="{% url 'product_delete' cp.product.category.slug cp.cart.id cp.product.slug %}" class="delete-link inline-block text-sm items-center">
                             <svg class="me-2 eVNhx7m5tjSVbfYQzDdT kbeH5ty3CtPKxXm5TXph" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"></path>
                             </svg>
@@ -25,7 +25,7 @@
             {% endfor %}
             <div id="product-block"></div>
             <div class="w-full text-right">
-                <p class="text-xl">Total price: <span class="text-2xl">${{cart.total_price}}</span></p>
+                <p class="text-xl">Total price: <span id="total" class="text-2xl">${{cart.total_price}}</span></p>
             </div>
             <div class="w-full text-center">
                 <button type="button" class="inline-block border-4 hover:border-gray-400 hover:shadow-md shadow-black mt-10 py-2 px-4" data-modal-hide="cart-slide">Check out</button>
