@@ -1,12 +1,17 @@
 from .models import Cart
+import uuid
 
 
 def cart_renderer(request):
     try:
         if request.user.is_authenticated:
-            cart = Cart.objects.get(owner=request.user)
+            cart, created = Cart.objects.get_or_create(owner=request.user)
         else:
-            cart = Cart.objects.get(session_id=request.session['nonuser'])
+            try: 
+                cart = Cart.objects.get(session_id=request.session['nonuser'])
+            except:
+                request.session['nonuser'] = str(uuid.uuid4())
+                cart = Cart.objects.create(session_id = request.session['nonuser'])
     except:
         cart = None
 

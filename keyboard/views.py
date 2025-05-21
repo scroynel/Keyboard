@@ -6,6 +6,9 @@ from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect, HttpResponse
 from .models import Product, ProductAdditionalImages, Cart_product, Cart
 import uuid
+from django.shortcuts import render
+from django.template import Context
+from django.template.loader import get_template
 
 
 from django.http import HttpResponseBadRequest, JsonResponse
@@ -15,7 +18,26 @@ class MainView(ListView):
     model = Product
     template_name = 'keyboard/main.html'
     queryset = Product.objects.all()
+    context_object_name = 'products'
+
     
+    # def get_queryset(self):
+    #     if self.request.user.is_authenticated:
+    #         cart = Cart.objects.get(owner=self.request.user)
+    #     else: 
+    #         cart = Cart.objects.get(session_id=self.request.session['nonuser'])
+    #     return Product.objects.filter(cart_product__cart=cart)
+
+
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     if self.request.user.is_authenticated:
+    #         cart = Cart.objects.get(owner=self.request.user)
+    #     else: 
+    #         cart = Cart.objects.get(session_id=self.request.session['nonuser'])
+    #     context['cart_products'] = Product.objects.filter(cart_product__cart=cart)
+    #     return context
+            
 
 class KeyboardsView(ListView):
     model = Product
@@ -77,22 +99,27 @@ def add_to_cart(request, category_slug, product_slug):
     product = Product.objects.get(category__slug=category_slug, slug=product_slug)
 
     if request.user.is_authenticated:
-        cart, created = Cart.objects.get_or_create(owner=request.user)
+        # cart, created = Cart.objects.get_or_create(owner=request.user)
+        cart = Cart.objects.get(owner=request.user)
         cart_product, created = Cart_product.objects.get_or_create(cart=cart, product=product)
         cart_product.quantity += 1
         cart_product.save()
     else:
-        try:
-            cart = Cart.objects.get(session_id=request.session['nonuser'])
-            cart_product, created = Cart_product.objects.get_or_create(cart=cart, product=product)
-            cart_product.quantity += 1
-            cart_product.save()
-        except: 
-            request.session['nonuser'] = str(uuid.uuid4())
-            cart = Cart.objects.create(session_id = request.session['nonuser'])
-            cart_product, created = Cart_product.objects.get_or_create(cart=cart, product=product)
-            cart_product.quantity += 1
-            cart_product.save()
+        cart = Cart.objects.get(session_id=request.session['nonuser'])
+        cart_product, created = Cart_product.objects.get_or_create(cart=cart, product=product)
+        cart_product.quantity += 1
+        cart_product.save()
+        # try:
+        #     # cart = Cart.objects.get(session_id=request.session['nonuser'])
+        #     cart_product, created = Cart_product.objects.get_or_create(cart=cart, product=product)
+        #     cart_product.quantity += 1
+        #     cart_product.save()
+        # except: 
+        #     # request.session['nonuser'] = str(uuid.uuid4())
+        #     # cart = Cart.objects.create(session_id = request.session['nonuser'])
+        #     cart_product, created = Cart_product.objects.get_or_create(cart=cart, product=product)
+        #     cart_product.quantity += 1
+        #     cart_product.save()
 
     return HttpResponseRedirect(reverse('main'))
     
@@ -131,16 +158,15 @@ class AjaxDeleteView(SingleObjectMixin, View):
             if self.request.method == 'POST':
                 self.object = self.get_object()
                 self.object.delete()
-                print(self.kwargs['cart_id'])
-                cart = Cart.objects.values().filter(id=self.kwargs['cart_id']).first()
-                cart_products = list(Cart_product.objects.values().filter(cart__id = self.kwargs['cart_id']))
-                products = list(Product.objects.values().filter(cart_product__cart__id=self.kwargs['cart_id']))
+                if self.request.user.is_authenticated:
+                    cart = Cart.objects.get(owner=self.request.user)
+                else: 
+                    cart = Cart.objects.get(session_id=self.request.session['nonuser'])
+                
                 total = Cart.objects.get(id=self.kwargs['cart_id']).total_price
-                print(cart)
-                print(cart_products)
-                print(products)
-                print(total)
-                return JsonResponse({'status': 1, 'cart_user': cart, 'cart_products_user': cart_products, 'products_user': products, 'total': total})
+                count = Cart_product.objects.filter(cart=cart).count()
+
+                return JsonResponse({'status': 1, 'total': total, 'count': count})
             return JsonResponse({'status': 'Invalid request'}, status=400)
         else:
             return HttpResponseBadRequest('Invalid request')

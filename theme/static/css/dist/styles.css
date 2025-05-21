@@ -1796,6 +1796,30 @@ select {
   top: 8%;
 }
 
+.left-\[20px\] {
+  left: 20px;
+}
+
+.left-\[-30px\] {
+  left: -30px;
+}
+
+.left-\[-40px\] {
+  left: -40px;
+}
+
+.left-\[-10px\] {
+  left: -10px;
+}
+
+.left-\[-39px\] {
+  left: -39px;
+}
+
+.left-\[-34px\] {
+  left: -34px;
+}
+
 .z-10 {
   z-index: 10;
 }
@@ -2270,6 +2294,18 @@ select {
 
 .bg-opacity-20 {
   --tw-bg-opacity: 0.2;
+}
+
+.bg-opacity-30 {
+  --tw-bg-opacity: 0.3;
+}
+
+.bg-opacity-50 {
+  --tw-bg-opacity: 0.5;
+}
+
+.bg-opacity-90 {
+  --tw-bg-opacity: 0.9;
 }
 
 .bg-cover {
