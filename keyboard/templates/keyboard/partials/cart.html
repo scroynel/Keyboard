@@ -1,7 +1,7 @@
 {% load tags %}
 
-<div id="cart-slide" tabindex="-1" aria-hidden="true" class="hidden fixed overflow-x-hidden overflow-y-scroll top-0 bottom-0 left-[-40px] !justify-end z-50 w-full bg-black bg-opacity-50">
-    <div id="cart" class="w-[33%] h-full p-4 bg-[#f3f3f3]">
+<div id="cart-slide"  class="hidden fixed overflow-x-hidden overflow-y-scroll top-0 bottom-0 left-[-40px] z-50 w-full bg-black bg-opacity-50">
+    <div id="cart" class="fixed right-0 w-[33%] h-full p-4 bg-[#f3f3f3]">
         {% if cart.cart_products.all %}
             <h2 class="text-4xl mb-10">Your cart</h2>
             {% for p in cart.cart_products.all %}
@@ -28,13 +28,13 @@
                 <p class="text-xl">Total price: <span id="total" class="text-2xl">${{cart.total_price}}</span></p>
             </div>
             <div class="w-full text-center">
-                <button type="button" class="inline-block border-4 hover:border-gray-400 hover:shadow-md shadow-black mt-10 py-2 px-4" data-modal-hide="cart-slide">Check out</button>
+                <button type="button" class="inline-block border-4 hover:border-gray-400 hover:shadow-md shadow-black mt-10 py-2 px-4">Check out</button>
             </div>
         {% else %}
         <div id="cart-empty" class="w-full h-full flex justify-center items-center">
             <div class="text-center">
                 <p class="text-4xl">Your cart is empty</p>
-                <button id="button-modal" type="button" class="inline-block border-4 hover:border-gray-400 hover:shadow-md shadow-black mt-10 p-4" data-modal-hide="cart-slide">Continue shopping</button>
+                <button id="button-modal" type="button" class="inline-block border-4 hover:border-gray-400 hover:shadow-md shadow-black mt-10 p-4">Continue shopping</button>
                 <p class="text-2xl mt-10">Have an account?</p>
                 <p><a id="login" href="{% url 'login' %}" class="underline text-xl">Log in</a> to check out faster.</p>
             </div>

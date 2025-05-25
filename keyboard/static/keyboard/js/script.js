@@ -35,13 +35,33 @@ function getCookie(name) {
 }
 
 
+// Modal cart
+$(document).ready(function() {
+  $('#cart-button').on('click', function(e) {;
+    $('#cart-slide').removeClass('hidden');
+    $('body').addClass('overflow-hidden')
+  })
+
+  $('#cart-slide').on('click', function(e) {
+    $('#cart-slide').addClass('hidden');
+    $('body').removeClass('overflow-hidden')
+  })
+
+  $('#cart').on('click', function(e) {
+    e.stopPropagation();
+  })
+
+  $('#button-modal').on('click', function(e) {
+    $('#cart-slide').addClass('hidden')
+  })
+})
 
 
-// Delete-link ajax (without refresh page)
+
+
+// Delete-link ajax (without refresh page) for cart
 $('.delete-link').on('click', function(e) {
   e.preventDefault();
-  login = 'login/'
-  console.log('login', login)
   $.ajax({
     url: $(this).attr('href'),
     type: "POST",
@@ -51,23 +71,24 @@ $('.delete-link').on('click', function(e) {
       "X-CSRFToken": getCookie("csrftoken"),  // don't forget to include the 'getCookie' function
     },
     success: (data) => {
-      console.log(data)
       if (data.status == 1) {
         $(this).closest('.cart-item').fadeOut();
-        console.log(data.total)
         $('#total').text(data.total)
         if (data.count == 0) {
           let code = `
             <div id="cart-empty" class="w-full h-full flex justify-center items-center">
-                <div class="text-center">
-                    <p class="text-4xl">Your cart is empty</p>
-                    <button id="button-modal" type="button" class="inline-block border-4 hover:border-gray-400 hover:shadow-md shadow-black mt-10 p-4" data-modal-hide="cart-slide">Continue shopping</button>
-                    <p class="text-2xl mt-10">Have an account?</p>
-                    <p><a id="login" href="{% url 'login' %}" class="underline text-xl">Log in</a> to check out faster.</p>
-                </div>
-            </div>
+              <div class="text-center">
+                  <p class="text-4xl">Your cart is empty</p>
+                  <button id="button-modal" type="button" class="inline-block border-4 hover:border-gray-400 hover:shadow-md shadow-black mt-10 p-4">Continue shopping</button>
+                  <p class="text-2xl mt-10">Have an account?</p>
+                  <p><a id="login" href="{% url 'login' %}" class="underline text-xl">Log in</a> to check out faster.</p>
+              </div>
+          </div>
           `
           $('#cart').html(code)
+          $('#button-modal').on('click', function(e) {
+            $('#cart-slide').addClass('hidden');
+          })
         }
       }
     },
@@ -76,17 +97,3 @@ $('.delete-link').on('click', function(e) {
     }
   })
 })
-
-
-$('#js-button-modal').on('click', function(e){
-  e.preventDefault();
-  console.log('sdfkdlsf')
-  $('#cart-slide').addClass('hidden');
-})
-
-
-// // Click on botton to the cart
-// $('#cart-button').on('click', function(e) {
-//   e.preventDefault();
-//   $('#cart-slide').fadeIn();
-// })
