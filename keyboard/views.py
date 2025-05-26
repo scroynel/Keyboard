@@ -1,14 +1,9 @@
-from django.views.generic import ListView, DetailView, DeleteView, View
+from django.views.generic import ListView, DetailView, View
 from django.views.generic.detail import SingleObjectMixin
-from django.contrib.auth.views import LoginView
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy, reverse
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect
 from .models import Product, ProductAdditionalImages, Cart_product, Cart
-import uuid
-from django.shortcuts import render
-from django.template import Context
-from django.template.loader import get_template
 
 
 from django.http import HttpResponseBadRequest, JsonResponse
@@ -19,24 +14,6 @@ class MainView(ListView):
     template_name = 'keyboard/main.html'
     queryset = Product.objects.all()
     context_object_name = 'products'
-
-    
-    # def get_queryset(self):
-    #     if self.request.user.is_authenticated:
-    #         cart = Cart.objects.get(owner=self.request.user)
-    #     else: 
-    #         cart = Cart.objects.get(session_id=self.request.session['nonuser'])
-    #     return Product.objects.filter(cart_product__cart=cart)
-
-
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     if self.request.user.is_authenticated:
-    #         cart = Cart.objects.get(owner=self.request.user)
-    #     else: 
-    #         cart = Cart.objects.get(session_id=self.request.session['nonuser'])
-    #     context['cart_products'] = Product.objects.filter(cart_product__cart=cart)
-    #     return context
             
 
 class KeyboardsView(ListView):
@@ -99,7 +76,6 @@ def add_to_cart(request, category_slug, product_slug):
     product = Product.objects.get(category__slug=category_slug, slug=product_slug)
 
     if request.user.is_authenticated:
-        # cart, created = Cart.objects.get_or_create(owner=request.user)
         cart = Cart.objects.get(owner=request.user)
         cart_product, created = Cart_product.objects.get_or_create(cart=cart, product=product)
         cart_product.quantity += 1
@@ -109,17 +85,6 @@ def add_to_cart(request, category_slug, product_slug):
         cart_product, created = Cart_product.objects.get_or_create(cart=cart, product=product)
         cart_product.quantity += 1
         cart_product.save()
-        # try:
-        #     # cart = Cart.objects.get(session_id=request.session['nonuser'])
-        #     cart_product, created = Cart_product.objects.get_or_create(cart=cart, product=product)
-        #     cart_product.quantity += 1
-        #     cart_product.save()
-        # except: 
-        #     # request.session['nonuser'] = str(uuid.uuid4())
-        #     # cart = Cart.objects.create(session_id = request.session['nonuser'])
-        #     cart_product, created = Cart_product.objects.get_or_create(cart=cart, product=product)
-        #     cart_product.quantity += 1
-        #     cart_product.save()
 
     return HttpResponseRedirect(reverse('main'))
     
@@ -171,4 +136,27 @@ class AjaxDeleteView(SingleObjectMixin, View):
         else:
             return HttpResponseBadRequest('Invalid request')
     
-   
+
+class AjaxUpdateView(SingleObjectMixin, View):
+    model = Cart_product
+
+
+    def get_object(self, queryset = None):
+        return get_object_or_404(Cart_product, product__category__slug=self.kwargs['category_slug'], cart=self.kwargs['cart_id'], product__slug=self.kwargs['product_slug'])
+    
+
+    def post(self, *args, **kwargs):
+        is_ajax = self.request.headers.get('X-Requested-With') == 'XMLHttpRequest'
+
+        if is_ajax:
+            if self.request.method == 'POST':
+                self.object = self.get_object()
+                qty = self.request.POST['qty']
+                self.object.quantity = qty
+                self.object.save()
+                total = Cart.objects.get(id=self.kwargs['cart_id']).total_price
+                return JsonResponse({'status': 1, 'total': total})
+            return JsonResponse({'status': 'Invalid request'}, status=400)
+        else:
+            return HttpResponseBadRequest('Invalid request')
+
