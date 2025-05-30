@@ -3,11 +3,16 @@
 {% block title %}Log In{% endblock %}
 
 {% block content %}
-<h1>Log In</h1>
-<form action="" method="POST">
-    {% csrf_token %}
-    <input type="text" name="username">
-    <input type="password" name="password">
-    <button type="submit">Log In</button>
-</form>
+<div class="w-full flex justify-center">
+    <div class="text-center m-auto">
+        <h1 class="font-bold text-5xl">Log In</h1>
+        <form action="" method="POST" class="mt-5 space-y-5">
+            {% csrf_token %}
+            <input class="w-full rounded-md text-xl" type="text" name="username" placeholder="Username">
+            <input class="w-full rounded-md text-xl" type="password" name="password" placeholder="Password">
+            <button type="submit" class="mt-8 inline-block p-4 border border-black text-center">Sign In</button>
+        </form>
+    </div>
+</div>
+
 {% endblock %}
