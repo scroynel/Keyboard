@@ -3,7 +3,7 @@
 {% block title %}{{switch.name}}{% endblock %}
 
 {% block content %}
-    <div class="flex space-x-10 mt-[50px]">
+    <div class="flex space-x-10 my-[50px]">
         <div class="w-[70%] flex space-x-5">
             {% for image in switch.additional_images.all %}
                 <img class="w-[200px]" src="{{image.image.url}}" alt="">

@@ -17,8 +17,8 @@
     {% tailwind_css %}
     <title>{% block title %}{% endblock %}</title>
 </head>
-<body>
-    <header id="header" class="bg-[#303030] py-2 flex justify-between items-center px-32 relative bg-opacity-100">
+<body class="flex flex-col min-h-screen">
+    <header id="header" class="bg-[#303030] py-2 flex justify-between items-center px-32 relative bg-opacity-100 h-[75px]">
         <div class="flex items-center space-x-5 flex-1">
             <a href="{% url 'main' %}">
                 <img class="w-[100px]" src="{% static '/keyboard/images/keyboard_logo_copy.png' %}" alt="">
@@ -75,10 +75,12 @@
         </div>
     </header>  
 
-    {% block content %}
-    {% endblock %}
-
-    <footer class="w-full h-[250px] bg-black ">
+    <!-- <div class="grow flex justify-center items-center"> -->
+        {% block content %}
+        {% endblock %}
+    <!-- </div> -->
+    
+    <footer class="w-full h-[250px] bg-[#303030]">
 
     </footer>
     <!-- SwiperJS script -->

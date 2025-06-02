@@ -4,11 +4,11 @@
 {% block title %}keyboards{% endblock %}
 
 {% block content %}
-<div>
-    <div class="text-center py-[70px]">
+<div class="my-[70px]">
+    <div class="text-center">
         <h1 class="text-7xl">Keyboards</h1>
     </div>
-    <div class="grid grid-cols-3 space-x-5 px-[100px]">
+    <div class="grid grid-cols-3 gap-5 px-[100px] mt-[70px]">
         {% for keyboard in keyboards %}
         <div class="relative text-center bg-[#f2f2f2] shadow-none transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-400">
             <a href="{% url 'keyboard_detail' keyboard.slug %}">

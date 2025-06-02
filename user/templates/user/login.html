@@ -3,15 +3,17 @@
 {% block title %}Log In{% endblock %}
 
 {% block content %}
-<div class="w-full flex justify-center">
-    <div class="text-center m-auto">
-        <h1 class="font-bold text-5xl">Log In</h1>
-        <form action="" method="POST" class="mt-5 space-y-5">
-            {% csrf_token %}
-            <input class="w-full rounded-md text-xl" type="text" name="username" placeholder="Username">
-            <input class="w-full rounded-md text-xl" type="password" name="password" placeholder="Password">
-            <button type="submit" class="mt-8 inline-block p-4 border border-black text-center">Sign In</button>
-        </form>
+<div class="grow flex justify-center items-center">
+    <div class="w-1/4 py-10">
+        <div class="text-center">
+            <h1 class="font-bold text-5xl">Log In</h1>
+            <form action="" method="POST" class="mt-5 space-y-5">
+                {% csrf_token %}
+                <input class="w-full rounded-md text-xl" type="text" name="username" placeholder="Username">
+                <input class="w-full rounded-md text-xl" type="password" name="password" placeholder="Password">
+                <button type="submit" class="mt-8 inline-block p-4 border border-black text-center">Sign In</button>
+            </form>
+        </div>
     </div>
 </div>
 
