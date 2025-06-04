@@ -29,17 +29,17 @@
         </div>
         <nav>
             <ul class="flex space-x-20 text-gray-500">
-                <li class="hover:text-white group relative">
+                <li class="hover:text-white group relative {% if request.resolver_match.url_name == 'keyboards' %}text-white{% endif %}">
                     <a href="{% url 'keyboards' %}">Keyboards</a>
-                    <span class="absolute -bottom-1 left-0 w-0 transition-all h-0.5 bg-white group-hover:w-full"></span>   
+                    <span class="absolute -bottom-1 left-0 w-0 transition-all h-0.5 bg-white group-hover:w-full {% if request.resolver_match.url_name == 'keyboards' %}w-full{% endif %}"></span>   
                 </li>
-                <li class="hover:text-white group relative">
+                <li class="hover:text-white group relative {% if request.resolver_match.url_name == 'keycaps' %}text-white{% endif %}">
                     <a href="{% url 'keycaps' %}">Keycaps</a>
-                    <span class="absolute -bottom-1 left-0 w-0 transition-all h-0.5 bg-white group-hover:w-full"></span>   
+                    <span class="absolute -bottom-1 left-0 w-0 transition-all h-0.5 bg-white group-hover:w-full {% if request.resolver_match.url_name == 'keycaps' %}w-full{% endif %}"></span>   
                 </li>
-                <li class="hover:text-white group relative">
+                <li class="hover:text-white group relative {% if request.resolver_match.url_name == 'switches' %}text-white{% endif %}">
                     <a href="{% url 'switches' %}">Switches</a>
-                    <span class="absolute -bottom-1 left-0 w-0 transition-all h-0.5 bg-white group-hover:w-full"></span>   
+                    <span class="absolute -bottom-1 left-0 w-0 transition-all h-0.5 bg-white group-hover:w-full {% if request.resolver_match.url_name == 'switches' %}w-full{% endif %}"></span>   
                 </li>
             </ul>
         </nav>

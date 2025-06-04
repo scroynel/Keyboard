@@ -1,9 +1,10 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 import uuid
+from .mixins import ImageTagMixin
 
 
-class Product(models.Model):
+class Product(models.Model, ImageTagMixin):
     name = models.CharField(max_length=100)
     slug = models.SlugField()
     description = models.TextField()
@@ -25,7 +26,7 @@ class Product(models.Model):
         verbose_name_plural = 'Products'
 
 
-class ProductAdditionalImages(models.Model):
+class ProductAdditionalImages(models.Model, ImageTagMixin):
     product = models.ForeignKey('Product', on_delete=models.CASCADE, related_name='additional_images')
     image = models.ImageField(upload_to='additional_images')
 

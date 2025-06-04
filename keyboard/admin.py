@@ -7,13 +7,16 @@ admin.site.register(Cart)
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name', 'category', 'number', 'price', 'add_time']
+    list_display = ['id', 'image_tag', 'name', 'category', 'number', 'price', 'add_time']
+    readonly_fields = ['image_tag',]
     prepopulated_fields = {'slug': ('name',)}
+    list_filter = ['category', ]
 
 
 @admin.register(ProductAdditionalImages)
 class ProductAdditionalImagesAdmin(admin.ModelAdmin):
-    list_display = ['id', 'product', 'image']
+    list_display = ['id', 'image_tag', 'product']
+    readonly_fields = ['image_tag',]
 
 
 @admin.register(Category)

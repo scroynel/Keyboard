@@ -4,10 +4,8 @@
 
 {% block content %}
     <div class="flex space-x-10 my-[50px]">
-        <div class="w-[70%] flex space-x-5">
-            {% for image in keycap.additional_images.all %}
-                <img class="w-[200px]" src="{{image.image.url}}" alt="">
-            {% endfor %}
+        <div class="w-[70%] px-[30px]">
+            {% include 'keyboard/partials/carousel_detail.html' %}
         </div>
         <div class="w-[30%]">
             <h1 class="text-4xl">{{keycap.name}}</h1>
