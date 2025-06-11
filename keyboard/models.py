@@ -103,3 +103,27 @@ class Cart_product(models.Model):
     class Meta:
         verbose_name = 'Cart product'
         verbose_name_plural = 'Cart products'
+
+
+class ProductComment(models.Model):
+    description = models.TextField(max_length=500)
+    rating = models.ForeignKey('RatingStar', on_delete=models.CASCADE)
+    owner = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='comments')
+
+
+    def __str__(self):
+        return f'{self.product} - {self.rating} - owner:{self.owner}'
+    
+
+    class Meta:
+        verbose_name = 'Comment'
+        verbose_name_plural = 'Comments'
+
+
+class RatingStar(models.Model):
+    star = models.PositiveIntegerField()
+
+
+    def __str__(self):
+        return f'{self.star}'

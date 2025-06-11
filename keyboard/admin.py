@@ -1,8 +1,9 @@
 from django.contrib import admin
-from .models import Product, Category, Cart_product, Cart, Order, ProductAdditionalImages
+from .models import Product, Category, Cart_product, Cart, Order, ProductAdditionalImages, RatingStar, ProductComment
 
 
 admin.site.register(Cart)
+admin.site.register(RatingStar)
 
 
 @admin.register(Product)
@@ -32,3 +33,9 @@ class CartProductAdmin(admin.ModelAdmin):
 @admin.register(Order)
 class OrederAdmin(admin.ModelAdmin):
     list_display = ['id', 'cart', 'create_time', 'is_paid']
+
+
+@admin.register(ProductComment)
+class ProductComment(admin.ModelAdmin):
+    list_display = ['id', 'owner', 'product', 'rating', 'description']
+
