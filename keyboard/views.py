@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
 from .models import Product, ProductAdditionalImages, Cart_product, Cart
+from .mixins import ImageCarouselMixin
 
 
 from django.http import HttpResponseBadRequest, JsonResponse
@@ -37,7 +38,7 @@ class SwitchesView(ListView):
     queryset = Product.objects.filter(category__slug="switches")
 
 
-class KeyboardDetailView(DetailView):
+class KeyboardDetailView(DetailView, ImageCarouselMixin):
     template_name = 'keyboard/keyboard_detail.html'
     slug_url_kwarg = 'keyboard_slug'
     context_object_name = 'keyboard'
@@ -46,15 +47,8 @@ class KeyboardDetailView(DetailView):
     def get_object(self, queryset = None):
         return Product.objects.filter(category__slug='keyboards').get(slug=self.kwargs[self.slug_url_kwarg])
     
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['image_count'] = range(ProductAdditionalImages.objects.filter(product__slug=self.kwargs[self.slug_url_kwarg]).count())
-        return context
-
     
-    
-
-class KeycapDetailView(DetailView):
+class KeycapDetailView(DetailView, ImageCarouselMixin):
     template_name = 'keyboard/keycap_detail.html'
     slug_url_kwarg = 'keycap_slug'
     context_object_name = 'keycap'
@@ -63,7 +57,7 @@ class KeycapDetailView(DetailView):
         return Product.objects.filter(category__slug='keycaps').get(slug=self.kwargs[self.slug_url_kwarg])
     
 
-class SwitchDetailView(DetailView):
+class SwitchDetailView(DetailView, ImageCarouselMixin):
     template_name = 'keyboard/switch_detail.html'
     slug_url_kwarg = 'switch_slug'
     context_object_name = 'switch'
