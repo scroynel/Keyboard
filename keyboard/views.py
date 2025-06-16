@@ -1,10 +1,13 @@
-from django.views.generic import ListView, DetailView, View
+from django.views.generic import ListView, DetailView, View, CreateView
 from django.views.generic.detail import SingleObjectMixin
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
-from .models import Product, ProductAdditionalImages, Cart_product, Cart
+from .models import Product, ProductAdditionalImages, Cart_product, Cart, ProductComment
 from .mixins import ImageCarouselMixin
+from .forms import CommentForm
+
+from django.views.generic.edit import FormMixin
 
 
 from django.http import HttpResponseBadRequest, JsonResponse
@@ -38,14 +41,26 @@ class SwitchesView(ListView):
     queryset = Product.objects.filter(category__slug="switches")
 
 
-class KeyboardDetailView(DetailView, ImageCarouselMixin):
+class KeyboardDetailView(FormMixin, ImageCarouselMixin, DetailView):
     template_name = 'keyboard/keyboard_detail.html'
     slug_url_kwarg = 'keyboard_slug'
     context_object_name = 'keyboard'
+    form_class = CommentForm
 
 
     def get_object(self, queryset = None):
         return Product.objects.filter(category__slug='keyboards').get(slug=self.kwargs[self.slug_url_kwarg])
+    
+
+    def form_valid(self, form):
+        print('Enter in form_valid')
+        f = form.save(commit=False)
+        f.owner = self.request.user
+        f.product = self.get_object()
+        f.save()
+        print('Pring after save form')
+        return super().form_valid(form)
+        
     
     
 class KeycapDetailView(DetailView, ImageCarouselMixin):
@@ -153,4 +168,9 @@ class AjaxUpdateView(SingleObjectMixin, View):
             return JsonResponse({'status': 'Invalid request'}, status=400)
         else:
             return HttpResponseBadRequest('Invalid request')
+        
+
+def comment_create(request):
+    form = CommentForm()
+    return render(request, 'keyboard/partials/comment_form.html', {'form': form})
 

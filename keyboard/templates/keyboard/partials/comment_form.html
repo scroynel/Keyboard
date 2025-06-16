@@ -1,0 +1,38 @@
+<div class="flex w-full px-[20%]">
+    <form action="" method="POST" class="w-full">
+        {% csrf_token %}
+        <div class="mt-4 w-full flex space-x-5 items-center justify-end">
+            <div><p>Select rating: </p></div>
+            <div>
+                <label class="label" for="star-1">
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                </label>
+                <input class="input hidden" type="radio" id="star-1" name="star" value="1">
+                <label class="label" for="star-2">
+                    <i class="fa fa-star"></i>
+                </label>
+                <input class="input hidden" type="radio" id="star-2" name="star" value="2">
+                <label class="label" for="star-3">
+                    <i class="fa fa-star"></i>
+                </label>
+                <input class="input hidden" type="radio" id="star-3" name="star" value="3">
+                <label class="label" for="star-4">
+                    <i class="fa fa-star"></i>
+                </label>
+                <input class="input hidden" type="radio" id="star-4" name="star" value="4">
+                <label class="label" for="star-5">
+                    <i class="fa fa-star"></i>
+                </label>
+                <input class="input hidden" type="radio" id="star-5" name="star" value="5" checked>
+            </div>
+        </div>
+        <div class="text-red-600">{{ form.non_field_errors }}</div>
+        <div>{{form.errors}}</div>
+        <div class="mt-4">
+            {{form.description}}
+        <div class="text-red-600">{{form.description.errors}}</div>
+        <div class="flex justify-end">
+            <button type="submit" class="inline-block py-2 px-4 border border-black text-center">Comment</button>
+        </div>
+    </form>
+</div>

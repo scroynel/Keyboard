@@ -3,6 +3,7 @@
 {% block title %}{{keycap.name}}{% endblock %}
 
 {% block content %}
+<div>
     <div class="flex space-x-10 my-[50px]">
         <div class="w-[70%] px-[30px]">
             {% include 'keyboard/partials/carousel_detail.html' %}
@@ -13,4 +14,6 @@
             <a href="{% url 'product_add' keycap.category.slug keycap.slug %}" class="mt-8 inline-block p-4 border border-black text-center">Add to cart</a>
         </div>
     </div>
+    {% include 'keyboard/partials/comment_form.html' %}
+</div>
 {% endblock %}
