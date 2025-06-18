@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 import uuid
 from .mixins import ImageTagMixin
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 class Product(models.Model, ImageTagMixin):
@@ -107,9 +108,10 @@ class Cart_product(models.Model):
 
 class ProductComment(models.Model):
     description = models.TextField(max_length=500)
-    rating = models.ForeignKey('RatingStar', on_delete=models.CASCADE)
+    rating = models.PositiveIntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(5)])
     owner = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='comments')
+    time_create = models.DateTimeField(auto_now_add=True)
 
 
     def __str__(self):
@@ -119,11 +121,3 @@ class ProductComment(models.Model):
     class Meta:
         verbose_name = 'Comment'
         verbose_name_plural = 'Comments'
-
-
-class RatingStar(models.Model):
-    star = models.PositiveIntegerField()
-
-
-    def __str__(self):
-        return f'{self.star}'

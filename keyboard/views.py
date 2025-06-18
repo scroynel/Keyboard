@@ -6,6 +6,7 @@ from django.http import HttpResponseRedirect
 from .models import Product, ProductAdditionalImages, Cart_product, Cart, ProductComment
 from .mixins import ImageCarouselMixin
 from .forms import CommentForm
+from django.shortcuts import redirect
 
 from django.views.generic.edit import FormMixin
 
@@ -52,14 +53,32 @@ class KeyboardDetailView(FormMixin, ImageCarouselMixin, DetailView):
         return Product.objects.filter(category__slug='keyboards').get(slug=self.kwargs[self.slug_url_kwarg])
     
 
-    def form_valid(self, form):
-        print('Enter in form_valid')
-        f = form.save(commit=False)
-        f.owner = self.request.user
-        f.product = self.get_object()
-        f.save()
-        print('Pring after save form')
-        return super().form_valid(form)
+    def post(self, *args, **kwargs):
+        self.object = self.get_object()
+        print('post')
+        if self.request.method == 'POST':
+            form = self.form_class(self.request.POST)
+            print(self.request.POST)
+            print(form)
+            if form.is_valid():
+                print('valid')
+                f = form.save(commit=False)
+                f.owner = self.request.user
+                f.product = self.object
+                f.save()
+                return redirect('main')
+            else:
+                return self.form_invalid(form)
+            
+
+    # def form_valid(self, form):
+    #     print('Enter in form_valid')
+    #     f = form.save(commit=False)
+    #     f.owner = self.request.user
+    #     f.product = self.get_object()
+    #     f.save()
+    #     print('Pring after save form')
+    #     return super().form_valid(form)
         
     
     

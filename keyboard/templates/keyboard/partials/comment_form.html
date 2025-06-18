@@ -1,4 +1,4 @@
-<div class="flex w-full px-[20%]">
+<div class="flex w-full px-[20%] my-[100px]">
     <form action="" method="POST" class="w-full">
         {% csrf_token %}
         <div class="mt-4 w-full flex space-x-5 items-center justify-end">
@@ -7,23 +7,23 @@
                 <label class="label" for="star-1">
                     <i class="fa fa-star" aria-hidden="true"></i>
                 </label>
-                <input class="input hidden" type="radio" id="star-1" name="star" value="1">
+                <input class="input hidden" type="radio" id="star-1" name="rating" value="1">
                 <label class="label" for="star-2">
                     <i class="fa fa-star"></i>
                 </label>
-                <input class="input hidden" type="radio" id="star-2" name="star" value="2">
+                <input class="input hidden" type="radio" id="star-2" name="rating" value="2">
                 <label class="label" for="star-3">
                     <i class="fa fa-star"></i>
                 </label>
-                <input class="input hidden" type="radio" id="star-3" name="star" value="3">
+                <input class="input hidden" type="radio" id="star-3" name="rating" value="3">
                 <label class="label" for="star-4">
                     <i class="fa fa-star"></i>
                 </label>
-                <input class="input hidden" type="radio" id="star-4" name="star" value="4">
+                <input class="input hidden" type="radio" id="star-4" name="rating" value="4">
                 <label class="label" for="star-5">
                     <i class="fa fa-star"></i>
                 </label>
-                <input class="input hidden" type="radio" id="star-5" name="star" value="5" checked>
+                <input class="input hidden" type="radio" id="star-5" name="rating" value="5" checked>
             </div>
         </div>
         <div class="text-red-600">{{ form.non_field_errors }}</div>
@@ -35,4 +35,33 @@
             <button type="submit" class="inline-block py-2 px-4 border border-black text-center">Comment</button>
         </div>
     </form>
+    <div class="space-y-5 mt-[50px]">
+        {% for comment in keyboard.comments.all %}
+            <div class="p-5 space-y-5">
+                <div class="flex justify-between">
+                    <div class="flex justify-between items-center space-x-5">
+                        <!-- <img src="" alt=""> UserImage will be here -->
+                        <div class="w-[50px] h-[50px] rounded-full bg-[#303030]"></div>
+                        <p>{{comment.owner}}</p>
+                    </div>
+                    <div>
+                        <span class="fa fa-star color-off {% if comment.rating > 0 %}color-on{% endif %}"></span>
+                        <span class="fa fa-star color-off {% if comment.rating > 1 %}color-on{% endif %}"></span>
+                        <span class="fa fa-star color-off {% if comment.rating > 2 %}color-on{% endif %}"></span>
+                        <span class="fa fa-star color-off {% if comment.rating > 3 %}color-on{% endif %}"></span>
+                        <span class="fa fa-star color-off {% if comment.rating > 4 %}color-on{% endif %}"></span>
+                    </div>
+                </div>
+                <div class="pl-[30px]">
+                    <p>{{comment.description}}</p>
+                </div>
+                <div class="text-right">
+                    <p>{{comment.time_create|date:"d M Y H:m"}}</p>
+                </div>
+            </div>
+            {% if not forloop.last %}
+            <hr class="border-[#303030]">
+            {% endif %}
+        {% endfor %}
+    </div>
 </div>
