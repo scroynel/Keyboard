@@ -1,5 +1,8 @@
 from django.utils.safestring import mark_safe
 from django.views.generic.base import ContextMixin
+from django.views.generic.edit import FormMixin
+# from .forms import CommentForm
+from django.shortcuts import redirect
 
 
 # It shows the pictures in the admin panel
@@ -14,3 +17,25 @@ class ImageCarouselMixin(ContextMixin):
         context = super().get_context_data(**kwargs)
         context['products'] = self.get_object()
         return context
+    
+
+class FormClassMixin(FormMixin):
+    # form_class = CommentForm
+
+
+    def post(self, *args, **kwargs):
+        self.object = self.get_object()
+        print('post')
+        if self.request.method == 'POST':
+            form = self.form_class(self.request.POST)
+            print(self.request.POST)
+            print(form)
+            if form.is_valid():
+                print('valid')
+                f = form.save(commit=False)
+                f.owner = self.request.user
+                f.product = self.object
+                f.save()
+                return redirect('main')
+            else:
+                return self.form_invalid(form)

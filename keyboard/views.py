@@ -3,8 +3,8 @@ from django.views.generic.detail import SingleObjectMixin
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
-from .models import Product, ProductAdditionalImages, Cart_product, Cart, ProductComment
-from .mixins import ImageCarouselMixin
+from .models import Product, Cart_product, Cart
+from .mixins import ImageCarouselMixin, FormClassMixin
 from .forms import CommentForm
 from django.shortcuts import redirect
 
@@ -45,7 +45,7 @@ class SwitchesView(ListView):
 class KeyboardDetailView(FormMixin, ImageCarouselMixin, DetailView):
     template_name = 'keyboard/keyboard_detail.html'
     slug_url_kwarg = 'keyboard_slug'
-    context_object_name = 'keyboard'
+    context_object_name = 'product'
     form_class = CommentForm
 
 
@@ -85,7 +85,7 @@ class KeyboardDetailView(FormMixin, ImageCarouselMixin, DetailView):
 class KeycapDetailView(DetailView, ImageCarouselMixin):
     template_name = 'keyboard/keycap_detail.html'
     slug_url_kwarg = 'keycap_slug'
-    context_object_name = 'keycap'
+    context_object_name = 'product'
 
     def get_object(self, queryset = None):
         return Product.objects.filter(category__slug='keycaps').get(slug=self.kwargs[self.slug_url_kwarg])
@@ -94,7 +94,7 @@ class KeycapDetailView(DetailView, ImageCarouselMixin):
 class SwitchDetailView(DetailView, ImageCarouselMixin):
     template_name = 'keyboard/switch_detail.html'
     slug_url_kwarg = 'switch_slug'
-    context_object_name = 'switch'
+    context_object_name = 'product'
 
     def get_object(self, queryset = None):
         return Product.objects.filter(category__slug='switches').get(slug=self.kwargs[self.slug_url_kwarg])
@@ -187,9 +187,4 @@ class AjaxUpdateView(SingleObjectMixin, View):
             return JsonResponse({'status': 'Invalid request'}, status=400)
         else:
             return HttpResponseBadRequest('Invalid request')
-        
-
-def comment_create(request):
-    form = CommentForm()
-    return render(request, 'keyboard/partials/comment_form.html', {'form': form})
 

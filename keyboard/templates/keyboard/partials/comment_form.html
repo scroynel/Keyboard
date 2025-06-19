@@ -36,12 +36,14 @@
         </div>
     </form>
     <div class="space-y-5 mt-[50px]">
-        {% for comment in keyboard.comments.all %}
-            <div class="p-5 space-y-5">
+        {% for comment in product.comments.all %}
+            <div class="p-5 space-y-5 border-dotted border-2 border-[#303030]">
                 <div class="flex justify-between">
                     <div class="flex justify-between items-center space-x-5">
                         <!-- <img src="" alt=""> UserImage will be here -->
-                        <div class="w-[50px] h-[50px] rounded-full bg-[#303030]"></div>
+                        <div class="w-[50px] h-[50px] rounded-full bg-[#303030] text-white text-2xl">
+                            <p class="flex h-full justify-center items-center">{{comment.owner|make_list|first|upper}}</p>
+                        </div>
                         <p>{{comment.owner}}</p>
                     </div>
                     <div>
@@ -59,9 +61,6 @@
                     <p>{{comment.time_create|date:"d M Y H:m"}}</p>
                 </div>
             </div>
-            {% if not forloop.last %}
-            <hr class="border-[#303030]">
-            {% endif %}
         {% endfor %}
     </div>
 </div>
