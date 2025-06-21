@@ -1,7 +1,6 @@
 from django.utils.safestring import mark_safe
 from django.views.generic.base import ContextMixin
 from django.views.generic.edit import FormMixin
-# from .forms import CommentForm
 from django.shortcuts import redirect
 
 
@@ -20,9 +19,6 @@ class ImageCarouselMixin(ContextMixin):
     
 
 class FormClassMixin(FormMixin):
-    # form_class = CommentForm
-
-
     def post(self, *args, **kwargs):
         self.object = self.get_object()
         print('post')

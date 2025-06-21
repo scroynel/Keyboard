@@ -10,7 +10,7 @@
     <div class="grid grid-cols-3 gap-5 px-[100px] mt-[70px]">
         {% for switch in switches %}
         <div class="text-center bg-[#f2f2f2] shadow-none transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-400">
-            <a href="{% url 'switch_detail' switch.slug %}">
+            <a href="{% url 'switches_detail' switch.slug %}">
                 <img src="{{switch.image.url}}" alt="">
                 <h2 class="text-5xl">{{switch.name}}</h2>
                 <p class="text-3xl">${{switch.price}}</p>

@@ -11,7 +11,7 @@
     <div class="grid grid-cols-3 gap-5 px-[100px] mt-[70px]">
         {% for keyboard in keyboards %}
         <div class="relative text-center bg-[#f2f2f2] shadow-none transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-400">
-            <a href="{% url 'keyboard_detail' keyboard.slug %}">
+            <a href="{% url 'keyboards_detail' keyboard.slug %}">
                 <div class="absolute left-[8%] top-[8%] text-center bg-cover bg-center w-[150px] h-[47px] bg-no-repeat" style="background-image: url('/static/keyboard/images/price_cloud.webp')">
                     <p class="text-4xl">${{keyboard.price}}</p>
                 </div>

@@ -10,7 +10,7 @@
     <div class="grid grid-cols-3 gap-5 px-[100px] mt-[70px]">
         {% for keycap in keycaps %}
         <div class="text-center bg-[#f2f2f2] shadow-none transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-400">
-            <a href="{% url 'keycap_detail' keycap.slug %}">
+            <a href="{% url 'keycaps_detail' keycap.slug %}">
                 <img src="{{keycap.image.url}}" alt="">
                 <h2 class="text-5xl">{{keycap.name}}</h2>
                 <p class="text-3xl">${{keycap.price}}</p>

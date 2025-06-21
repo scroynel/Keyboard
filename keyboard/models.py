@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 import uuid
 from .mixins import ImageTagMixin
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.urls import reverse
 
 
 class Product(models.Model, ImageTagMixin):
@@ -21,6 +22,10 @@ class Product(models.Model, ImageTagMixin):
     def __str__(self):
         return self.name
     
+    
+    def get_absolute_url(self):
+        return reverse(f'{self.category.slug}_detail', args=[self.slug])
+
 
     class Meta:
         verbose_name = 'Product'

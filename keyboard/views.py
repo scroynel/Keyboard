@@ -42,7 +42,7 @@ class SwitchesView(ListView):
     queryset = Product.objects.filter(category__slug="switches")
 
 
-class KeyboardDetailView(FormMixin, ImageCarouselMixin, DetailView):
+class KeyboardDetailView(ImageCarouselMixin, FormClassMixin, FormMixin, DetailView):
     template_name = 'keyboard/keyboard_detail.html'
     slug_url_kwarg = 'keyboard_slug'
     context_object_name = 'product'
@@ -53,22 +53,22 @@ class KeyboardDetailView(FormMixin, ImageCarouselMixin, DetailView):
         return Product.objects.filter(category__slug='keyboards').get(slug=self.kwargs[self.slug_url_kwarg])
     
 
-    def post(self, *args, **kwargs):
-        self.object = self.get_object()
-        print('post')
-        if self.request.method == 'POST':
-            form = self.form_class(self.request.POST)
-            print(self.request.POST)
-            print(form)
-            if form.is_valid():
-                print('valid')
-                f = form.save(commit=False)
-                f.owner = self.request.user
-                f.product = self.object
-                f.save()
-                return redirect('main')
-            else:
-                return self.form_invalid(form)
+    # def post(self, *args, **kwargs):
+    #     self.object = self.get_object()
+    #     print('post')
+    #     if self.request.method == 'POST':
+    #         form = self.form_class(self.request.POST)
+    #         print(self.request.POST)
+    #         print(form)
+    #         if form.is_valid():
+    #             print('valid')
+    #             f = form.save(commit=False)
+    #             f.owner = self.request.user
+    #             f.product = self.object
+    #             f.save()
+    #             return redirect('main')
+    #         else:
+    #             return self.form_invalid(form)
             
 
     # def form_valid(self, form):
@@ -82,19 +82,23 @@ class KeyboardDetailView(FormMixin, ImageCarouselMixin, DetailView):
         
     
     
-class KeycapDetailView(DetailView, ImageCarouselMixin):
+class KeycapDetailView(ImageCarouselMixin, FormClassMixin, FormMixin, DetailView):
     template_name = 'keyboard/keycap_detail.html'
     slug_url_kwarg = 'keycap_slug'
     context_object_name = 'product'
+    form_class = CommentForm
+    
 
     def get_object(self, queryset = None):
         return Product.objects.filter(category__slug='keycaps').get(slug=self.kwargs[self.slug_url_kwarg])
     
 
-class SwitchDetailView(DetailView, ImageCarouselMixin):
+class SwitchDetailView(ImageCarouselMixin, FormClassMixin, FormMixin, DetailView):
     template_name = 'keyboard/switch_detail.html'
     slug_url_kwarg = 'switch_slug'
     context_object_name = 'product'
+    form_class = CommentForm
+    
 
     def get_object(self, queryset = None):
         return Product.objects.filter(category__slug='switches').get(slug=self.kwargs[self.slug_url_kwarg])
