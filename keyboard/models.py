@@ -123,6 +123,10 @@ class ProductComment(models.Model):
         return f'{self.product} - {self.rating} - owner:{self.owner}'
     
 
+    def get_absolute_url(self):
+        return reverse('comment_add', self.product.category.slug, self.product.slug)
+    
+
     class Meta:
         verbose_name = 'Comment'
         verbose_name_plural = 'Comments'

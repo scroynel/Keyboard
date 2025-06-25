@@ -1,17 +1,14 @@
-from django.views.generic import ListView, DetailView, View, CreateView
+from django.views.generic import ListView, DetailView, View
 from django.views.generic.detail import SingleObjectMixin
+from django.views.generic.edit import FormMixin
+
 from django.shortcuts import get_object_or_404
-from django.urls import reverse_lazy, reverse
-from django.http import HttpResponseRedirect
+from django.urls import reverse
+from django.http import HttpResponseRedirect, HttpResponseBadRequest, JsonResponse
+
 from .models import Product, Cart_product, Cart
 from .mixins import ImageCarouselMixin, FormClassMixin
 from .forms import CommentForm
-from django.shortcuts import redirect
-
-from django.views.generic.edit import FormMixin
-
-
-from django.http import HttpResponseBadRequest, JsonResponse
 
 
 class MainView(ListView):
@@ -42,7 +39,7 @@ class SwitchesView(ListView):
     queryset = Product.objects.filter(category__slug="switches")
 
 
-class KeyboardDetailView(ImageCarouselMixin, FormClassMixin, FormMixin, DetailView):
+class KeyboardDetailView(FormClassMixin, FormMixin, DetailView):
     template_name = 'keyboard/keyboard_detail.html'
     slug_url_kwarg = 'keyboard_slug'
     context_object_name = 'product'
@@ -53,47 +50,18 @@ class KeyboardDetailView(ImageCarouselMixin, FormClassMixin, FormMixin, DetailVi
         return Product.objects.filter(category__slug='keyboards').get(slug=self.kwargs[self.slug_url_kwarg])
     
 
-    # def post(self, *args, **kwargs):
-    #     self.object = self.get_object()
-    #     print('post')
-    #     if self.request.method == 'POST':
-    #         form = self.form_class(self.request.POST)
-    #         print(self.request.POST)
-    #         print(form)
-    #         if form.is_valid():
-    #             print('valid')
-    #             f = form.save(commit=False)
-    #             f.owner = self.request.user
-    #             f.product = self.object
-    #             f.save()
-    #             return redirect('main')
-    #         else:
-    #             return self.form_invalid(form)
-            
-
-    # def form_valid(self, form):
-    #     print('Enter in form_valid')
-    #     f = form.save(commit=False)
-    #     f.owner = self.request.user
-    #     f.product = self.get_object()
-    #     f.save()
-    #     print('Pring after save form')
-    #     return super().form_valid(form)
-        
-    
-    
-class KeycapDetailView(ImageCarouselMixin, FormClassMixin, FormMixin, DetailView):
+class KeycapDetailView(FormClassMixin, FormMixin, DetailView):
     template_name = 'keyboard/keycap_detail.html'
     slug_url_kwarg = 'keycap_slug'
     context_object_name = 'product'
     form_class = CommentForm
-    
+
 
     def get_object(self, queryset = None):
         return Product.objects.filter(category__slug='keycaps').get(slug=self.kwargs[self.slug_url_kwarg])
     
 
-class SwitchDetailView(ImageCarouselMixin, FormClassMixin, FormMixin, DetailView):
+class SwitchDetailView(FormClassMixin, FormMixin, DetailView):
     template_name = 'keyboard/switch_detail.html'
     slug_url_kwarg = 'switch_slug'
     context_object_name = 'product'
@@ -119,22 +87,6 @@ def add_to_cart(request, category_slug, product_slug):
         cart_product.save()
 
     return HttpResponseRedirect(reverse('main'))
-    
-
-# class ProductDelete(DeleteView):
-#     model = Cart_product
-
-
-#     def get_object(self, queryset = None):
-#         return get_object_or_404(Cart_product, product__category__slug=self.kwargs['category_slug'], cart=self.kwargs['cart_id'], product__slug=self.kwargs['product_slug'])
-    
-
-#     def get(self, request, *args, **kwargs):
-#         return self.delete(request, *args, **kwargs)
-    
-
-#     def get_success_url(self):
-#         return reverse_lazy('main')
 
 
 class AjaxDeleteView(SingleObjectMixin, View):
@@ -191,4 +143,3 @@ class AjaxUpdateView(SingleObjectMixin, View):
             return JsonResponse({'status': 'Invalid request'}, status=400)
         else:
             return HttpResponseBadRequest('Invalid request')
-

@@ -12,8 +12,6 @@ urlpatterns = [
     path('keycaps/<slug:keycap_slug>/', views.KeycapDetailView.as_view(), name='keycaps_detail'),
     path('switches/<slug:switch_slug>/', views.SwitchDetailView.as_view(), name='switches_detail'),
     path('<slug:category_slug>/<slug:product_slug>/add/', views.add_to_cart, name='product_add'),
-    # path('<slug:category_slug>/<uuid:cart_id>/<slug:product_slug>/delete/', views.ProductDelete.as_view(), name='product_delete')
     path('<slug:category_slug>/<uuid:cart_id>/<slug:product_slug>/delete/', views.AjaxDeleteView.as_view(), name='product_delete'),
     path('<slug:category_slug>/<uuid:cart_id>/<slug:product_slug>/update/', views.AjaxUpdateView.as_view(), name='product_update'),
-    # path('comment_create/', views.CommentCreateView.as_view(), name='comment_create')
 ]

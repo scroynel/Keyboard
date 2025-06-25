@@ -2,6 +2,7 @@ from django.utils.safestring import mark_safe
 from django.views.generic.base import ContextMixin
 from django.views.generic.edit import FormMixin
 from django.shortcuts import redirect
+from django.shortcuts import render
 
 
 # It shows the pictures in the admin panel
@@ -32,6 +33,18 @@ class FormClassMixin(FormMixin):
                 f.owner = self.request.user
                 f.product = self.object
                 f.save()
-                return redirect('main')
+                self.object.comments.add(f) # I need this to add a comment without refreshing a page (HTMX)
+                comments = self.object.comments.all()
+                print(comments)
+                return render(self.request, 'keyboard/partials/comment_list.html', {'comments': comments})
             else:
                 return self.form_invalid(form)
+    
+    
+    def get_context_data(self, **kwargs):
+        self.object = self.get_object()
+        context = super().get_context_data(**kwargs)
+        context['products'] = self.get_object() # Solve problem: Display additional(дополнительные) images for the different categories of products in detailview (You don't need to refer(обращаться) to different categories of products (just "products"))
+        context['comments'] = self.object.comments.all()
+        return context
+    
