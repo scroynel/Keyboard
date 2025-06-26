@@ -35,7 +35,6 @@ class FormClassMixin(FormMixin):
                 f.save()
                 self.object.comments.add(f) # I need this to add a comment without refreshing a page (HTMX)
                 comments = self.object.comments.all()
-                print(comments)
                 return render(self.request, 'keyboard/partials/comment_list.html', {'comments': comments})
             else:
                 return self.form_invalid(form)

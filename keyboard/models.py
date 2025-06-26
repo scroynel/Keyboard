@@ -4,6 +4,7 @@ import uuid
 from .mixins import ImageTagMixin
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.urls import reverse
+from django.db.models import Avg
 
 
 class Product(models.Model, ImageTagMixin):
@@ -26,6 +27,10 @@ class Product(models.Model, ImageTagMixin):
     def get_absolute_url(self):
         return reverse(f'{self.category.slug}_detail', args=[self.slug])
 
+    @property
+    def average_rating(self):
+        rating = self.comments.all().aggregate(avg_rating = Avg('rating'))['avg_rating']
+        return float(f'{rating:.1f}')
 
     class Meta:
         verbose_name = 'Product'
