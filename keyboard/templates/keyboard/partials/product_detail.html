@@ -1,16 +1,15 @@
 <div class="flex space-x-10 my-[50px]">
-    {{product.average_rating}}
     <div class="w-[70%] px-[30px]">
         {% include 'keyboard/partials/carousel_detail.html' %}
     </div>
     <div class="w-[30%] pr-[50px]">
         <div class="flex justify-between items-center">
             <h1 class="text-4xl">{{product.name}}</h1>
-            <div class="">
+            <div id="average_rating">
                 <div class="w-[50px] h-[50px] bg-[#303030] flex items-center justify-center rounded-xl mx-auto">
                     <p class="text-white text-2xl">{{product.average_rating}}</p>
                 </div>
-                <a href="#comment_form" class="underline">{{product.comments.all.count}} replies</a>
+                <a href="#comment_form" class="underline">{{comments.count}} replies</a>
             </div>
         </div>
 

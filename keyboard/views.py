@@ -6,7 +6,7 @@ from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from django.http import HttpResponseRedirect, HttpResponseBadRequest, JsonResponse
 
-from .models import Product, Cart_product, Cart
+from .models import Product, Cart_product, Cart, ProductComment
 from .mixins import ImageCarouselMixin, FormClassMixin
 from .forms import CommentForm
 
@@ -140,6 +140,27 @@ class AjaxUpdateView(SingleObjectMixin, View):
                 self.object.save()
                 total = Cart.objects.get(id=self.kwargs['cart_id']).total_price
                 return JsonResponse({'status': 1, 'total': total})
+            return JsonResponse({'status': 'Invalid request'}, status=400)
+        else:
+            return HttpResponseBadRequest('Invalid request')
+        
+
+class AjaxCommentAddView(SingleObjectMixin, View):
+    model = Product
+
+
+    def get_object(self, queryset = None):
+        return get_object_or_404(Product, product__category__slug=self.kwargs['category_slug'], product__slug=self.kwargs['product_slug'])
+
+
+    def post(self, *args, **kwargs):
+        is_ajax = self.request.headers.get('X-Requested-With') == 'XMLHttpRequest'
+
+        if is_ajax:
+            if self.request.method == 'POST':
+                print('method post')
+
+                return JsonResponse({'status': 1, })
             return JsonResponse({'status': 'Invalid request'}, status=400)
         else:
             return HttpResponseBadRequest('Invalid request')

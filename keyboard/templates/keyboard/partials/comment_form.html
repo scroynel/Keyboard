@@ -1,5 +1,5 @@
 <div class="flex w-full px-[20%] my-[100px]" id="comment_form">
-    <form action="" method="POST" class="w-full">
+    <form action="" method="POST" class="w-full" id="comment_form_submit" data-href="{% url 'comment_add' product.category.slug product.slug %}">
         {% csrf_token %}
         <div class="mt-4 w-full flex space-x-5 items-center justify-end">
             <div><p>Select rating: </p></div>

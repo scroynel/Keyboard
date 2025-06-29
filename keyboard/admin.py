@@ -11,6 +11,8 @@ class ProductAdmin(admin.ModelAdmin):
     readonly_fields = ['image_tag',]
     prepopulated_fields = {'slug': ('name',)}
     list_filter = ['category', ]
+    list_display_links = ['id', 'name']
+    search_fields = ['name', ]
 
 
 @admin.register(ProductAdditionalImages)

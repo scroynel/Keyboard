@@ -126,3 +126,21 @@ $('#qty').on('change', function(e) {
     }
   })
 })
+
+
+$('#comment_form_submit').submit(function(e){
+  e.preventDefault();
+  form = $('#comment_form_submit')
+  action_url = form.attr('data-href')
+  $.ajax({
+    url: action_url,
+    dataType: 'json',
+    accepts: 'application/json',
+    data: form.serialize(),
+    success: (data) => {
+      console.log(data)
+      console.log('status')
+    },
+    error: (error) => console.log(error)
+});
+})

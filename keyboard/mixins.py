@@ -22,13 +22,9 @@ class ImageCarouselMixin(ContextMixin):
 class FormClassMixin(FormMixin):
     def post(self, *args, **kwargs):
         self.object = self.get_object()
-        print('post')
         if self.request.method == 'POST':
             form = self.form_class(self.request.POST)
-            print(self.request.POST)
-            print(form)
             if form.is_valid():
-                print('valid')
                 f = form.save(commit=False)
                 f.owner = self.request.user
                 f.product = self.object
@@ -37,7 +33,8 @@ class FormClassMixin(FormMixin):
                 comments = self.object.comments.all()
                 return render(self.request, 'keyboard/partials/comment_list.html', {'comments': comments})
             else:
-                return self.form_invalid(form)
+                form = self.form_class()
+                return form
     
     
     def get_context_data(self, **kwargs):
