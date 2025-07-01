@@ -32,7 +32,7 @@
             {{form.description}}
         <div class="text-red-600">{{form.description.errors}}</div>
         <div class="flex justify-end">
-            <button type="submit" hx-post="{{product.get_absolute_url}}" hx-target="#comment_list". class="inline-block py-2 px-4 border border-black text-center">Comment</button>
+            <button type="submit" class="inline-block py-2 px-4 border border-black text-center">Comment</button>
         </div>
     </form>
     <div class="space-y-5 mt-[50px]" id="comment_list">

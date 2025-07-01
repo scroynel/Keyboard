@@ -144,13 +144,10 @@ class AjaxUpdateView(SingleObjectMixin, View):
         else:
             return HttpResponseBadRequest('Invalid request')
         
+from django.template.loader import render_to_string
 
 class AjaxCommentAddView(SingleObjectMixin, View):
-    model = Product
-
-
-    def get_object(self, queryset = None):
-        return get_object_or_404(Product, product__category__slug=self.kwargs['category_slug'], product__slug=self.kwargs['product_slug'])
+    model = ProductComment
 
 
     def post(self, *args, **kwargs):
@@ -158,9 +155,23 @@ class AjaxCommentAddView(SingleObjectMixin, View):
 
         if is_ajax:
             if self.request.method == 'POST':
-                print('method post')
-
-                return JsonResponse({'status': 1, })
+                product = Product.objects.get(category__slug=self.kwargs['category_slug'], slug=self.kwargs['product_slug'])
+                form = CommentForm(self.request.POST)
+                if form.is_valid():
+                    f = form.save(commit=False)
+                    f.owner = self.request.user
+                    f.product = product
+                    f.save()
+                    avg_rating = product.average_rating
+                    comments_count = product.comments.count()
+                    product.comments.add(f)
+                    comments = ProductComment.objects.filter(product=product)
+                    print('comments', comments)
+                    d_partner_html = render_to_string("keyboard/partials/comment_list.html", {'comments': comments}, self.request)
+                    print(d_partner_html)
+                else:
+                    form = CommentForm()
+                return JsonResponse({'status': 1, 'avg_rating': avg_rating, 'comments_count': comments_count, 'comment_list': d_partner_html})
             return JsonResponse({'status': 'Invalid request'}, status=400)
         else:
             return HttpResponseBadRequest('Invalid request')

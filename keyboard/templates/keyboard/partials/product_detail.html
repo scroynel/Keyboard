@@ -7,9 +7,9 @@
             <h1 class="text-4xl">{{product.name}}</h1>
             <div id="average_rating">
                 <div class="w-[50px] h-[50px] bg-[#303030] flex items-center justify-center rounded-xl mx-auto">
-                    <p class="text-white text-2xl">{{product.average_rating}}</p>
+                    <p class="text-white text-2xl" id="avg_rating">{{product.average_rating}}</p>
                 </div>
-                <a href="#comment_form" class="underline">{{comments.count}} replies</a>
+                <a href="#comment_form" class="underline" id="comments_count">{{comments.count}} replies</a>
             </div>
         </div>
 
