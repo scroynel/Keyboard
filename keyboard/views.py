@@ -114,8 +114,10 @@ class AjaxDeleteView(SingleObjectMixin, View):
                 
                 total = Cart.objects.get(id=self.kwargs['cart_id']).total_price
                 count = Cart_product.objects.filter(cart=cart).count()
+                # get block of code for empty cart
+                empty = render_to_string('keyboard/partials/empty_cart.html')
 
-                return JsonResponse({'status': 1, 'total': total, 'count': count})
+                return JsonResponse({'status': 1, 'total': total, 'count': count, 'empty_cart': empty})
             return JsonResponse({'status': 'Invalid request'}, status=400)
         else:
             return HttpResponseBadRequest('Invalid request')
@@ -164,13 +166,9 @@ class AjaxCommentAddView(SingleObjectMixin, View):
                     f.save()
                     avg_rating = product.average_rating
                     comments_count = product.comments.count()
-                    product.comments.add(f)
                     comments = ProductComment.objects.filter(product=product)
-                    print('comments', comments)
+                    # block of code convert to string, add context and change #comment_list div with this string of code
                     d_partner_html = render_to_string("keyboard/partials/comment_list.html", {'comments': comments}, self.request)
-                    print(d_partner_html)
-                else:
-                    form = CommentForm()
                 return JsonResponse({'status': 1, 'avg_rating': avg_rating, 'comments_count': comments_count, 'comment_list': d_partner_html})
             return JsonResponse({'status': 'Invalid request'}, status=400)
         else:

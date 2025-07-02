@@ -76,17 +76,7 @@ $('.delete-link').on('click', function(e) {
         $(this).closest('.cart-item').fadeOut();
         $('#total').text(data.total)
         if (data.count == 0) {
-          let code = `
-            <div id="cart-empty" class="w-full h-full flex justify-center items-center">
-              <div class="text-center">
-                  <p class="text-4xl">Your cart is empty</p>
-                  <button id="button-modal" type="button" class="inline-block border-4 hover:border-gray-400 hover:shadow-md shadow-black mt-10 p-4">Continue shopping</button>
-                  <p class="text-2xl mt-10">Have an account?</p>
-                  <p><a id="login" href="${login}" class="underline text-xl">Log in</a> to check out faster.</p>
-              </div>
-          </div>
-          `
-          $('#cart').html(code)
+          $('#cart').html(data.empty_cart)
           $('#button-modal').on('click', function(e) {
             $('#cart-slide').addClass('hidden');
           })
@@ -132,7 +122,6 @@ $('#comment_form_submit').on('submit', function(e){
   e.preventDefault();
   form = $('#comment_form_submit');
   action_url = form.attr('data-href')
-  console.log(form.serialize())
   $.ajax({
     url: action_url,
     type: 'POST',
@@ -144,9 +133,6 @@ $('#comment_form_submit').on('submit', function(e){
       "X-CSRFToken": getCookie("csrftoken"), // function to get coookie by name 
     },
     success: (data) => {
-      console.log(data)
-      console.log($('#comment_list').html())
-      console.log(data)
       $("#comment_list").html(data.comment_list);
       $('#avg_rating').text(data.avg_rating)
       $('#comments_count').text(data.comments_count + ' replies')
