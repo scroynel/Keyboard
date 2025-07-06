@@ -1,7 +1,7 @@
 from django.views.generic import ListView, DetailView, View
 from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.edit import FormMixin
-
+from django.template.loader import render_to_string
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from django.http import HttpResponseRedirect, HttpResponseBadRequest, JsonResponse
@@ -89,18 +89,49 @@ def add_to_cart(request, category_slug, product_slug):
     return HttpResponseRedirect(reverse('main'))
 
 
+class AjaxAddProductCart(SingleObjectMixin, View):
+    model = Cart_product
+
+
+    def post(self, *args, **kwargs):
+        is_ajax = self.request.headers.get('X-Requested-With') == 'XMLHttpRequest'
+
+        if is_ajax:
+            if self.request.method == 'POST':
+                product = Product.objects.get(category__slug=kwargs['category_slug'], slug=kwargs['product_slug'])
+
+                if self.request.user.is_authenticated:
+                    cart = Cart.objects.get(owner=self.request.user)
+                    cart_product, created = Cart_product.objects.get_or_create(cart=cart, product=product)
+                    cart_product.quantity += 1
+                    cart_product.save()
+                else:
+                    cart = Cart.objects.get(session_id=self.request.session['nonuser'])
+                    cart_product, created = Cart_product.objects.get_or_create(cart=cart, product=product)
+                    cart_product.quantity += 1
+                    cart_product.save()
+
+                cart_list = render_to_string('keyboard/partials/cart_list.html', {'cart': cart})
+                print(cart_list)
+
+                return JsonResponse({'status': 1, 'cart_list': cart_list})
+            return JsonResponse({'status': 'Invalid request'}, status=400)
+        else:
+            return HttpResponseBadRequest('Invalid request')
+
+
 class AjaxDeleteView(SingleObjectMixin, View):
     """
     Works like DeleteView, but without confirmation screens or a success_url.
     """
     model = Cart_product
 
+
     def get_object(self, queryset = None):
         return get_object_or_404(Cart_product, product__category__slug=self.kwargs['category_slug'], cart=self.kwargs['cart_id'], product__slug=self.kwargs['product_slug'])
 
-    def post(self, *args, **kwargs):
-        
 
+    def post(self, *args, **kwargs):
         is_ajax = self.request.headers.get('X-Requested-With') == 'XMLHttpRequest'
 
         if is_ajax:
@@ -146,7 +177,6 @@ class AjaxUpdateView(SingleObjectMixin, View):
         else:
             return HttpResponseBadRequest('Invalid request')
         
-from django.template.loader import render_to_string
 
 class AjaxCommentAddView(SingleObjectMixin, View):
     model = ProductComment

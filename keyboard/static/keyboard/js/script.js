@@ -57,10 +57,31 @@ $(document).ready(function() {
 })
 
 
+$('#add_to_cart').on('click', function(e) {
+  e.preventDefault();
+  $.ajax({
+    url: $(this).attr('href'),
+    type: 'POST',
+    dataType: 'json',
+    headers: {
+      "X-Requested-With": "XMLHttpRequest",
+      "X-CSRFToken": getCookie("csrftoken"), // function to get coookie by name 
+    },
+    success: (data) => {
+      $('#cart').html(data.cart_list)
+      $('#cart-slide').removeClass('hidden');
+      $('body').addClass('overflow-hidden');
+    },
+    error: (error) => {
+      console.log(error);
+    }
+  })
+})
 
 
 // Delete-link ajax (without refresh page) for cart
 $('.delete-link').on('click', function(e) {
+// $(document).on('click', '.delete-link', function(e) {
   e.preventDefault();
   var login = 'login/' // It's a temporary solution #important
   $.ajax({
@@ -118,7 +139,7 @@ $('#qty').on('change', function(e) {
 })
 
 
-$('#comment_form_submit').on('submit', function(e){
+$('#comment_form_submit').on('submit', function(e) {
   e.preventDefault();
   form = $('#comment_form_submit');
   action_url = form.attr('data-href')
