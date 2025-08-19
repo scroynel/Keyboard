@@ -71,7 +71,7 @@ class Order(models.Model):
 
 
     def __str__(self):
-        return f'{self.cart.owner.username} - {self.is_paid} - {self.create_time.strftime('%d/%m/%Y - %H:%M')}'
+        return f'{self.cart.owner.username} - {self.is_paid} - {self.create_time.strftime("%d/%m/%Y - %H:%M")}'
     
 
     class Meta:
