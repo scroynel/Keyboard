@@ -1,8 +1,5 @@
 FROM python:3.12.11-bookworm
 
-RUN python --version
-RUN pip --version
-
 ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app

@@ -110,11 +110,10 @@ $('.delete-link').on('click', function(e) {
   })
 })
 
-
-$('#qty').on('change', function(e) {
+$('input[id=qty]').on('change', function(e) {
   e.preventDefault();
-  qty = $('#qty').val()
-  update_url = $('#qty').attr('data-href')
+  qty = $(this).val()
+  update_url = $(this).attr('data-href')
   $.ajax({
     url: update_url,
     type: "POST",
@@ -137,6 +136,33 @@ $('#qty').on('change', function(e) {
     }
   })
 })
+
+// $('#qty').on('change', function(e) {
+//   e.preventDefault();
+//   qty = $('#qty').val()
+//   update_url = $('#qty').attr('data-href')
+//   $.ajax({
+//     url: update_url,
+//     type: "POST",
+//     dataType: "json",
+//     data: {
+//       'qty': qty
+//     },
+//     headers: {
+//       "X-Requested-With": "XMLHttpRequest",
+//       "X-CSRFToken": getCookie("csrftoken"), // function to get coookie by name 
+//     },
+//     success: (data) => {
+//       console.log('data', data)
+//       if (data.status == 1) {
+//         $('#total').text(data.total)
+//       }
+//     },
+//     error: (error) => {
+//       console.log(error);
+//     }
+//   })
+// })
 
 
 $('#comment_form_submit').on('submit', function(e) {
