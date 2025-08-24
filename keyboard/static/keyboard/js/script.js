@@ -80,7 +80,7 @@ $('#add_to_cart').on('click', function(e) {
 
 
 // Delete-link ajax (without refresh page) for cart
-$('.delete-link').on('click', function(e) {
+$('#cart').on('click', '.delete-link', function(e) {
 // $(document).on('click', '.delete-link', function(e) {
   e.preventDefault();
   var login = 'login/' // It's a temporary solution #important
@@ -110,7 +110,8 @@ $('.delete-link').on('click', function(e) {
   })
 })
 
-$('input[id=qty]').on('change', function(e) {
+
+$('#cart').on('change', 'input[id=qty]', function(e) {
   e.preventDefault();
   qty = $(this).val()
   update_url = $(this).attr('data-href')
