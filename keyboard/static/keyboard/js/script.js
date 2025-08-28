@@ -138,6 +138,7 @@ $('#cart').on('change', 'input[id=qty]', function(e) {
   })
 })
 
+
 // $('#qty').on('change', function(e) {
 //   e.preventDefault();
 //   qty = $('#qty').val()
