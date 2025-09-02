@@ -35,24 +35,46 @@ function getCookie(name) {
 }
 
 
+function toggleCart() {
+  const $cart = $('#cart');
+  const $overlay = $('#cart-slide');
+
+  if ($cart.css('right') === '0px') {
+    // Close cart
+    $cart.animate({ right: '-100%' }, 400);
+    $('body').removeClass('overflow-hidden');
+    setTimeout(() => {
+      $overlay.addClass('hidden');
+    }, 400);
+  } else {
+    // Open cart
+    $overlay.removeClass('hidden'); // Show backdrop
+    $cart.animate({ right: '0' }, 400); // Slide in
+    $('body').addClass('overflow-hidden');
+  }
+}
+
 // Modal cart
 $(document).ready(function() {
   $('#cart-button').on('click', function(e) {;
-    $('#cart-slide').removeClass('hidden');
-    $('body').addClass('overflow-hidden')
+    // $('#cart-slide').removeClass('hidden');
+    // $('#cart').animate({right: 0});
+    // $('body').addClass('overflow-hidden')
+    toggleCart();
   })
 
   $('#cart-slide').on('click', function(e) {
-    $('#cart-slide').addClass('hidden');
-    $('body').removeClass('overflow-hidden')
+   
+    toggleCart();
+    
   })
 
   $('#cart').on('click', function(e) {
     e.stopPropagation();
   })
 
-  $('#button-modal').on('click', function(e) {
-    $('#cart-slide').addClass('hidden')
+  $('#cart').on('click', '.button-modal', function(e) {
+    toggleCart();
   })
 })
 
@@ -70,6 +92,7 @@ $('#add_to_cart').on('click', function(e) {
     success: (data) => {
       $('#cart').html(data.cart_list)
       $('#cart-slide').removeClass('hidden');
+      $('#cart').animate({right: 0});
       $('body').addClass('overflow-hidden');
     },
     error: (error) => {
@@ -98,9 +121,6 @@ $('#cart').on('click', '.delete-link', function(e) {
         $('#total').text(data.total)
         if (data.count == 0) {
           $('#cart').html(data.empty_cart)
-          $('#button-modal').on('click', function(e) {
-            $('#cart-slide').addClass('hidden');
-          })
         }
       }
     },
@@ -188,4 +208,10 @@ $('#comment_form_submit').on('submit', function(e) {
     },
     error: (error) => console.log(error)
   });
+})
+
+
+
+$('document').on('click', '.modal-button', function(e) {
+  $('#cart-slide').addClass('hidden');
 })

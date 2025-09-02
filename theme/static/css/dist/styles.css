@@ -1796,6 +1796,34 @@ select {
   top: 8%;
 }
 
+.right-\[100px\] {
+  right: 100px;
+}
+
+.right-\[100\%\] {
+  right: 100%;
+}
+
+.left-\[\] {
+  left: ;
+}
+
+.left-\[100\] {
+  left: 100;
+}
+
+.left-\[100\%\] {
+  left: 100%;
+}
+
+.left-\[-100\%\] {
+  left: -100%;
+}
+
+.right-\[-100\%\] {
+  right: -100%;
+}
+
 .z-10 {
   z-index: 10;
 }
@@ -1971,10 +1999,6 @@ select {
 
 .h-screen {
   height: 100vh;
-}
-
-.max-h-full {
-  max-height: 100%;
 }
 
 .min-h-screen {
@@ -2183,10 +2207,6 @@ select {
 
 .overflow-hidden {
   overflow: hidden;
-}
-
-.overflow-y-auto {
-  overflow-y: auto;
 }
 
 .overflow-x-hidden {
