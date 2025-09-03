@@ -43,6 +43,10 @@ INSTALLED_APPS = [
     'django_browser_reload',
     'keyboard',
     'user',
+    'cart', 
+    'wishlist',
+    'orders',
+    'payments'
 ]
 
 MIDDLEWARE = [

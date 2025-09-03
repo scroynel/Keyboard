@@ -57,16 +57,11 @@ function toggleCart() {
 // Modal cart
 $(document).ready(function() {
   $('#cart-button').on('click', function(e) {;
-    // $('#cart-slide').removeClass('hidden');
-    // $('#cart').animate({right: 0});
-    // $('body').addClass('overflow-hidden')
     toggleCart();
   })
 
   $('#cart-slide').on('click', function(e) {
-   
     toggleCart();
-    
   })
 
   $('#cart').on('click', function(e) {
@@ -104,7 +99,6 @@ $('#add_to_cart').on('click', function(e) {
 
 // Delete-link ajax (without refresh page) for cart
 $('#cart').on('click', '.delete-link', function(e) {
-// $(document).on('click', '.delete-link', function(e) {
   e.preventDefault();
   var login = 'login/' // It's a temporary solution #important
   $.ajax({
@@ -159,34 +153,6 @@ $('#cart').on('change', 'input[id=qty]', function(e) {
 })
 
 
-// $('#qty').on('change', function(e) {
-//   e.preventDefault();
-//   qty = $('#qty').val()
-//   update_url = $('#qty').attr('data-href')
-//   $.ajax({
-//     url: update_url,
-//     type: "POST",
-//     dataType: "json",
-//     data: {
-//       'qty': qty
-//     },
-//     headers: {
-//       "X-Requested-With": "XMLHttpRequest",
-//       "X-CSRFToken": getCookie("csrftoken"), // function to get coookie by name 
-//     },
-//     success: (data) => {
-//       console.log('data', data)
-//       if (data.status == 1) {
-//         $('#total').text(data.total)
-//       }
-//     },
-//     error: (error) => {
-//       console.log(error);
-//     }
-//   })
-// })
-
-
 $('#comment_form_submit').on('submit', function(e) {
   e.preventDefault();
   form = $('#comment_form_submit');
@@ -208,10 +174,4 @@ $('#comment_form_submit').on('submit', function(e) {
     },
     error: (error) => console.log(error)
   });
-})
-
-
-
-$('document').on('click', '.modal-button', function(e) {
-  $('#cart-slide').addClass('hidden');
 })

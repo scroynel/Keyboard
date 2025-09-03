@@ -4,7 +4,16 @@ from django.views.generic import DetailView
 from django.contrib.auth import get_user_model, authenticate, login
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
-from keyboard.models import Cart
+
+
+
+
+
+from cart.models import Cart
+
+
+
+
 
 
 def LoginUserView(request):

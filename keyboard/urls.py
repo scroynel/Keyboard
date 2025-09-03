@@ -11,8 +11,8 @@ urlpatterns = [
     path('keyboards/<slug:keyboard_slug>/', views.KeyboardDetailView.as_view(), name='keyboards_detail'),
     path('keycaps/<slug:keycap_slug>/', views.KeycapDetailView.as_view(), name='keycaps_detail'),
     path('switches/<slug:switch_slug>/', views.SwitchDetailView.as_view(), name='switches_detail'),
-    path('<slug:category_slug>/<slug:product_slug>/add/', views.AjaxAddProductCart.as_view(), name='product_add'),
+    # path('<slug:category_slug>/<slug:product_slug>/add/', views.AjaxAddProductCart.as_view(), name='product_add'),
     path('<slug:category_slug>/<slug:product_slug>/comment_add/', views.AjaxCommentAddView.as_view(), name='comment_add'),
-    path('<slug:category_slug>/<uuid:cart_id>/<slug:product_slug>/delete/', views.AjaxDeleteView.as_view(), name='product_delete'),
-    path('<slug:category_slug>/<uuid:cart_id>/<slug:product_slug>/update/', views.AjaxUpdateView.as_view(), name='product_update'),
+    # path('<slug:category_slug>/<uuid:cart_id>/<slug:product_slug>/delete/', views.AjaxDeleteView.as_view(), name='product_delete'),
+    # path('<slug:category_slug>/<uuid:cart_id>/<slug:product_slug>/update/', views.AjaxUpdateView.as_view(), name='product_update'),
 ]
