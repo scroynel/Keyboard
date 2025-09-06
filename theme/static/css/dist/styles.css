@@ -1788,40 +1788,16 @@ select {
   right: 0px;
 }
 
+.right-\[-100\%\] {
+  right: -100%;
+}
+
 .top-0 {
   top: 0px;
 }
 
 .top-\[8\%\] {
   top: 8%;
-}
-
-.right-\[100px\] {
-  right: 100px;
-}
-
-.right-\[100\%\] {
-  right: 100%;
-}
-
-.left-\[\] {
-  left: ;
-}
-
-.left-\[100\] {
-  left: 100;
-}
-
-.left-\[100\%\] {
-  left: 100%;
-}
-
-.left-\[-100\%\] {
-  left: -100%;
-}
-
-.right-\[-100\%\] {
-  right: -100%;
 }
 
 .z-10 {
@@ -2734,8 +2710,16 @@ select {
   transition-duration: 300ms;
 }
 
+.duration-500 {
+  transition-duration: 500ms;
+}
+
 .ease-out {
   transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+}
+
+.ease-in-out {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .hover\:border-gray-300:hover {

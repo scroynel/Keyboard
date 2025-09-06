@@ -41,15 +41,18 @@ function toggleCart() {
 
   if ($cart.css('right') === '0px') {
     // Close cart
-    $cart.animate({ right: '-100%' }, 400);
+    $overlay.removeClass('bg-opacity-50').addClass('bg-opacity-0')
+    $cart.removeClass('right-0').addClass('right-[-100%]')
     $('body').removeClass('overflow-hidden');
     setTimeout(() => {
       $overlay.addClass('hidden');
-    }, 400);
+    }, 300)
   } else {
     // Open cart
-    $overlay.removeClass('hidden'); // Show backdrop
-    $cart.animate({ right: '0' }, 400); // Slide in
+    $overlay.removeClass('hidden');
+    void $overlay[0].offsetWidth;
+    $overlay.removeClass('bg-opacity-0').addClass('bg-opacity-50');
+    $cart.removeClass('right-[-100%]').addClass('right-0');
     $('body').addClass('overflow-hidden');
   }
 }
@@ -86,9 +89,7 @@ $('#add_to_cart').on('click', function(e) {
     },
     success: (data) => {
       $('#cart').html(data.cart_list)
-      $('#cart-slide').removeClass('hidden');
-      $('#cart').animate({right: 0});
-      $('body').addClass('overflow-hidden');
+      toggleCart();
     },
     error: (error) => {
       console.log(error);
