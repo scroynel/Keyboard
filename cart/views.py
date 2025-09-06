@@ -3,8 +3,9 @@ from django.views.generic.detail import SingleObjectMixin
 from django.views.generic import View
 from django.template.loader import render_to_string
 from django.http import HttpResponseBadRequest, JsonResponse
-from .models import Cart_product, Cart
 from keyboard.models import Product
+
+from .models import Cart_product, Cart
 
 
 class AjaxAddProductCart(SingleObjectMixin, View):

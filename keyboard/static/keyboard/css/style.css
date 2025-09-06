@@ -52,3 +52,15 @@ i.fa-star {
     color: orange;
 }
 /*  */
+
+
+/* wishlist */
+a.wishlist svg {
+    fill: #bfbfbf;
+}
+
+a.wishlist.active svg {
+    fill: #ff0400;
+}
+/*  */
+

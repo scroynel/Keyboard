@@ -176,3 +176,27 @@ $('#comment_form_submit').on('submit', function(e) {
     error: (error) => console.log(error)
   });
 })
+
+
+$('.wishlist').on('click', function(e) {
+  e.preventDefault();
+  $.ajax({
+    url: $(this).attr('href'),
+    type: 'POST',
+    dataType: 'json',
+    headers: {
+      "X-Requested-With": "XMLHttpRequest",
+      "X-CSRFToken": getCookie("csrftoken"), // function to get coookie by name 
+    },
+    success: (data) => {
+      if (data.status === 'added') {
+        $('.wishlist').addClass('active')
+      } else if (data.status === 'removed') {
+        $('.wishlist').removeClass('active')
+      }
+    },
+    error: (error) => {
+      console.log(error);
+    }
+  })
+})
