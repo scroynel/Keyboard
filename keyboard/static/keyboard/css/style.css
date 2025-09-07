@@ -55,11 +55,11 @@ i.fa-star {
 
 
 /* wishlist */
-a.wishlist svg {
+a.wishlist svg path{
     fill: #bfbfbf;
 }
 
-a.wishlist.active svg {
+a.wishlist.active svg path{
     fill: #ff0400;
 }
 /*  */

@@ -7,6 +7,7 @@ from django.http import HttpResponseBadRequest, JsonResponse
 from .models import Product, ProductComment
 from .mixins import FormClassMixin
 from .forms import CommentForm
+from wishlist.models import Wishlist
 
 
 class MainView(ListView):
@@ -21,6 +22,12 @@ class KeyboardsView(ListView):
     template_name = 'keyboard/keyboards.html'
     context_object_name = 'keyboards'
     queryset = Product.objects.filter(category__slug="keyboards")
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['user_wishlist'] = Wishlist.objects.filter(owner=self.request.user).values_list('product', flat=True)
+        return context
 
 
 class KeycapsView(ListView):

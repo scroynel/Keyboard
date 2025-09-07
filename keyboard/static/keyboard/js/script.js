@@ -190,9 +190,9 @@ $('.wishlist').on('click', function(e) {
     },
     success: (data) => {
       if (data.status === 'added') {
-        $('.wishlist').addClass('active')
+        $(this).addClass('active')
       } else if (data.status === 'removed') {
-        $('.wishlist').removeClass('active')
+        $(this).removeClass('active')
       }
     },
     error: (error) => {
