@@ -1,5 +1,9 @@
 {% load static tailwind_tags %}
-{% load tags %}
+{% load cart_tags %}
+{% load keyboard_tags %}
+
+{% categories as categories %}
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,18 +34,12 @@
         </div>
         <nav>
             <ul class="flex space-x-20 text-gray-500">
+                {% for category in categories %}
                 <li class="hover:text-white group relative {% if request.resolver_match.url_name == 'keyboards' %}text-white{% endif %}">
-                    <a href="{% url 'keyboards' %}">Keyboards</a>
-                    <span class="absolute -bottom-1 left-0 w-0 transition-all h-0.5 bg-white group-hover:w-full {% if request.resolver_match.url_name == 'keyboards' %}w-full{% endif %}"></span>   
+                    <a href="{% url 'products' category.slug %}">{{category}}</a>
+                    <span class="absolute -bottom-1 left-0 w-0 transition-all h-0.5 bg-white group-hover:w-full {% if request.resolver_match.kwargs.category_slug == category.slug %}w-full{% endif %}"></span>   
                 </li>
-                <li class="hover:text-white group relative {% if request.resolver_match.url_name == 'keycaps' %}text-white{% endif %}">
-                    <a href="{% url 'keycaps' %}">Keycaps</a>
-                    <span class="absolute -bottom-1 left-0 w-0 transition-all h-0.5 bg-white group-hover:w-full {% if request.resolver_match.url_name == 'keycaps' %}w-full{% endif %}"></span>   
-                </li>
-                <li class="hover:text-white group relative {% if request.resolver_match.url_name == 'switches' %}text-white{% endif %}">
-                    <a href="{% url 'switches' %}">Switches</a>
-                    <span class="absolute -bottom-1 left-0 w-0 transition-all h-0.5 bg-white group-hover:w-full {% if request.resolver_match.url_name == 'switches' %}w-full{% endif %}"></span>   
-                </li>
+                {% endfor %}
             </ul>
         </nav>
         <div class="flex space-x-10 flex-1 justify-end">

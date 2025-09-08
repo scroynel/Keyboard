@@ -5,9 +5,10 @@ from . import views
 
 urlpatterns = [
     path('', views.MainView.as_view(), name='main'),
-    path('keyboards/', views.KeyboardsView.as_view(), name='keyboards'),
-    path('keycaps/', views.KeycapsView.as_view(), name='keycaps'),
-    path('switches/', views.SwitchesView.as_view(), name='switches'),
+    # path('keyboards/', views.KeyboardsView.as_view(), name='keyboards'),
+    # path('keycaps/', views.KeycapsView.as_view(), name='keycaps'),
+    # path('switches/', views.SwitchesView.as_view(), name='switches'),
+    path('<slug:category_slug>/', views.ProductView.as_view(), name='products'),
     path('keyboards/<slug:keyboard_slug>/', views.KeyboardDetailView.as_view(), name='keyboards_detail'),
     path('keycaps/<slug:keycap_slug>/', views.KeycapDetailView.as_view(), name='keycaps_detail'),
     path('switches/<slug:switch_slug>/', views.SwitchDetailView.as_view(), name='switches_detail'),

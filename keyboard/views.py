@@ -17,31 +17,21 @@ class MainView(ListView):
     context_object_name = 'products'
             
 
-class KeyboardsView(ListView):
-    model = Product
-    template_name = 'keyboard/keyboards.html'
-    context_object_name = 'keyboards'
-    queryset = Product.objects.filter(category__slug="keyboards")
+class ProductView(ListView):
+    model=Product
+    template_name='keyboard/products.html'
+    context_object_name = 'products'
+    
+
+    def get_queryset(self):
+        return Product.objects.filter(category__slug=self.kwargs['category_slug'])
 
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['category_slug'] = self.kwargs['category_slug']
         context['user_wishlist'] = Wishlist.objects.filter(owner=self.request.user).values_list('product', flat=True)
         return context
-
-
-class KeycapsView(ListView):
-    model = Product
-    template_name = 'keyboard/keycaps.html'
-    context_object_name = 'keycaps'
-    queryset = Product.objects.filter(category__slug="keycaps")
-
-
-class SwitchesView(ListView):
-    model = Product
-    template_name = 'keyboard/switches.html'
-    context_object_name = 'switches'
-    queryset = Product.objects.filter(category__slug="switches")
 
 
 class KeyboardDetailView(FormClassMixin, FormMixin, DetailView):
