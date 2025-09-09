@@ -34,38 +34,16 @@ class ProductView(ListView):
         return context
 
 
-class KeyboardDetailView(FormClassMixin, FormMixin, DetailView):
-    template_name = 'keyboard/keyboard_detail.html'
-    slug_url_kwarg = 'keyboard_slug'
-    context_object_name = 'product'
+class ProductDetailView(FormClassMixin, FormMixin, DetailView):
+    model = Product
+    template_name = 'keyboard/products_detail.html'
+    slug_url_kwarg = 'product_slug'
     form_class = CommentForm
 
 
     def get_object(self, queryset = None):
-        return Product.objects.filter(category__slug='keyboards').get(slug=self.kwargs[self.slug_url_kwarg])
-    
+        return Product.objects.get(slug=self.kwargs[self.slug_url_kwarg])
 
-class KeycapDetailView(FormClassMixin, FormMixin, DetailView):
-    template_name = 'keyboard/keycap_detail.html'
-    slug_url_kwarg = 'keycap_slug'
-    context_object_name = 'product'
-    form_class = CommentForm
-
-
-    def get_object(self, queryset = None):
-        return Product.objects.filter(category__slug='keycaps').get(slug=self.kwargs[self.slug_url_kwarg])
-    
-
-class SwitchDetailView(FormClassMixin, FormMixin, DetailView):
-    template_name = 'keyboard/switch_detail.html'
-    slug_url_kwarg = 'switch_slug'
-    context_object_name = 'product'
-    form_class = CommentForm
-    
-
-    def get_object(self, queryset = None):
-        return Product.objects.filter(category__slug='switches').get(slug=self.kwargs[self.slug_url_kwarg])
-        
 
 class AjaxCommentAddView(SingleObjectMixin, View):
     model = ProductComment
