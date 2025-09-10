@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'theme',
     'django_browser_reload',
     'keyboard',
-    'user',
+    'users',
     'cart', 
     'wishlist',
     'orders',

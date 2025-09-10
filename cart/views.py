@@ -30,7 +30,7 @@ class AjaxAddProductCart(SingleObjectMixin, View):
                     cart_product.quantity += 1
                     cart_product.save()
 
-                cart_list = render_to_string('keyboard/partials/cart_list.html', {'cart': cart})
+                cart_list = render_to_string('cart/partials/cart_list.html', {'cart': cart})
                 print(cart_list)
 
                 return JsonResponse({'status': 1, 'cart_list': cart_list})
@@ -65,7 +65,7 @@ class AjaxDeleteView(SingleObjectMixin, View):
                 total = Cart.objects.get(id=self.kwargs['cart_id']).total_price
                 count = Cart_product.objects.filter(cart=cart).count()
                 # get block of code for empty cart
-                empty = render_to_string('keyboard/partials/empty_cart.html')
+                empty = render_to_string('cart/partials/empty_cart.html')
 
                 return JsonResponse({'status': 1, 'total': total, 'count': count, 'empty_cart': empty})
             return JsonResponse({'status': 'Invalid request'}, status=400)

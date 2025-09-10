@@ -1,0 +1,31 @@
+{% if cart.cart_products.all %}
+    <h2 class="text-4xl mb-10">Your cart</h2>
+    {% for p in cart.cart_products.all %}
+        <div class="cart-item flex items-center space-x-5 border-t-2 p-4">
+            <img src="{{p.product.image.url}}" class="w-[100px] h-[100px]" alt="">
+            <div>
+                <p class="text-2xl">{{p.product.name}}</p>
+                <div class="flex space-x-5 items-center">
+                    <input id="qty" type="number" min="1" max="99" data-href="{% url 'product_update' p.product.category.slug p.cart.id p.product.slug %}" value="{{p.quantity}}" class="text-center w-[100px]">
+                </div>
+            </div>
+            <div class="flex flex-1 justify-end items-center">
+                <p class="text-xl mr-10 underline underline-offset-2">${{p.product.price}}</p>
+                <a href="{% url 'product_delete' p.product.category.slug p.cart.id p.product.slug %}" class="delete-link inline-block text-sm items-center">
+                    <svg class="me-2 eVNhx7m5tjSVbfYQzDdT kbeH5ty3CtPKxXm5TXph" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>          
+    {% endfor %}
+    <div id="product-block"></div>
+    <div class="w-full text-right">
+        <p class="text-xl">Total price: <span id="total" class="text-2xl">${{cart.total_price}}</span></p>
+    </div>
+    <div class="w-full text-center">
+        <button type="button" class="inline-block border-4 hover:border-gray-400 hover:shadow-md shadow-black mt-10 py-2 px-4">Check out</button>
+    </div>
+{% else %}
+{% include 'cart/partials/empty_cart.html' %}
+{% endif %}

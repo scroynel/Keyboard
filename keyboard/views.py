@@ -3,8 +3,9 @@ from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.edit import FormMixin
 from django.template.loader import render_to_string
 from django.http import HttpResponseBadRequest, JsonResponse
+from django.shortcuts import get_object_or_404
 
-from .models import Product, ProductComment
+from .models import Product, ProductComment, Category
 from .mixins import FormClassMixin
 from .forms import CommentForm
 from wishlist.models import Wishlist
@@ -24,12 +25,13 @@ class ProductView(ListView):
     
 
     def get_queryset(self):
-        return Product.objects.filter(category__slug=self.kwargs['category_slug'])
+        self.category = get_object_or_404(Category, slug=self.kwargs['category_slug'])
+        return Product.objects.filter(category=self.category)
 
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['category_slug'] = self.kwargs['category_slug']
+        context['category_slug'] = self.category
         context['user_wishlist'] = Wishlist.objects.filter(owner=self.request.user).values_list('product', flat=True)
         return context
 
@@ -39,10 +41,6 @@ class ProductDetailView(FormClassMixin, FormMixin, DetailView):
     template_name = 'keyboard/products_detail.html'
     slug_url_kwarg = 'product_slug'
     form_class = CommentForm
-
-
-    def get_object(self, queryset = None):
-        return Product.objects.get(slug=self.kwargs[self.slug_url_kwarg])
 
 
 class AjaxCommentAddView(SingleObjectMixin, View):

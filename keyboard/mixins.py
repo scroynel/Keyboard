@@ -12,11 +12,11 @@ class ImageTagMixin():
     
 
 # Display additional images for the different categories of products in detailview
-class ImageCarouselMixin(ContextMixin):
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['products'] = self.get_object()
-        return context
+# class ImageCarouselMixin(ContextMixin):
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['products'] = self.get_object()
+#         return context
     
 
 class FormClassMixin(FormMixin):
