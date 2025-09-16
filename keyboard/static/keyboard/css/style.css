@@ -62,5 +62,10 @@ a.wishlist svg path{
 a.wishlist.active svg path{
     fill: #ff0400;
 }
+
+/* wishlist page */
+a.wishlistdel.active svg path{
+    fill: #ff0400
+}
 /*  */
 

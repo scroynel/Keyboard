@@ -20,14 +20,17 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+from keyboard.views import MainView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("__reload__/", include("django_browser_reload.urls")),
-    path('', include('users.urls')),
-    path('', include('keyboard.urls')),
-    path('', include('cart.urls')),
-    path('', include('wishlist.urls')),
-    path('', include('orders.urls')),
-    path('', include('payments.urls')),
+    path('', MainView.as_view(), name='main'),
+    path('profile/', include('users.urls')),
+    path('products/', include('keyboard.urls')),
+    path('cart/', include('cart.urls')),
+    path('wishlist/', include('wishlist.urls')),
+    path('orders/', include('orders.urls')),
+    path('payments/', include('payments.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

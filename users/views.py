@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
-from django.views.generic import DetailView
+from django.views.generic import DetailView, ListView
 from django.contrib.auth import get_user_model, authenticate, login
 from django.shortcuts import get_object_or_404
 
 from cart.models import Cart
+
+from wishlist.models import Wishlist
 
 
 def LoginUserView(request):
@@ -43,3 +45,25 @@ class ProfileView(DetailView):
 
     def get_object(self, queryset = None):
         return get_object_or_404(self.model, pk=self.kwargs[self.slug_url_kwarg])
+    
+
+class OrderHistoryView(ListView):
+    pass
+
+
+class AccountDetailsView(ListView):
+    pass
+
+
+# class WishlistView(ListView):
+#     model = Wishlist
+#     template_name = 'users/wishlist.html'
+#     context_object_name = 'wishlist'
+    
+
+#     def get_queryset(self):
+#         return Wishlist.objects.filter(owner=self.request.user.id)
+
+
+class ReviewsView(ListView):
+    pass

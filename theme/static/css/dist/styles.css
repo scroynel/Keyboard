@@ -1788,6 +1788,10 @@ select {
   right: 0px;
 }
 
+.right-3 {
+  right: 0.75rem;
+}
+
 .right-\[-100\%\] {
   right: -100%;
 }
@@ -1796,28 +1800,12 @@ select {
   top: 0px;
 }
 
-.top-\[8\%\] {
-  top: 8%;
-}
-
-.top-20 {
-  top: 5rem;
-}
-
-.top-10 {
-  top: 2.5rem;
-}
-
-.right-10 {
-  right: 2.5rem;
-}
-
-.right-3 {
-  right: 0.75rem;
-}
-
 .top-3 {
   top: 0.75rem;
+}
+
+.top-\[8\%\] {
+  top: 8%;
 }
 
 .z-10 {
@@ -1981,6 +1969,10 @@ select {
   height: 47px;
 }
 
+.h-\[500px\] {
+  height: 500px;
+}
+
 .h-\[50px\] {
   height: 50px;
 }
@@ -2029,6 +2021,10 @@ select {
   width: 150px;
 }
 
+.w-\[200px\] {
+  width: 200px;
+}
+
 .w-\[30\%\] {
   width: 30%;
 }
@@ -2047,6 +2043,10 @@ select {
 
 .w-\[70\%\] {
   width: 70%;
+}
+
+.w-\[85\%\] {
+  width: 85%;
 }
 
 .w-full {
@@ -2203,6 +2203,10 @@ select {
 
 .overflow-hidden {
   overflow: hidden;
+}
+
+.overflow-scroll {
+  overflow: scroll;
 }
 
 .overflow-x-hidden {
@@ -2374,10 +2378,6 @@ select {
   --tw-bg-opacity: 1;
 }
 
-.bg-opacity-50 {
-  --tw-bg-opacity: 0.5;
-}
-
 .bg-cover {
   background-size: cover;
 }
@@ -2479,6 +2479,11 @@ select {
 .py-3 {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
+}
+
+.py-\[50px\] {
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 
 .pb-7 {
@@ -2730,16 +2735,12 @@ select {
   transition-duration: 300ms;
 }
 
-.duration-500 {
-  transition-duration: 500ms;
+.ease-in-out {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .ease-out {
   transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
-}
-
-.ease-in-out {
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .hover\:border-gray-300:hover {

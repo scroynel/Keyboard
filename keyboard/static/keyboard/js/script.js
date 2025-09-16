@@ -178,8 +178,9 @@ $('#comment_form_submit').on('submit', function(e) {
 })
 
 
-$('.wishlist').on('click', function(e) {
+$('.likes').on('click', '.wishlist', function(e) {
   e.preventDefault();
+  console.log('sdlkfjlskdjfls')
   $.ajax({
     url: $(this).attr('href'),
     type: 'POST',
@@ -193,6 +194,32 @@ $('.wishlist').on('click', function(e) {
         $(this).addClass('active')
       } else if (data.status === 'removed') {
         $(this).removeClass('active')
+      }
+    },
+    error: (error) => {
+      console.log(error);
+    }
+  })
+})
+
+
+$('#content').on('click', '.wishlistdel', function(e) {
+  e.preventDefault();
+  console.log('34234324v234v234v234v234v234v3')
+  $.ajax({
+    url: $(this).attr('href'),
+    type: 'POST',
+    dataType: 'json',
+    headers: {
+      "X-Requested-With": "XMLHttpRequest",
+      "X-CSRFToken": getCookie("csrftoken"), // function to get coookie by name 
+    },
+    success: (data) => {
+      if (data.status === 'removed') {
+        $(this).removeClass('active')
+        $(this).closest('.wishlist-user').fadeOut()
+        console.log($(this))
+
       }
     },
     error: (error) => {
