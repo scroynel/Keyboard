@@ -49,10 +49,6 @@ class AjaxDeleteFromWishlist(SingleObjectMixin, View):
     model = Wishlist
 
 
-    # def get_object(self, queryset = None):
-    #     return get_object_or_404(Wishlist, product=self.kwargs['product_slug'], owner=self.request.user)
-
-
     def post(self, *args, **kwargs):
         is_ajax = self.request.headers.get('X-Requested-With') == 'XMLHttpRequest'
 

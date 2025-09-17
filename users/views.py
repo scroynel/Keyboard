@@ -33,7 +33,7 @@ def LoginUserView(request):
 
     context = {}
             
-    return render(request, 'user/login.html', context)
+    return render(request, 'users/login.html', context)
 
 
 class ProfileView(DetailView):
@@ -53,16 +53,6 @@ class OrderHistoryView(ListView):
 
 class AccountDetailsView(ListView):
     pass
-
-
-# class WishlistView(ListView):
-#     model = Wishlist
-#     template_name = 'users/wishlist.html'
-#     context_object_name = 'wishlist'
-    
-
-#     def get_queryset(self):
-#         return Wishlist.objects.filter(owner=self.request.user.id)
 
 
 class ReviewsView(ListView):

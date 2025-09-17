@@ -61,4 +61,8 @@ module.exports = {
         require('@tailwindcss/typography'),
         require('@tailwindcss/aspect-ratio'),
     ],
+    safelist: [
+    'bg-opacity-0',
+    'bg-opacity-50',
+    ],
 }

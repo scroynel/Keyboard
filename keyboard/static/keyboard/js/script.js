@@ -50,7 +50,7 @@ function toggleCart() {
   } else {
     // Open cart
     $overlay.removeClass('hidden');
-    void $overlay[0].offsetWidth;
+    void $overlay[0].offsetWidth; // That transition works well
     $overlay.removeClass('bg-opacity-0').addClass('bg-opacity-50');
     $cart.removeClass('right-[-100%]').addClass('right-0');
     $('body').addClass('overflow-hidden');
@@ -180,7 +180,6 @@ $('#comment_form_submit').on('submit', function(e) {
 
 $('.likes').on('click', '.wishlist', function(e) {
   e.preventDefault();
-  console.log('sdlkfjlskdjfls')
   $.ajax({
     url: $(this).attr('href'),
     type: 'POST',
@@ -205,7 +204,6 @@ $('.likes').on('click', '.wishlist', function(e) {
 
 $('#content').on('click', '.wishlistdel', function(e) {
   e.preventDefault();
-  console.log('34234324v234v234v234v234v234v3')
   $.ajax({
     url: $(this).attr('href'),
     type: 'POST',
@@ -218,8 +216,6 @@ $('#content').on('click', '.wishlistdel', function(e) {
       if (data.status === 'removed') {
         $(this).removeClass('active')
         $(this).closest('.wishlist-user').fadeOut()
-        console.log($(this))
-
       }
     },
     error: (error) => {

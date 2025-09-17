@@ -25,6 +25,15 @@ class Product(models.Model, ImageTagMixin):
     
     def get_absolute_url(self):
         return reverse(f'{self.category.slug}_detail', args=[self.slug])
+    
+
+    def get_wishlist_add_url(self):
+        return reverse('wishlist:wishlist_add', args=[self.slug])
+    
+
+    def get_wishlist_delete_url(self):
+        return reverse('wishlist:wishlist_delete', args=[self.slug])
+
 
     @property
     def average_rating(self):
