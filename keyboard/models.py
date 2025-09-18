@@ -24,7 +24,7 @@ class Product(models.Model, ImageTagMixin):
     
     
     def get_absolute_url(self):
-        return reverse(f'{self.category.slug}_detail', args=[self.slug])
+        return reverse(f'products_detail', args=[self.category.slug, self.slug])
     
 
     def get_wishlist_add_url(self):

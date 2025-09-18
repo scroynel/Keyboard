@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.urls import reverse
 import uuid
 
 from keyboard.models import Product
@@ -39,6 +40,13 @@ class Cart_product(models.Model):
     def __str__(self):
         return f'{self.product} - {self.cart}'
     
+
+    def get_product_delete_url(self):
+        return reverse('product_delete', args=[self.product.category.slug, self.cart.id, self.product.slug])
+
+    def get_product_update_url(self):
+        return reverse('product_update', args=[self.product.category.slug, self.cart.id, self.product.slug])
+
 
     class Meta:
         verbose_name = 'Cart product'
