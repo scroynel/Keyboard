@@ -2,6 +2,7 @@ from django.views.generic.detail import SingleObjectMixin
 from django.views.generic import ListView, View
 from django.http import HttpResponseBadRequest, JsonResponse
 from django.shortcuts import get_object_or_404
+from django.template.loader import render_to_string
 
 from keyboard.models import Product
 from .models import Wishlist
@@ -57,7 +58,11 @@ class AjaxDeleteFromWishlist(SingleObjectMixin, View):
                 product = Product.objects.get(slug=self.kwargs['product_slug'])
                 wishlist_product = Wishlist.objects.get(product=product, owner=self.request.user)
                 wishlist_product.delete()
-                return JsonResponse({'status': 'removed'})
+
+                count = Wishlist.objects.filter(owner=self.request.user).count()
+                empty = render_to_string('wishlist/wishlist.html')
+
+                return JsonResponse({'status': 'removed', 'count': count, 'wishlist_empty': empty})
             return JsonResponse({'status': 'Invalid request'}, status=400)
         else:
             return HttpResponseBadRequest('Invalid request')

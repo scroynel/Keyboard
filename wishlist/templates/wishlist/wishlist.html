@@ -1,3 +1,4 @@
+{% if wishlist %}
 <div class="likes grid grid-cols-3 gap-5 px-[100px]">
     {% for wish in wishlist %}
     <div class="wishlist-user relative text-center bg-[#f2f2f2] shadow-none transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-400">
@@ -22,3 +23,8 @@
     </div>
     {% endfor %}
 </div>
+{% else %}
+<div class="w-full h-full flex justify-center items-center">
+    <h1 class="text-3xl">Your Wishlist is empty.</h1>
+</div>
+{% endif %}

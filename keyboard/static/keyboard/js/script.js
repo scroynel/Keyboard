@@ -216,6 +216,10 @@ $('#content').on('click', '.wishlistdel', function(e) {
       if (data.status === 'removed') {
         $(this).removeClass('active')
         $(this).closest('.wishlist-user').fadeOut()
+        console.log(data.count)
+        if (data.count == 0){
+          $('#content').html(data.wishlist_empty)
+        }
       }
     },
     error: (error) => {

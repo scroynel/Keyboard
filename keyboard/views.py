@@ -35,7 +35,7 @@ class ProductView(ListView):
         if self.request.user.is_authenticated:
             context['user_wishlist'] = Wishlist.objects.filter(owner=self.request.user).values_list('product', flat=True)
 
-        context['category_slug'] = self.category
+        context['category_slug'] = self.category.slug
         # context['user_wishlist'] = Wishlist.objects.filter(owner=self.request.user).values_list('product', flat=True)
         return context
 
