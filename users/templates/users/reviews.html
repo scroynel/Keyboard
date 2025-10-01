@@ -1,0 +1,30 @@
+{% if comments %}
+    <div class="px-[100px]">
+        <table class="w-full text-left">
+            <tr class="border-b-2 border-black">
+                <th>Product</th>
+                <th>Description</th>
+                <th>Rating</th>
+                <th>Created</th>
+            </tr>
+            {% for comment in comments %}
+            <tr>
+                <td>{{ comment.product.name }}</td>
+                <td>{{ comment.description|truncatechars:255 }}</td>
+                <td>
+                    <div>
+                        <span class="fa fa-star color-off {% if comment.rating > 0 %}color-on{% endif %}"></span>
+                        <span class="fa fa-star color-off {% if comment.rating > 1 %}color-on{% endif %}"></span>
+                        <span class="fa fa-star color-off {% if comment.rating > 2 %}color-on{% endif %}"></span>
+                        <span class="fa fa-star color-off {% if comment.rating > 3 %}color-on{% endif %}"></span>
+                        <span class="fa fa-star color-off {% if comment.rating > 4 %}color-on{% endif %}"></span>
+                    </div>
+                </td>
+                <td>{{ comment.time_create }}</td>
+            </tr>
+            {% endfor %}
+        </table>    
+    </div>
+{% else %}
+        <p class="text-center text-2xl text-[#303030] opacity-50">There aren't comments</p>
+{% endif %}

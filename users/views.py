@@ -4,8 +4,7 @@ from django.contrib.auth import get_user_model, authenticate, login
 from django.shortcuts import get_object_or_404
 
 from cart.models import Cart
-
-from wishlist.models import Wishlist
+from keyboard.models import ProductComment
 
 
 def LoginUserView(request):
@@ -56,4 +55,10 @@ class AccountDetailsView(ListView):
 
 
 class ReviewsView(ListView):
-    pass
+    model = ProductComment
+    template_name = 'users/reviews.html'
+    context_object_name = 'comments'
+
+
+    def get_queryset(self):
+        return ProductComment.objects.filter(owner=self.request.user)

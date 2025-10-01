@@ -22,10 +22,10 @@
                         <a href="{% url 'wishlist:wishlist' %}" hx-get="{% url 'wishlist:wishlist' %}" hx-target="#content">Wishlist</a>
                     </li>
                     <li>
-                        <a href="#">Reviews</a>
+                        <a href="{% url 'reviews' request.user.id %}" hx-get="{% url 'reviews' request.user.id %}" hx-target="#content">Reviews</a>
                     </li>
                     <li>
-                        <a href="#">Log Out</a>
+                        <a href="{% url 'logout' %}">Log Out</a>
                     </li>
                 </ul>
             </div>

@@ -2135,6 +2135,10 @@ select {
   grid-template-columns: repeat(7, minmax(0, 1fr));
 }
 
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
 .flex-col {
   flex-direction: column;
 }
@@ -2261,6 +2265,10 @@ select {
 
 .border-t-2 {
   border-top-width: 2px;
+}
+
+.border-b-2 {
+  border-bottom-width: 2px;
 }
 
 .border-dotted {
@@ -2516,6 +2524,10 @@ select {
 
 .pt-\[6\%\] {
   padding-top: 6%;
+}
+
+.text-left {
+  text-align: left;
 }
 
 .text-center {
