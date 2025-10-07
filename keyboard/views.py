@@ -8,6 +8,7 @@ from django.shortcuts import get_object_or_404
 from .models import Product, ProductComment, Category
 from .mixins import FormClassMixin
 from .forms import CommentForm
+from django.contrib import messages
 from wishlist.models import Wishlist
 
 
@@ -59,13 +60,16 @@ class AjaxCommentAddView(SingleObjectMixin, View):
                 product = Product.objects.get(category__slug=self.kwargs['category_slug'], slug=self.kwargs['product_slug'])
                 form = CommentForm(self.request.POST)
                 if form.is_valid():
+                    comments = ProductComment.objects.filter(product=product, owner=self.request.user)
+                    if comments.exists():
+                        message = "You have already commented on this product."
+                        return JsonResponse({'status_error': message})
                     f = form.save(commit=False)
                     f.owner = self.request.user
                     f.product = product
                     f.save()
                     avg_rating = product.average_rating
                     comments_count = product.comments.count()
-                    comments = ProductComment.objects.filter(product=product)
                     # block of code convert to string, add context and change #comment_list div with this string of code
                     d_partner_html = render_to_string("keyboard/partials/comment_list.html", {'comments': comments}, self.request)
                 return JsonResponse({'status': 1, 'avg_rating': avg_rating, 'comments_count': comments_count, 'comment_list': d_partner_html})

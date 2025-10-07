@@ -8,7 +8,7 @@
                 <th>Created</th>
             </tr>
             {% for comment in comments %}
-            <tr>
+            <tr class="{% if forloop.counter|divisibleby:2 %}bg-gray-300{% endif %}">
                 <td>{{ comment.product.name }}</td>
                 <td>{{ comment.description|truncatechars:255 }}</td>
                 <td>

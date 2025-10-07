@@ -25,7 +25,10 @@
                         <a href="{% url 'reviews' request.user.id %}" hx-get="{% url 'reviews' request.user.id %}" hx-target="#content">Reviews</a>
                     </li>
                     <li>
-                        <a href="{% url 'logout' %}">Log Out</a>
+                        <form action="{% url 'logout' %}" method="POST">
+                            {% csrf_token %}
+                            <button>Logout</button>
+                        </form>
                     </li>
                 </ul>
             </div>

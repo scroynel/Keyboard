@@ -89,6 +89,7 @@ class ProductComment(models.Model):
     
 
     class Meta:
+        unique_together = ('product', 'owner')
         verbose_name = 'Comment'
         verbose_name_plural = 'Comments'
         ordering = ['-time_create']

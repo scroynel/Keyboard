@@ -169,6 +169,10 @@ $('#comment_form_submit').on('submit', function(e) {
       "X-CSRFToken": getCookie("csrftoken"), // function to get coookie by name 
     },
     success: (data) => {
+      if (data.status_error){
+        $('status_error').text(data.status_error)
+      }
+
       $("#comment_list").html(data.comment_list);
       $('#avg_rating').text(data.avg_rating)
       $('#comments_count').text(data.comments_count + ' replies')
