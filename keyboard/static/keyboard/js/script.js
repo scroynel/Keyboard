@@ -157,7 +157,7 @@ $('#cart').on('change', 'input[id=qty]', function(e) {
 $('#comment_form_submit').on('submit', function(e) {
   e.preventDefault();
   form = $('#comment_form_submit');
-  action_url = form.attr('data-href')
+  action_url = form.attr('action')
   $.ajax({
     url: action_url,
     type: 'POST',
@@ -170,6 +170,7 @@ $('#comment_form_submit').on('submit', function(e) {
     },
     success: (data) => {
       if (data.status_error){
+        console.log($('#comment_description'))
         $('status_error').text(data.status_error)
       }
 

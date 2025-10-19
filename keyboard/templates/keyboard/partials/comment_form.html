@@ -1,5 +1,5 @@
 <div class="flex w-full px-[20%] my-[100px]" id="comment_form">
-    <form action="" method="POST" class="w-full" id="comment_form_submit" data-href="{% url 'comment_add' product.category.slug product.slug %}">
+    <form action="{% url 'comment_add' product.category.slug product.slug %}" method="POST" class="w-full" id="comment_form_submit">
         {% csrf_token %}
         <div class="mt-4 w-full flex space-x-5 items-center justify-end">
             <div><p>Select rating: </p></div>
@@ -28,9 +28,9 @@
         </div>
         <div class="text-red-600">{{ form.non_field_errors }}</div>
         <div>{{form.errors}}</div>
-        <div class="mt-4">
+        <div class="mt-4" id="comment_description">
             {{form.description}}
-        <div class="text-red-600">{{form.description.errors}}</div>
+            <div class="text-red-600">{{form.description.errors}}</div>
         <div class="flex justify-end">
             <button type="submit" class="inline-block py-2 px-4 border border-black text-center">Comment</button>
         </div>

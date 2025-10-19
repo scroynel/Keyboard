@@ -38,10 +38,10 @@ class Product(models.Model, ImageTagMixin):
     @property
     def average_rating(self):
         rating = self.comments.all().aggregate(avg_rating = Avg('rating'))['avg_rating']
-        if rating is None:
-            return 0
-        else:
+        if rating:
             return float(f'{rating:.1f}')
+        else:
+            return 0
 
     class Meta:
         verbose_name = 'Product'

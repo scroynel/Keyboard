@@ -6,7 +6,6 @@ from django.http import HttpResponseBadRequest, JsonResponse
 from django.shortcuts import get_object_or_404
 
 from .models import Product, ProductComment, Category
-from .mixins import FormClassMixin
 from .forms import CommentForm
 from django.contrib import messages
 from wishlist.models import Wishlist
@@ -41,11 +40,18 @@ class ProductView(ListView):
         return context
 
 
-class ProductDetailView(FormClassMixin, FormMixin, DetailView):
+class ProductDetailView(FormMixin, DetailView):
     model = Product
     template_name = 'keyboard/products_detail.html'
     slug_url_kwarg = 'product_slug'
     form_class = CommentForm
+    
+    
+    def get_context_data(self, **kwargs):
+        self.object = self.get_object()
+        context = super().get_context_data(**kwargs)
+        context['comments'] = self.object.comments.all()
+        return context
 
 
 class AjaxCommentAddView(SingleObjectMixin, View):
@@ -72,6 +78,8 @@ class AjaxCommentAddView(SingleObjectMixin, View):
                     comments_count = product.comments.count()
                     # block of code convert to string, add context and change #comment_list div with this string of code
                     d_partner_html = render_to_string("keyboard/partials/comment_list.html", {'comments': comments}, self.request)
+                else:
+                    return JsonResponse({'status_error': 'Invalid form', 'errors': form.errors}, status=400)
                 return JsonResponse({'status': 1, 'avg_rating': avg_rating, 'comments_count': comments_count, 'comment_list': d_partner_html})
             return JsonResponse({'status': 'Invalid request'}, status=400)
         else:
