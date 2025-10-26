@@ -190,9 +190,9 @@ class AjaxCommentAddViewTest(BaseTestCase):
 
 
     def test_ajax_comment_add_view_with_headers(self):
-        self.client.login(username='testuser', password='pass')
+        self.client.login(username='testuser3', password='pass')
         data = {
-            'description': 'Test description2',
+            'description': 'Test description3',
             'rating': 4,
             'owner': self.user3,
             'product': self.product1
