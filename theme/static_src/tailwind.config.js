@@ -49,6 +49,9 @@ module.exports = {
                 main_keyboard: "url('/static/keyboard/images/main_bg_keyboard.jpg')"
             } 
         },
+        // screens: {
+        //     'max-1000': {'max': '1000px'}
+        // }
     },
     plugins: [
         /**
@@ -62,7 +65,7 @@ module.exports = {
         require('@tailwindcss/aspect-ratio'),
     ],
     safelist: [
-    'bg-opacity-0',
-    'bg-opacity-50',
+        'bg-opacity-0',
+        'bg-opacity-50',
     ],
 }

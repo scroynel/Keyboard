@@ -57,9 +57,46 @@ function toggleCart() {
   }
 }
 
+
+function toggleBurgerMenu() {
+  const $menu = $('#burger-menu');
+  const $overlay = $('#burger-menu-slide');
+
+  if ($menu.css('left') === '0px') {
+    // Close cart
+    console.log('close cart')
+    $overlay.removeClass('bg-opacity-50').addClass('bg-opacity-0')
+    $menu.removeClass('left-0').addClass('left-[-100%]')
+    $('body').removeClass('overflow-hidden');
+    setTimeout(() => {
+      $overlay.addClass('hidden');
+    }, 300)
+  } else {
+    // Open cart
+    $overlay.removeClass('hidden');
+    void $overlay[0].offsetWidth; // That transition works well
+    $overlay.removeClass('bg-opacity-0').addClass('bg-opacity-50');
+    $menu.removeClass('left-[-100%]').addClass('left-0');
+    $('body').addClass('overflow-hidden');
+  }
+}
+
+
 // Modal cart
 $(document).ready(function() {
-  $('#cart-button').on('click', function(e) {;
+  $('#burger-menu-btn').on('click', function(e) {
+    toggleBurgerMenu();
+  })
+
+  $('#burger-menu-slide').on('click', function(e) {
+    toggleBurgerMenu();
+  })
+
+  $('#burger-menu').on('click', function(e) {
+    e.stopPropagation();
+  })
+
+  $('#cart-button').on('click', function(e) {
     toggleCart();
   })
 

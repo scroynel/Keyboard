@@ -1,0 +1,15 @@
+{% load keyboard_tags %}
+
+<div id="burger-menu-slide"  class="hidden fixed overflow-x-hidden overflow-y-scroll top-0 bottom-0 left-0 z-50 w-full bg-black bg-opacity-0 transition-all duration-300 ease-in-out">
+    <div id="burger-menu" class="fixed left-[-100%] w-[33%] h-full bg-[#303030] transition-all duration-300 ease-in-out">
+        <div class="h-full flex items-center justify-center text-center">
+            <ul class="space-y-10 w-full">
+                {% for category in categories %}
+                <li class="p-4 {% if request.resolver_match.url_name == 'products' and request.resolver_match.kwargs.category_slug == category.slug %}bg-[#7f7f7f]{% endif %}">
+                    <a href="{{ category.get_absolute_url }}" class="text-4xl text-white">{{category.name}}</a>    
+                </li>
+                {% endfor %}
+            </ul> 
+        </div>
+    </div>
+</div>

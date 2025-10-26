@@ -8,7 +8,7 @@
     <div class="text-center">
         <h1 class="text-7xl">{{ category_slug|title }}</h1>
     </div>
-    <div class="grid grid-cols-3 gap-5 px-[100px] mt-[70px] likes">
+    <div class="grid xl:grid-cols-3 grid-cols-2 max-[900px]:grid-cols-1 gap-5 px-[100px] mt-[70px] likes">
         {% for product in products %}
         <div class="relative text-center bg-[#f2f2f2] shadow-none transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-400">
             {% if request.user.is_authenticated %}
@@ -26,7 +26,7 @@
                     <p class="text-4xl">${{product.price}}</p>
                 </div>
                 {% endif %}
-                <img src="{{product.image.url}}" alt="">
+                <img src="{{product.image.url}}" alt="" class="w-full">
                 <h2 class="text-5xl">{{product.name}}</h2>
                 {% if category_slug != 'keyboards' %}
                 <p class="text-3xl">${{product.price}}</p>

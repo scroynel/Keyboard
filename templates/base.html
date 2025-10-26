@@ -23,16 +23,24 @@
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body class="flex flex-col min-h-screen">
-    <header id="header" class="bg-[#303030] py-2 flex justify-between items-center px-32 relative bg-opacity-100 h-[75px]">
-        <div class="flex items-center space-x-5 flex-1">
-            <a href="{% url 'main' %}">
+    <header id="header" class="bg-[#303030] py-2 flex justify-between items-center px-32 relative bg-opacity-100 h-[75px] max-[1000px]:px-10">
+        <div class="hidden max-[1000px]:block max-[1000px]:flex max-[1000px]:items-center max-[1000px]:flex-1">
+            <button id="burger-menu-btn">
+                    <div class="w-6 h-0.5 bg-white mb-1"></div>
+                    <div class="w-6 h-0.5 bg-white mb-1"></div>
+                    <div class="w-6 h-0.5 bg-white"></div>
+            </button>
+        </div>
+        {% include 'keyboard/partials/burger_menu.html' %}
+        <div class="flex items-center space-x-5 flex-1 max-[1000px]:space-x-0 max-[1000px]:flex-none">
+            <a href="{% url 'main' %}" class="max-[1000px]:hidden">
                 <img class="w-[100px]" src="{% static '/keyboard/images/keyboard_logo_copy.png' %}" alt="">
             </a>
-            <a href="{% url 'main' %}">
+            <a href="{% url 'main' %}" class="max-[1000px]:text-center">
                 <h1 class="text-white text-4xl">IKEY</h1>
             </a>
         </div>
-        <nav>
+        <nav class="max-[1000px]:hidden">
             <ul class="flex space-x-20 text-gray-500">
                 {% for category in categories %}
                 <li class="hover:text-white group relative text-white">
