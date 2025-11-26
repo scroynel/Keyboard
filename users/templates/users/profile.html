@@ -5,6 +5,7 @@
 {% block content %}
 <div class="px-[100px] py-[50px]">
     <h1 class="text-5xl text-center">Profile</h1>
+    {{request.user.profile.birth}}
     <div class="flex gap-5 mt-[50px]">
         <div class="bg-[#303030] text-white w-[200px] p-4">
             <div class="text-center text-2xl">

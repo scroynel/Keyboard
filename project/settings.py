@@ -156,3 +156,9 @@ INTERNAL_IPS = ['127.0.0.1',]
 LOGIN_REDIRECT_URL = 'main'
 
 LOGOUT_REDIRECT_URL = 'main'
+
+AUTH_USER_MODEL = 'users.CustomUser'
+
+AUTHENTICATION_BACKENDS = [
+    'users.backends.EmailBackend',  # Custom backend
+]

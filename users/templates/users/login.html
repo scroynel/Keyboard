@@ -11,6 +11,7 @@
                 {% csrf_token %}
                 <input class="w-full rounded-md text-xl" type="text" name="username" placeholder="Username">
                 <input class="w-full rounded-md text-xl" type="password" name="password" placeholder="Password">
+                <p class="text-gray-400 text-sm">If you dont register yet. Please, <a href="{% url 'register' %}" class="underline font-bold">Register</a></p>
                 <button type="submit" class="mt-8 inline-block p-4 border border-black text-center">Sign In</button>
             </form>
         </div>

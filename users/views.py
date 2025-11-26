@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect
-from django.views.generic import DetailView, ListView
+from django.shortcuts import render, redirect, get_object_or_404
+from django.views.generic import DetailView, ListView, CreateView
 from django.contrib.auth import get_user_model, authenticate, login
-from django.shortcuts import get_object_or_404
+from django.urls import reverse_lazy
+from users.forms import RegisterForm, EmailOrUsernameAuthenticationForm
 
 from cart.models import Cart
 from keyboard.models import ProductComment
@@ -33,6 +34,33 @@ def LoginUserView(request):
     context = {}
             
     return render(request, 'users/login.html', context)
+
+
+class RegisterUserView(CreateView):
+    template_name = 'users/register.html'
+    form_class = RegisterForm
+    success_url = reverse_lazy('login')
+
+
+    def post(self, request, *args, **kwargs):
+        if request.method == 'POST':
+            form = RegisterForm(request.POST)
+            if form.is_valid():
+                User = get_user_model()
+                # add try except that if username exist or email and user will see this issue
+
+                new_User = User.objects.create_user(
+                    username = form.cleaned_data['username'],
+                    email = form.cleaned_data['email'],
+                    first_name = form.cleaned_data['first_name'],
+                    last_name = form.cleaned_data['last_name'],
+                    password = form.cleaned_data['password1'],
+                    birth = form.cleaned_data['birth'],
+                    postalcode = form.cleaned_data['postalcode'],
+                )  
+
+                return redirect('login')
+            return self.form_invalid(form)
 
 
 class ProfileView(DetailView):
