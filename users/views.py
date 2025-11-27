@@ -1,39 +1,76 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import DetailView, ListView, CreateView
 from django.contrib.auth import get_user_model, authenticate, login
-from django.urls import reverse_lazy
-from users.forms import RegisterForm, EmailOrUsernameAuthenticationForm
+from django.contrib.auth.views import LoginView
+from django.contrib.auth.forms import AuthenticationForm
+from django.urls import reverse_lazy, reverse
+from users.forms import RegisterForm
 
 from cart.models import Cart
 from keyboard.models import ProductComment
 
 
-def LoginUserView(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
+# def LoginUserView(request):
+#     if request.method == 'POST':
+#         username = request.POST['username']
+#         password = request.POST['password']
+#         user = authenticate(request, username=username, password=password)
+#         if user is not None:
+#             login(request, user)  
+#             try:
+#                 ses = request.session['nonuser']
+#                 cart = Cart.objects.get(session_id = ses)
+#                 if not Cart.objects.filter(owner=request.user).exists():
+#                     cart.owner = request.user
+#                     cart.save()
+#                 else:
+#                     cart.delete()
+#                     print('delete -> redirect main') 
+#             except:
+#                 print('except redirect')
+               
+#             return redirect('profile', user_pk=request.user.pk)
+#         else:
+#             print("Invalid credentials provided")
+
+#     context = {}
+            
+#     return render(request, 'users/login.html', context)
+
+
+class LoginUserView(LoginView):
+    template_name = 'users/login.html'
+    form_class = AuthenticationForm
+    
+
+    def get_success_url(self):
+        return reverse_lazy('profile', kwargs={'user_pk': self.request.user.id})
+    
+
+    def form_valid(self, form):
+        username = form.cleaned_data['username']
+        password = form.cleaned_data['password']
+
+        user = authenticate(self.request, username=username, password=password)
         if user is not None:
-            login(request, user)  
+            login(self.request, user)
             try:
-                ses = request.session['nonuser']
-                cart = Cart.objects.get(session_id = ses)
-                if not Cart.objects.filter(owner=request.user).exists():
-                    cart.owner = request.user
+                ses = self.request.session['nonuser']
+                print('ses', ses)
+                cart = Cart.objects.get(session_id=ses)
+                print('cart', cart)
+                if not Cart.objects.filter(owner=self.request.user).exists():
+                    cart.owner = self.request.user
                     cart.save()
                 else:
                     cart.delete()
-                    print('delete -> redirect main') 
-            except:
-                print('except redirect')
+            except Cart.DoesNotExist:
+                pass
                
-            return redirect('profile', user_pk=request.user.pk)
+            return redirect(self.get_success_url())
         else:
             print("Invalid credentials provided")
-
-    context = {}
-            
-    return render(request, 'users/login.html', context)
+            return self.form_invalid(form)
 
 
 class RegisterUserView(CreateView):
@@ -60,7 +97,8 @@ class RegisterUserView(CreateView):
                 )  
 
                 return redirect('login')
-            return self.form_invalid(form)
+            else:
+                return self.form_invalid(form)
 
 
 class ProfileView(DetailView):

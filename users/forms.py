@@ -24,7 +24,3 @@ class RegisterForm(UserCreationForm):
     class Meta:
         model = get_user_model()
         fields = ['username', 'email', 'first_name', 'last_name', 'password1', 'password2', 'birth', 'postalcode']
-
-
-class EmailOrUsernameAuthenticationForm(AuthenticationForm):
-    username = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Email or Username'}))
