@@ -24,8 +24,21 @@
         <p class="text-xl">Total price: <span id="total" class="text-2xl">${{cart.total_price}}</span></p>
     </div>
     <div class="w-full text-center">
-        <button type="button" class="inline-block border-4 hover:border-gray-400 hover:shadow-md shadow-black mt-10 py-2 px-4">Check out</button>
+        <button id="checkout-button" class="inline-block border-4 hover:border-gray-400 hover:shadow-md shadow-black mt-10 py-2 px-4">Check out</button>
     </div>
 {% else %}
 {% include 'cart/partials/empty_cart.html' %}
 {% endif %}
+
+<script>
+    const stripe = Stripe("pk_test_51SXlqKPkfE7OYRUUKR4XFsmygO39Fb6jT2IqPfxDpyU77hyWWbkNUTUK6bNwhkWAGqB3lGfZJqC1aOIIJ2RWWCbU00Uy08NnAw");
+
+    document.getElementById("checkout-button").addEventListener("click", function() {
+        fetch("{% url 'checkout' %}", {
+            method: "POST",
+            headers: { "X-CSRFToken": "{{ csrf_token }}" },
+        })
+        .then(res => res.json())
+        .then(data => stripe.redirectToCheckout({ sessionId: data.id }));
+    });
+</script>

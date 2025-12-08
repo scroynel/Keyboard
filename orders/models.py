@@ -6,6 +6,7 @@ class Order(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
     create_time = models.DateTimeField(auto_now_add=True, verbose_name='Time')
     is_paid = models.BooleanField(default=False)
+    stripe_payment_intent = models.CharField(max_length=255)
 
 
     def __str__(self):

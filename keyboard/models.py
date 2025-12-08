@@ -18,6 +18,9 @@ class Product(models.Model, ImageTagMixin):
     edit_time = models.DateTimeField(auto_now=True)
     category = models.ForeignKey('Category', on_delete=models.CASCADE)
 
+    stripe_product_id = models.CharField(max_length=255, blank=True, null=True)
+    stripe_price_id = models.CharField(max_length=255, blank=True, null=True)
+
     
     def __str__(self):
         return self.name

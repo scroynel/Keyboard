@@ -23,7 +23,7 @@ class Cart(models.Model):
     def total_price(self):
         cart_products = self.cart_products.all()
         total = sum([cp.product.price * cp.quantity for cp in cart_products])
-        return total
+        return total            
 
 
     class Meta:
