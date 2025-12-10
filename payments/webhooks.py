@@ -6,7 +6,9 @@ from django.conf import settings
 from orders.models import Order, Order_product
 from cart.models import Cart
 
+
 stripe.api_key = settings.STRIPE_SECRET_KEY
+
 
 @csrf_exempt
 def stripe_webhook(request):

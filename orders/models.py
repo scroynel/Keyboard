@@ -1,5 +1,4 @@
 from django.db import models
-from cart.models import Cart
 from django.contrib.auth import get_user_model
 from keyboard.models import Product
 

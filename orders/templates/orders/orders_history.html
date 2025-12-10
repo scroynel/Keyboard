@@ -1,0 +1,24 @@
+{% if orders %}
+    <div class="px-[100px]">
+        <table class="w-full text-left">
+            <tr class="border-b-2 border-black">
+                <th>ID</th>
+                <th>Paid</th>
+                <th>Total</th>
+                <th>Creating time</th>
+            </tr>
+            {% for order in orders %}
+            <tr class="{% if forloop.counter|divisibleby:2 %}bg-gray-300{% endif %}">
+                <td>{{ order.stripe_payment_intent|slice:'3:' }}</td>
+                <td>{{ order.paid}}</td>
+                <td>{{ order.total }}</td>
+                <td>{{ order.creating_time|date:"d M Y" }}</td>
+            </tr>
+            {% endfor %}
+        </table>    
+    </div>
+{% else %}
+    <div class="w-full h-full flex justify-center items-center">
+        <h1 class="text-3xl opacity-50">There aren't orders.</h1>
+    </div>
+{% endif %}

@@ -1,15 +1,5 @@
-
-
-
-
-from cart.models import Cart
-
-
-
-
-
-
 import uuid
+from cart.models import Cart
 
 
 def cart_renderer(request):

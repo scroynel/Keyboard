@@ -46,6 +46,7 @@ class Product(models.Model, ImageTagMixin):
         else:
             return 0
 
+
     class Meta:
         verbose_name = 'Product'
         verbose_name_plural = 'Products'

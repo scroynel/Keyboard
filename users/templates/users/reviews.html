@@ -9,7 +9,7 @@
             </tr>
             {% for comment in comments %}
             <tr class="{% if forloop.counter|divisibleby:2 %}bg-gray-300{% endif %}">
-                <td>{{ comment.product.name }}</td>
+                <td><a href="{{comment.product.get_absolute_url}}">{{ comment.product.name }}</a></td>
                 <td>{{ comment.description|truncatechars:255 }}</td>
                 <td>
                     <div>
@@ -20,7 +20,7 @@
                         <span class="fa fa-star color-off {% if comment.rating > 4 %}color-on{% endif %}"></span>
                     </div>
                 </td>
-                <td>{{ comment.time_create }}</td>
+                <td>{{ comment.time_create|date:"d M Y" }}</td>
             </tr>
             {% endfor %}
         </table>    

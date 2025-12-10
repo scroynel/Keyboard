@@ -7,7 +7,6 @@ from django.shortcuts import get_object_or_404
 
 from .models import Product, ProductComment, Category
 from .forms import CommentForm
-from django.contrib import messages
 from wishlist.models import Wishlist
 
 
@@ -36,7 +35,6 @@ class ProductView(ListView):
             context['user_wishlist'] = Wishlist.objects.filter(owner=self.request.user).values_list('product', flat=True)
 
         context['category_slug'] = self.category.slug
-        # context['user_wishlist'] = Wishlist.objects.filter(owner=self.request.user).values_list('product', flat=True)
         return context
 
 

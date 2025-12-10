@@ -1,14 +1,10 @@
 import stripe
-import json
-from django.shortcuts import render, redirect
 from django.conf import settings
-from django.views.decorators.csrf import csrf_exempt
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse
 
 
 from cart.models import Cart
 from keyboard.models import Product
-from orders.models import Order
 
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
