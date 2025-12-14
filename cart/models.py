@@ -10,6 +10,7 @@ class Cart(models.Model):
     id = models.UUIDField(default=uuid.uuid4, primary_key=True)
     owner = models.OneToOneField(get_user_model(), on_delete=models.CASCADE, related_name='cart_user', blank=True, null=True)
     session_id = models.CharField(max_length=100, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
 
     def __str__(self):

@@ -12,7 +12,7 @@
                 <td>{{ order.stripe_payment_intent|slice:'3:' }}</td>
                 <td>{{ order.paid}}</td>
                 <td>{{ order.total }}</td>
-                <td>{{ order.creating_time|date:"d M Y" }}</td>
+                <td>{{ order.creating_time|date:"d M Y - H:m" }}</td>
             </tr>
             {% endfor %}
         </table>    

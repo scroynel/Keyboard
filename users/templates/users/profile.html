@@ -14,7 +14,7 @@
             <div class="">
                 <ul>
                     <li>
-                        <a href="{% url 'orders_history' request.user.id %}" hx-get="{% url 'order_history' request.user.id %}" hx-target="#content">Order History</a>
+                        <a href="{% url 'orders_history' request.user.id %}" hx-get="{% url 'orders_history' request.user.id %}" hx-target="#content">Order History</a>
                     </li>
                     <li>
                         <a href="{% url 'wishlist:wishlist' %}" hx-get="{% url 'wishlist:wishlist' %}" hx-target="#content">Wishlist</a>

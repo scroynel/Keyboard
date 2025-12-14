@@ -1,14 +1,13 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import redirect, get_object_or_404
 from django.views.generic import DetailView, ListView, CreateView
 from django.contrib.auth import get_user_model, authenticate, login
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.forms import AuthenticationForm
-from django.urls import reverse_lazy, reverse
+from django.urls import reverse_lazy
 from users.forms import RegisterForm
 
 from cart.models import Cart
 from keyboard.models import ProductComment
-from orders.models import Order
 
 
 class LoginUserView(LoginView):

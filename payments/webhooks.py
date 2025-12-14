@@ -33,7 +33,7 @@ def stripe_webhook(request):
         )
 
         if created:
-            # copy products from cart > order
+            # copy products from cart --> order
             for cart_product in cart.cart_products.all():
                 Order_product.objects.create(
                     order=order,

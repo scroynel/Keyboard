@@ -1,7 +1,6 @@
 from django.views.generic.detail import SingleObjectMixin
 from django.views.generic import ListView, View
 from django.http import HttpResponseBadRequest, JsonResponse
-from django.shortcuts import get_object_or_404
 from django.template.loader import render_to_string
 
 from keyboard.models import Product
