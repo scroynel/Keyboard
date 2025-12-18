@@ -47,31 +47,49 @@ Keyboard/
 
 ```bash
 git clone https://github.com/scroynel/Keyboard.git
+```
+
+```bash
 cd Keyboard
 ```
 
-### 2️⃣ Create virtual environment
+### 2️⃣ Docker Build → Create → Run
 
-python -m venv venv
-source venv/bin/activate  # Linux / macOS
-venv\Scripts\activate     # Windows
-
-### 3️⃣ Install dependencies
-
-pip install -r requirements.txt
-
-### 4️⃣ Run migrations
-
-python manage.py migrate
-
-### 5️⃣ Start development server
-
-python manage.py runserver
-Open your browser and go to:
-👉 http://127.0.0.1:8000/
-
-🐳 Docker (Optional)
+```bash
 docker compose up --build
+```
+
+### 3️⃣ Create .env file
+
+```bash
+POSTGRES_USER = user_name
+POSTGRES_DB = db_name
+POSTGRES_PASSWORD = db_password
+DB_HOST = db
+DB_PORT = 5432
+
+
+# Stripe keys
+STRIPE_SECRET_KEY = sk_test_key
+STRIPE_PUBLIC_KEY = pk_test_key
+STRIPE_WEBHOOK_SECRET = whsec_key
+```
+
+### 4️⃣ Login to Stripe
+
+```bash
+stripe login
+```
+
+### 5️⃣ Start listening for events
+
+```bash
+stripe listen --forward-to localhost:8000/payments/webhook/
+```
+
+### 6️⃣ Open your browser and go to:
+
+👉 http://localhost:8000/
 
 🤝 Contributing
 Contributions are welcome!
