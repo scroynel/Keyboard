@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
+# Load .env file
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -95,11 +99,11 @@ WSGI_APPLICATION = 'project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ['POSTGRES_DB'],
-        'USER' : os.environ['POSTGRES_USER'],
-        'PASSWORD' : os.environ['POSTGRES_PASSWORD'],
-        'HOST' : os.environ['DB_HOST'],
-        'PORT' : os.environ['DB_PORT']
+        'NAME': os.getenv('POSTGRES_DB'),
+        'USER' : os.getenv('POSTGRES_USER'),
+        'PASSWORD' : os.getenv('POSTGRES_PASSWORD'),
+        'HOST' : os.getenv('DB_HOST'),
+        'PORT' : os.getenv('DB_PORT')
     }
 }
 
@@ -163,6 +167,6 @@ AUTHENTICATION_BACKENDS = [
     'users.backends.EmailBackend',  # Custom backend
 ]
 
-STRIPE_SECRET_KEY = 'sk_test_51SXlqKPkfE7OYRUU3EuqMiNG9NSU3Dqg7BP66rKjXmaEb2IRceVZKsJUxzqAK2ESNuA94idkiAU5hzaBgZJ3EXxC00Yw3LvDj7'
-STRIPE_PUBLIC_KEY = 'pk_test_51SXlqKPkfE7OYRUUKR4XFsmygO39Fb6jT2IqPfxDpyU77hyWWbkNUTUK6bNwhkWAGqB3lGfZJqC1aOIIJ2RWWCbU00Uy08NnAw'
-STRIPE_WEBHOOK_SECRET = 'whsec_1f1ff7c104df721c741acbe6136ca226a5ca793227cd5c80d2c3bbdaf1603a28'
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
+STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY')
+STRIPE_WEBHOOK_SECRET = os.getenv('STRIPE_WEBHOOK_SECRET')
