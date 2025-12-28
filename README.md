@@ -53,13 +53,7 @@ git clone https://github.com/scroynel/Keyboard.git
 cd Keyboard
 ```
 
-### 2️⃣ Docker Build → Create → Run
-
-```bash
-docker compose up --build
-```
-
-### 3️⃣ Create .env file
+### 2️⃣ Create .env file with own data
 
 ```bash
 POSTGRES_USER = user_name
@@ -75,6 +69,12 @@ STRIPE_PUBLIC_KEY = pk_test_key
 STRIPE_WEBHOOK_SECRET = whsec_key
 ```
 
+### 3️⃣ Docker Build → Create → Run
+
+```bash
+docker compose up --build
+```
+
 ### 4️⃣ Login to Stripe
 
 ```bash
@@ -87,7 +87,13 @@ stripe login
 stripe listen --forward-to localhost:8000/payments/webhook/
 ```
 
-### 6️⃣ Open your browser and go to:
+### 6️⃣ Create a super user to enter to admin panel
+
+```bash
+docker exec -it django_keyboard python manage.py createsuperuser
+```
+
+### 7️⃣ Open your browser and go to:
 
 👉 http://localhost:8000/
 
