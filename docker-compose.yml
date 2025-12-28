@@ -15,8 +15,6 @@ services:
   db:
     image: postgres:17
     container_name: keyboard_postgres_db
-    volumes:
-      - ./keyboard_postgres_db:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_DB: ${POSTGRES_DB}
