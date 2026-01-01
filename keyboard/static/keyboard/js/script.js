@@ -114,7 +114,26 @@ $(document).ready(function() {
 })
 
 
-$('#add_to_cart').on('click', function(e) {
+// $('#add_to_cart').on('click', function(e) {
+//   e.preventDefault();
+//   $.ajax({
+//     url: $(this).attr('href'),
+//     type: 'POST',
+//     dataType: 'json',
+//     headers: {
+//       "X-Requested-With": "XMLHttpRequest",
+//       "X-CSRFToken": getCookie("csrftoken"), // function to get coookie by name 
+//     },
+//     success: (data) => {
+//       $('#cart').html(data.cart_list)
+//       toggleCart();
+//     },
+//     error: (error) => {
+//       console.log(error);
+//     }
+//   })
+// })
+$(document).on('click', '#add_to_cart', function(e) {
   e.preventDefault();
   $.ajax({
     url: $(this).attr('href'),
@@ -179,7 +198,6 @@ $('#cart').on('change', 'input[id=qty]', function(e) {
       "X-CSRFToken": getCookie("csrftoken"), // function to get coookie by name 
     },
     success: (data) => {
-      console.log('data', data)
       if (data.status == 1) {
         $('#total').text(data.total)
       }

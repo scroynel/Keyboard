@@ -14,6 +14,6 @@ def cart_products(context):
     return cart_products
 
 
-@register.simple_tag()
-def stripe_punlic_key():
-    return settings.STRIPE_PUBLIC_KEY
+# @register.simple_tag()
+# def stripe_public_key():
+#     return settings.STRIPE_PUBLIC_KEY

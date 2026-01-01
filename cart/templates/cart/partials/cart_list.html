@@ -1,3 +1,5 @@
+{% load stripe_tags %}
+
 {% if cart.cart_products.all %}
     <h2 class="text-4xl mb-10">Your cart</h2>
     {% for cart_product in cart.cart_products.all %}
@@ -24,21 +26,50 @@
         <p class="text-xl">Total price: <span id="total" class="text-2xl">${{cart.total_price}}</span></p>
     </div>
     <div class="w-full text-center">
-        <button id="checkout-button" class="inline-block border-4 hover:border-gray-400 hover:shadow-md shadow-black mt-10 py-2 px-4">Check out</button>
+        <button type="button" id="checkout-button" class="inline-block border-4 hover:border-gray-400 hover:shadow-md shadow-black mt-10 py-2 px-4">Check out</button>
     </div>
 {% else %}
 {% include 'cart/partials/empty_cart.html' %}
 {% endif %}
 
 <script>
-    const stripe = Stripe("pk_test_51SXlqKPkfE7OYRUUKR4XFsmygO39Fb6jT2IqPfxDpyU77hyWWbkNUTUK6bNwhkWAGqB3lGfZJqC1aOIIJ2RWWCbU00Uy08NnAw");
 
-    document.getElementById("checkout-button").addEventListener("click", function() {
+console.log('Before click')
+
+
+window.stripe = window.stripe || Stripe("{% stripe_public_key %}");
+
+
+function getCSRFToken() {
+    return document.querySelector('[name=csrf-token]').content;
+}
+
+
+function CheckoutHandler() {
+    const button = document.querySelector('#checkout-button');
+    if (!button || button.dataset.bound) return;
+
+    button.dataset.bound = 'true';
+
+    button.addEventListener('click', function(e) {
+        e.preventDefault();
+        console.log('Click')
+
         fetch("{% url 'checkout' %}", {
-            method: "POST",
-            headers: { "X-CSRFToken": "{{ csrf_token }}" },
+        method: "POST",
+        headers: { "X-CSRFToken": getCSRFToken() },
         })
         .then(res => res.json())
-        .then(data => stripe.redirectToCheckout({ sessionId: data.id }));
-    });
+        .then(data => window.stripe.redirectToCheckout({ sessionId: data.id }));
+    })
+    
+}
+
+document.addEventListener('DOMContentLoaded', CheckoutHandler);
+
+if (!window.cartObserver) {
+    window.cartObserver = new MutationObserver(() => CheckoutHandler());
+    window.cartObserver.observe(document.body, { childList: true, subtree: true });
+}
+
 </script>

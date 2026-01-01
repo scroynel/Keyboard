@@ -20,11 +20,12 @@
     <!-- SwiperJS css -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     {% tailwind_css %}
+    <meta name="csrf-token" content="{{ csrf_token }}">
     <script src="https://js.stripe.com/v3/"></script>
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body class="flex flex-col min-h-screen">
-    <header id="header" class="bg-[#303030] py-2 flex justify-between items-center px-32 relative bg-opacity-100 h-[75px] max-[1000px]:px-10">
+    <header id="header" class="{% if request.path != '/' %}bg-[#303030]{% endif %} py-2 flex justify-between items-center px-32 relative bg-opacity-100 h-[75px] max-[1000px]:px-10">
         <div class="hidden max-[1000px]:block max-[1000px]:flex max-[1000px]:items-center max-[1000px]:flex-1">
             <button id="burger-menu-btn">
                     <div class="w-6 h-0.5 bg-white mb-1"></div>
@@ -79,8 +80,8 @@
     {% endblock %}
   
     
-    <footer class="w-full h-[250px] bg-[#303030]">
-
+    <footer class="w-full h-[250px] {% if request.path != '/' %}bg-[#303030]{% else %}bg-black{% endif %}">
+        
     </footer>
     <!-- HTMX -->
     <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.5/dist/htmx.min.js"></script>
